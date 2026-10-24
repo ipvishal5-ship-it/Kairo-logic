@@ -1,154 +1,201 @@
 "use client";
-
-import { motion, useReducedMotion } from "motion/react";
-import { SectionHeading } from "./motion-primitives";
-import { documents } from "@/lib/data";
-
+import { useState } from "react";
+import { ArrowRight, Check, FileText, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Reveal } from "./motion-primitives";
+import { handleTabKeys } from "./tab-navigation";
 const stages = [
-  { n: "01", t: "Borrower & Loan", d: "Account & loan details" },
-  { n: "02", t: "Legal Status", d: "Case standing &amp; court info" },
-  { n: "03", t: "Section 13(2)/(4)", d: "Demand &amp; possession notices" },
-  { n: "04", t: "Section 14 Order", d: "COT / DRT order received" },
-  { n: "05", t: "Physical Possession", d: "Site visit & possession" },
-  { n: "06", t: "Documents", d: "All case-linked files" },
-  { n: "07", t: "Geo-Location", d: "Property location pinned" },
-  { n: "08", t: "Recovery & Closure", d: "Auction, sale, closed" },
+  {
+    name: "Borrower & loan",
+    title: "Start with the complete picture.",
+    description:
+      "Borrower, loan and secured property details, linked to one case.",
+    document: "Loan & security details",
+    action: "Review the case record",
+    status: "Case record created",
+  },
+  {
+    name: "Legal proceedings",
+    title: "Keep every proceeding in context.",
+    description:
+      "Legal status, court information and supporting documents stay with the case.",
+    document: "Legal case documents",
+    action: "Review legal status",
+    status: "Legal review in progress",
+  },
+  {
+    name: "Section 13",
+    title: "From case data to the right notice.",
+    description:
+      "Prepare demand and possession notices using information already in the record.",
+    document: "Demand Notice · Section 13(2)",
+    action: "Prepare the next notice",
+    status: "Notice preparation",
+  },
+  {
+    name: "Section 14",
+    title: "See the order. Know the next step.",
+    description:
+      "Keep the application and court order together, ready for the possession team.",
+    document: "Section 14 Order.pdf",
+    action: "Coordinate physical possession",
+    status: "Order received",
+  },
+  {
+    name: "Possession",
+    title: "The field update meets the case file.",
+    description:
+      "Property photographs, location and possession records, captured in one place.",
+    document: "Inventory & Panchnama",
+    action: "Review field evidence",
+    status: "Possession update received",
+  },
+  {
+    name: "Auction & sale",
+    title: "A clear view through to sale.",
+    description:
+      "Follow the asset into auction with the relevant records available to your team.",
+    document: "Auction & sale records",
+    action: "Review auction progress",
+    status: "Auction preparation",
+  },
+  {
+    name: "Recovery & closure",
+    title: "Close the loop on recovery.",
+    description:
+      "Keep the recovery outcome and closure record connected to the full case history.",
+    document: "Recovery & closure record",
+    action: "Review the final outcome",
+    status: "Closure review",
+  },
 ];
-
 export default function Record() {
-  const reduce = useReducedMotion();
+  const [active, setActive] = useState(3);
+  const stage = stages[active];
   return (
-    <section id="record" className="border-t border-line/60 py-24 bg-surface/30">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHeading
-          eyebrow="The Record"
-          title={
-            <>
-              One digital record.<br />
-              <span className="text-muted">Every stage. One place.</span>
-            </>
+    <section className="section-block record-section" id="record">
+      <div className="page-shell">
+        <Reveal className="section-intro">
+          <p className="eyebrow">THE CONNECTED CASE</p>
+          <h2>
+            Every stage.
+            <br />
+            <span className="accent-heading">The same source of truth.</span>
+          </h2>
+          <p className="section-description">
+            Explore the journey from borrower details to recovery.
+          </p>
+        </Reveal>
+        <div
+          className="journey"
+          role="tablist"
+          aria-label="Explore the case journey"
+          onKeyDown={(event) =>
+            handleTabKeys(event, active, stages.length, setActive)
           }
-          sub="Everything important follows the case — data, documents, photos, location — ready for every field visit."
-        />
-
-        {/* 8-stage timeline */}
-        <div className="mt-20 relative">
-          <div className="absolute left-1/2 -top-1/2 w-[1px] h-full bg-line/40 hidden lg:block" />
-          <div className="grid gap-8 md:grid-cols-4 lg:grid-cols-8">
-            {stages.map((s, i) => (
-              <motion.div
-                key={s.n}
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06, duration: 0.5 }}
-                className="flex flex-col items-center gap-3 relative"
-              >
-                <span
-                  className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full border text-[10px] font-mono font-bold transition-all
-                    ${i === 0 ? "border-accent bg-accent text-white shadow-lg shadow-accent/30" : "border-line/60 text-muted bg-ink"}`}
-                >
-                  {s.n}
-                </span>
-                <p className="text-center text-xs font-display font-semibold text-text leading-tight">{s.t}</p>
-                <p className="text-center text-[10px] leading-4 text-muted">{s.d}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* case record preview card */}
-        <div className="mt-24 grid gap-8 lg:grid-cols-2">
-          <motion.div
-            initial={reduce ? false : { opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="card p-7"
-          >
-            <div className="flex items-center justify-between border-b border-line/60 pb-4 mb-5">
-              <p className="font-mono text-xs tracking-widest text-muted">CASE FILE</p>
-              <span className="rounded-full border border-accent2/40 bg-accent2/10 px-2.5 py-0.5 font-mono text-[10px] text-accent2">
-                LIVE
-              </span>
-            </div>
-            <p className="mb-5 font-mono text-sm text-accent">Case #2026-0148</p>
-            <div className="space-y-3">
-              {[
-                { label: "Borrower", value: "ABC Industries" },
-                { label: "Property", value: "Industrial Unit, Mumbai" },
-                { label: "Stage", value: "Section 14 Order Received" },
-                { label: "Next Action", value: "Physical Possession" },
-              ].map((f) => (
-                <div key={f.label} className="flex justify-between text-sm">
-                  <p className="text-muted">{f.label}</p>
-                  <p className="font-medium text-text">{f.value}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={reduce ? false : { opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="card p-7"
-          >
-            <p className="mb-4 font-mono text-[10px] tracking-widest text-muted uppercase">Linked Documents</p>
-            <div className="space-y-3">
-              {documents.map((d) => (
-                <motion.div
-                  key={d.t}
-                  initial={reduce ? false : { opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.15 + documents.indexOf(d) * 0.05 }}
-                  className="flex items-center gap-3 px-3 py-2 rounded-lg border border-line/60 bg-ink/40 text-sm"
-                >
-                  <span className="w-8 text-[10px] font-mono text-accent2">{d.tag}</span>
-                  <p className="flex-1 font-medium text-text">{d.t}</p>
-                  <span className="h-1.5 w-1.5 rounded-full bg-line/60" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* auto-generated documents */}
-        <div className="mt-24">
-          <SectionHeading
-            eyebrow="Auto-Generated Documents"
-            title="Prepared from the case data. No retyping."
-            sub="Notices and records are generated from the case itself — no copy-paste errors."
-          />
-          {documents.map((d, i) => (
-            <motion.div
-              key={d.t}
-              initial={reduce ? false : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.55 }}
-              whileHover={{ y: -6 }}
-              className="card group p-6"
+        >
+          {stages.map((s, i) => (
+            <button
+              role="tab"
+              id={`stage-tab-${i}`}
+              aria-controls="stage-panel"
+              aria-selected={i === active}
+              tabIndex={i === active ? 0 : -1}
+              key={s.name}
+              onClick={() => setActive(i)}
+              className={i === active ? "active" : ""}
             >
-              <span className="font-mono text-[10px] tracking-widest text-accent2 uppercase">
-                {d.tag}
+              <span className="journey-number">
+                {i < active ? (
+                  <Check size={15} />
+                ) : (
+                  String(i + 1).padStart(2, "0")
+                )}
               </span>
-              <div className="mt-4 h-28 rounded-lg border border-line bg-ink/60 p-3 font-mono text-[10px] leading-4 text-muted">
-                <span className="block text-accent">{d.t.toUpperCase()}</span>
-                <span className="mt-1 block opacity-40 group-hover:opacity-80 transition-opacity">
-                  ── populated from case #2026-0148 ──
-                </span>
-                <span className="mt-2 block opacity-0 transition-opacity duration-500 group-hover:opacity-70">
-                  borrower: ABC Industries
-                  <br />
-                  account &amp; loan ✓ &nbsp; property ✓ &nbsp; stage ✓
-                </span>
-              </div>
-              <p className="mt-4 font-display text-base font-semibold text-text">{d.t}</p>
-              <p className="mt-1.5 text-sm leading-6 text-muted">{d.d}</p>
-            </motion.div>
+              <span>{s.name}</span>
+            </button>
           ))}
+        </div>
+        <div
+          className="journey-content"
+          id="stage-panel"
+          role="tabpanel"
+          aria-labelledby={`stage-tab-${active}`}
+        >
+          <div className="journey-copy">
+            <p className="small-label">
+              STAGE {String(active + 1).padStart(2, "0")} / 07
+            </p>
+            <h3>{stage.title}</h3>
+            <p>{stage.description}</p>
+            <div className="document-benefit">
+              <span>
+                <FileText size={21} />
+              </span>
+              <div>
+                <strong>Documents that start with your data.</strong>
+                <p>
+                  Demand notices, possession notices, inventory and panchnama.
+                </p>
+              </div>
+            </div>
+            <a className="text-link" href="#contact">
+              See it with your team <ArrowRight size={18} />
+            </a>
+          </div>
+          <div className="case-preview">
+            <div className="preview-toolbar">
+              <span>
+                <span className="status-dot" /> CASE WORKSPACE
+              </span>
+              <span className="sample-pill">Illustrative demo</span>
+            </div>
+            <div className="case-preview-body">
+              <div className="case-identity">
+                <div>
+                  <p className="small-label">CASE #2026-0148</p>
+                  <h3>ABC Industries</h3>
+                  <p>Industrial unit · Mumbai</p>
+                </div>
+                <div className="case-thumb">
+                  <Image
+                    src="/images/hero-industrial-estate.webp"
+                    alt="Illustrative industrial property linked to the demo case"
+                    fill
+                    sizes="110px"
+                  />
+                </div>
+              </div>
+              <div className="stage-status" key={active}>
+                <span className="small-label">CURRENT STAGE</span>
+                <strong>
+                  <span className="status-dot" />
+                  {stage.status}
+                </strong>
+              </div>
+              <div className="linked-document">
+                <FileText size={22} />
+                <div>
+                  <strong>{stage.document}</strong>
+                  <span>Linked to this case</span>
+                </div>
+                <Check size={17} />
+              </div>
+              <div className="next-action">
+                <span className="small-label">NEXT ACTION</span>
+                <strong>
+                  {stage.action}
+                  <ArrowRight size={18} />
+                </strong>
+              </div>
+              <div className="preview-footer">
+                <span>
+                  <MapPin size={15} /> Property linked
+                </span>
+                <span>Data · Documents · Activity</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

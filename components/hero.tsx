@@ -1,144 +1,107 @@
 "use client";
-
-import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, FileText, MapPin, Shield } from "lucide-react";
 import Image from "next/image";
-import { caseRecord, caseChips } from "@/lib/data";
-
+import { ArrowDown, ArrowRight, MapPin, Check } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 export default function Hero() {
   const reduce = useReducedMotion();
-  const fade = (delay: number) =>
-    reduce
-      ? {}
-      : {
-        initial: { opacity: 0, y: 24 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.8, delay, ease: [0.21, 0.65, 0.36, 1] as const },
-      };
-
   return (
-    <section className="relative overflow-hidden bg-grid">
-      <div className="bg-glow absolute inset-0 pointer-events-none" />
-      <div className="relative mx-auto grid max-w-6xl gap-14 px-5 pb-24 pt-20 md:pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div>
-          <motion.p {...fade(0)} className="eyebrow mb-6">
-            SARFAESI Intelligence
-          </motion.p>
-          <motion.h1
-            {...fade(0.1)}
-            className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-text sm:text-5xl lg:text-[4.2rem]"
-          >
+    <section className="hero-section" id="home">
+      <div className="hero-orbit" aria-hidden="true" />
+      <div className="page-shell hero-layout">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="hero-copy"
+        >
+          <p className="eyebrow">
+            <span className="status-dot" /> SARFAESI INTELLIGENCE
+          </p>
+          <h1>
             One case.
             <br />
             One record.
             <br />
-            <span className="text-accent">Total control.</span>
-          </motion.h1>
-          <motion.p {...fade(0.25)} className="mt-7 max-w-xl text-lg leading-8 text-muted sm:text-xl">
-            Spend less time collecting data. Spend more time on recovery.
-            Every SARFAESI case — data, documents, photos, location — in a
-            single digital record for Banks, NBFCs, HFCs &amp; ARCs.
-          </motion.p>
-          <motion.div {...fade(0.4)} className="mt-9 flex flex-wrap items-center gap-4">
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
-            >
-              Request a demo
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            <span>Total control.</span>
+          </h1>
+          <p className="hero-description">
+            From the first notice to final recovery.
+            <br className="desktop-break" /> Your entire case, connected.
+          </p>
+          <div className="button-row">
+            <a className="button button-primary" href="#contact">
+              Request a demo <ArrowRight size={19} />
             </a>
-            <a
-              href="#record"
-              className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm text-muted transition hover:text-text"
-            >
-              See how it works
+            <a className="text-link" href="#record">
+              Explore the platform <ArrowDown size={18} />
             </a>
-          </motion.div>
-        </div>
-
-        {/* self-assembling case record card + property visual */}
-        <motion.div {...fade(0.5)} className="space-y-5">
-          {/* hero image slot — replace with generated image */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="card overflow-hidden"
-          >
-            <Image
-              src="/images/hero-industrial-estate.jpg"
-              alt="Industrial property in Mumbai — a SARFAESI secured asset"
-              width={1024}
-              height={576}
-              className="h-56 w-full object-cover sm:h-64"
-              priority
-            />
-            <div className="flex items-center justify-between px-5 py-3">
-              <span className="flex items-center gap-2 text-sm text-muted">
-                <MapPin className="h-4 w-4 text-accent2" /> Secured asset · Mumbai
-              </span>
-              <span className="rounded-full bg-accent2/10 px-3 py-1 font-mono text-[11px] text-accent2">
-                GEO-TAGGED
-              </span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="card p-6 shadow-2xl shadow-accent/5"
-            initial={reduce ? false : { opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.55 }}
-          >
-            <div className="flex items-center justify-between border-b border-line pb-4">
-              <p className="font-mono text-xs tracking-widest text-muted">CASE FILE</p>
-              <span className="rounded-full border border-accent2/40 bg-accent2/10 px-2.5 py-0.5 font-mono text-[10px] text-accent2">
-                LIVE
-              </span>
-            </div>
-            <p className="mt-4 font-mono text-sm text-accent">{caseRecord.id}</p>
-            <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-              <div>
-                <p className="text-xs text-muted">Borrower</p>
-                <p className="mt-1 font-medium text-text">{caseRecord.borrower}</p>
-              </div>
-              <div>
-                <p className="text-xs text-muted">Property</p>
-                <p className="mt-1 font-medium text-text">{caseRecord.property}</p>
-              </div>
-              <div>
-                <p className="text-xs text-muted">Stage</p>
-                <p className="mt-1 font-medium text-warn">{caseRecord.stage}</p>
-              </div>
-              <div>
-                <p className="text-xs text-muted">Next Action</p>
-                <p className="mt-1 font-medium text-accent2">{caseRecord.next}</p>
-              </div>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {caseChips.map((c, i) => (
-                <motion.span
-                  key={c}
-                  initial={reduce ? false : { opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9 + i * 0.09 }}
-                  className="rounded-md border border-line bg-surface px-2.5 py-1 text-xs text-muted"
-                >
-                  {c}
-                </motion.span>
-              ))}
-            </div>
-            <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
-              <div className="flex items-center gap-2 text-xs text-muted">
-                <FileText className="h-3.5 w-3.5 text-accent" />
-                {caseRecord.docs.length} linked documents
-              </div>
-              <div className="flex items-center gap-2 text-xs text-muted">
-                <MapPin className="h-3.5 w-3.5 text-accent2" /> Geo-tagged
-                <Shield className="ml-2 h-3.5 w-3.5 text-accent" /> Audited
-              </div>
-            </div>
-          </motion.div>
+          </div>
+          <p className="hero-audience">Built for Banks · NBFCs · HFCs · ARCs</p>
         </motion.div>
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.15 }}
+          className="asset-scene"
+        >
+          <Image
+            src="/images/hero-industrial-estate.webp"
+            alt="Illustrative industrial estate in Mumbai at dusk"
+            fill
+            sizes="(max-width: 900px) 100vw, 58vw"
+            priority
+            className="asset-photo"
+          />
+          <div className="scene-shade" />
+          <div className="scene-top">
+            <span className="scene-label">ASSET INTELLIGENCE</span>
+            <span className="scene-label">ILLUSTRATIVE VIEW</span>
+          </div>
+          <div className="asset-pin" aria-hidden="true">
+            <span />
+            <MapPin size={24} />
+          </div>
+          <div className="asset-caption">
+            <MapPin size={16} /> Industrial property · Mumbai
+          </div>
+          <div className="floating-case">
+            <div className="case-heading">
+              <span className="eyebrow">ONE CONNECTED RECORD</span>
+              <span className="sample-pill">Demo case</span>
+            </div>
+            <h3>ABC Industries</h3>
+            <div
+              className="case-progress"
+              aria-label="Illustrative case progress: order received, possession next"
+            >
+              <i />
+              <i />
+              <i />
+              <i />
+              <i className="current" />
+              <i />
+              <i />
+            </div>
+            <div className="case-action">
+              <span>
+                <Check size={17} /> Section 14 order received
+              </span>
+              <strong>
+                Possession next <ArrowRight size={16} />
+              </strong>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+      <div className="page-shell value-strip">
+        <span>One source of truth.</span>
+        <p>Case data</p>
+        <b>+</b>
+        <p>Legal documents</p>
+        <b>+</b>
+        <p>Field evidence</p>
+        <b>+</b>
+        <p>Management visibility</p>
       </div>
     </section>
   );
