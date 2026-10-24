@@ -1,91 +1,128 @@
 "use client";
-
-import { motion, useReducedMotion } from "motion/react";
-import { Monitor, Smartphone, Tablet, Users, Lock, MapPinned } from "lucide-react";
-import { SectionHeading } from "./motion-primitives";
-import { roles, devices, rollout } from "@/lib/data";
-
-const roleIcons = [Users, Lock, MapPinned];
-const deviceIcons = [Monitor, Smartphone, Tablet];
-
+import { useState } from "react";
+import Image from "next/image";
+import { Check, MapPin, ArrowRight } from "lucide-react";
+import { Reveal } from "./motion-primitives";
+import { handleTabKeys } from "./tab-navigation";
+const roles = [
+  {
+    name: "Field team",
+    title: "Capture it at the source.",
+    text: "Upload property photographs and location during a visit. Keep the evidence with the case.",
+    items: [
+      "Property photographs",
+      "Location linked to the case",
+      "Possession records",
+    ],
+  },
+  {
+    name: "Legal team",
+    title: "Open the case. Find the context.",
+    text: "Review legal status and linked documents without chasing a separate folder or email thread.",
+    items: [
+      "Court and case information",
+      "Linked notices and orders",
+      "A shared case history",
+    ],
+  },
+  {
+    name: "Management",
+    title: "Review the position. Move forward.",
+    text: "See the case pipeline and outstanding stages, with access aligned to each team’s role.",
+    items: [
+      "Portfolio dashboards",
+      "Stage-wise visibility",
+      "Role-based access",
+    ],
+  },
+];
 export default function Trust() {
-  const reduce = useReducedMotion();
+  const [role, setRole] = useState(0);
+  const current = roles[role];
   return (
-    <section id="trust" className="border-t border-line/60 py-24">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHeading
-          eyebrow="Built for Control"
-          title="Access, security and mobile use — planned for the SARFAESI team."
-          sub="Data stays in one controlled system. Every change is recorded."
-        />
-
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
-          {roles.map((r, i) => {
-            const Icon = roleIcons[i];
-            return (
-              <motion.div
-                key={r.t}
-                initial={reduce ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="card p-7"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 text-accent">
-                  <Icon className="h-5 w-5" />
+    <section className="section-block field-section" id="trust">
+      <div className="page-shell">
+        <Reveal className="field-layout">
+          <div className="field-visual">
+            <Image
+              src="/images/field-inspection.webp"
+              alt="Illustrative field officer photographing an industrial property on a smartphone"
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+            <span className="field-image-label">
+              FIELD INTELLIGENCE · ILLUSTRATIVE SCENE
+            </span>
+            <div className="field-update">
+              <div className="field-update-icon">
+                <Check size={21} />
+              </div>
+              <div>
+                <strong>A visit becomes a case update.</strong>
+                <span>
+                  <MapPin size={14} /> Photo + location + case context
                 </span>
-                <p className="mt-5 font-display text-lg font-semibold text-text">{r.t}</p>
-                <p className="mt-2 text-sm leading-6 text-muted">{r.d}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* omnichannel */}
-        <div className="mt-20 grid gap-5 md:grid-cols-3">
-          {devices.map((d, i) => {
-            const Icon = deviceIcons[i];
-            return (
-              <motion.div
-                key={d.t}
-                initial={reduce ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="card flex items-start gap-4 p-6"
-              >
-                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-accent2" />
-                <div>
-                  <p className="font-medium text-text">{d.t}</p>
-                  <p className="mt-1 text-sm leading-6 text-muted">{d.d}</p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* rollout stepper */}
-        <div className="mt-24">
-          <SectionHeading eyebrow="Rollout" title="A simple, low-risk path to start." />
-          <div className="relative mt-14 grid gap-8 md:grid-cols-4">
-            <div className="absolute left-0 right-0 top-5 hidden h-px bg-line md:block" />
-            {rollout.map((r, i) => (
-              <motion.div
-                key={r.n}
-                initial={reduce ? false : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                className="relative"
-              >
-                <span className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-accent bg-ink font-mono text-xs text-accent">
-                  {r.n}
-                </span>
-                <p className="mt-4 font-display font-semibold text-text">{r.t}</p>
-                <p className="mt-1.5 text-sm leading-6 text-muted">{r.d}</p>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </div>
+          <div className="field-copy">
+            <p className="eyebrow">CONNECTED PEOPLE. CLEAR RESPONSIBILITY.</p>
+            <h2>
+              From the property.
+              <br />
+              <span className="accent-heading">To the whole team.</span>
+            </h2>
+            <div
+              className="role-tabs"
+              role="tablist"
+              aria-label="Explore team roles"
+              onKeyDown={(event) =>
+                handleTabKeys(event, role, roles.length, setRole)
+              }
+            >
+              {roles.map((r, i) => (
+                <button
+                  role="tab"
+                  key={r.name}
+                  id={`role-tab-${i}`}
+                  aria-controls="role-panel"
+                  aria-selected={i === role}
+                  tabIndex={i === role ? 0 : -1}
+                  onClick={() => setRole(i)}
+                >
+                  {r.name}
+                </button>
+              ))}
+            </div>
+            <div
+              id="role-panel"
+              role="tabpanel"
+              aria-labelledby={`role-tab-${role}`}
+              className="role-content"
+            >
+              <h3>{current.title}</h3>
+              <p>{current.text}</p>
+              <ul>
+                {current.items.map((item) => (
+                  <li key={item}>
+                    <Check size={17} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <a className="text-link" href="#contact">
+              Plan a pilot <ArrowRight size={18} />
+            </a>
+          </div>
+        </Reveal>
+        <div className="trust-strip">
+          <p>
+            <span className="status-dot" /> Role-based access
+          </p>
+          <p>One controlled case record</p>
+          <p>Activity history</p>
+          <p>Desktop to mobile</p>
         </div>
       </div>
     </section>
