@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* ============ KAIROLOGIC TECHNOLOGY — DESIGN TOKENS ============ */
+:root {
+  --ink: #0a0e14;
+  --surface: #111823;
+  --line: #1e2a3a;
+  --accent: #4f7cff;
+  --accent2: #22d3aa;
+  --warn: #f5a623;
+  --text: #e7ecf3;
+  --muted: #8a97a8;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+  --color-warn: var(--warn);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jb), ui-monospace, monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+/* subtle blueprint grid + glow background */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.bg-glow {
+  background: radial-gradient(600px circle at 50% 0%, rgba(79,124,255,0.14), transparent 70%);
+}
+
+.card {
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

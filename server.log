@@ -1,0 +1,10 @@
+npm notice run kairo-technology@0.1.0 npx
+npm notice run next start -p 3124
+▲ Next.js 16.4.3
+- Local:         http://localhost:3124
+- Network:       http://169.254.83.107:3124
+✓ Ready in 811ms
+  next-swc build: wasm build @next/swc-wasm-nodejs
+⚠ Attempted to load @next/swc-win32-x64-msvc, but an error occurred: \\?\C:\Users\ipvis\Downloads\kiro technology\kairo-technology\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 application.
+\\?\C:\Users\ipvis\Downloads\kiro technology\kairo-technology\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+✓ Running next.config.ts took 494ms

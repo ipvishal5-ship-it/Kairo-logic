@@ -1,0 +1,13 @@
+npm notice run kairo-technology@0.1.0 npx
+npm notice run next start -p 3126
+▲ Next.js 16.4.3
+- Local:         http://localhost:3126
+- Network:       http://169.254.83.107:3126
+✓ Ready in 766ms
+  next-swc build: wasm build @next/swc-wasm-nodejs
+⚠ Attempted to load @next/swc-win32-x64-msvc, but an error occurred: \\?\C:\Users\ipvis\Downloads\kiro technology\kairo-technology\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 application.
+\\?\C:\Users\ipvis\Downloads\kiro technology\kairo-technology\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\ipvis because it would include your home directory (C:\Users\ipvis).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+✓ Running next.config.ts took 514ms
