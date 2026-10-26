@@ -1,68 +1,81 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import Brand from "./brand";
 const links = [
-  { href: "#record", label: "The platform" },
-  { href: "#dashboard", label: "Intelligence" },
-  { href: "#trust", label: "In the field" },
+  { href: "#platform", label: "The solution" },
+  { href: "#approach", label: "Our approach" },
+  { href: "#security", label: "Security" },
 ];
-export function Brand() {
-  return (
-    <span className="brand-wordmark">
-      <strong>
-        KAIROLOGIC<span className="brand-dot">.</span>
-      </strong>
-      <small>TECHNOLOGY</small>
-    </span>
-  );
-}
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggle.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open]);
   return (
-    <header className="site-header">
-      <div className="page-shell header-inner">
-        <a href="#home" aria-label="Kairologic Technology home">
-          <Brand />
-        </a>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {links.map((l) => (
-            <a href={l.href} key={l.href}>
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <div className="header-actions">
-          <a href="#contact" className="header-cta">
-            Let’s talk <ArrowUpRight size={17} />
-          </a>
-          <button
-            className="menu-toggle"
-            onClick={() => setOpen(!open)}
-            aria-label={open ? "Close navigation" : "Open navigation"}
-            aria-expanded={open}
-            aria-controls="mobile-nav"
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <header className="site-header">
+        <div className="container header-inner">
+          <a
+            href="#home"
+            className="brand-link"
+            aria-label="Kairologic Technology home"
           >
-            {open ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-      {open && (
-        <nav
-          id="mobile-nav"
-          className="mobile-nav"
-          aria-label="Mobile navigation"
-        >
-          {links.map((l) => (
-            <a onClick={() => setOpen(false)} href={l.href} key={l.href}>
-              {l.label}
-              <ArrowUpRight size={18} />
-            </a>
-          ))}
-          <a onClick={() => setOpen(false)} href="#contact">
-            Contact us <ArrowUpRight size={18} />
+            <Brand />
           </a>
-        </nav>
-      )}
-    </header>
+          <nav className="desktop-nav" aria-label="Main navigation">
+            {links.map((l) => (
+              <a href={l.href} key={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          <div className="header-actions">
+            <a href="#contact" className="header-contact">
+              Let’s connect <ArrowUpRight size={21} />
+            </a>
+            <button
+              ref={toggle}
+              className="menu-toggle"
+              onClick={() => setOpen(!open)}
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
+              aria-label={open ? "Close menu" : "Open menu"}
+            >
+              {open ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
+        {open && (
+          <nav
+            className="mobile-nav container"
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+          >
+            {[
+              ...links,
+              { href: "#contact", label: "Request a demonstration" },
+            ].map((l) => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                {l.label}
+                <ArrowUpRight size={20} />
+              </a>
+            ))}
+          </nav>
+        )}
+      </header>
+    </>
   );
 }

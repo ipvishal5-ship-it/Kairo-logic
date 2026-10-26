@@ -28,8 +28,6 @@ Use case: photorealistic-natural. Create one photorealistic panoramic website he
 
 Use case photorealistic-natural. Website editorial image for an Indian enterprise property case management technology brand. A professional Indian male field officer aged around 35 wearing a pale blue cotton shirt standing outside a modern industrial warehouse in Mumbai, inspecting the property and photographing its facade with a smartphone held naturally in both hands. Shoot over his right shoulder so his hands and the phone are visible at the lower right and the real industrial warehouse fills most of the frame. Wide landscape 3:2 composition. Premium documentary photography with realistic concrete, steel, palms in distance, natural late afternoon blue-hour light, navy and restrained teal color grade harmonious with a dark navy website. Physically accurate hands and ordinary realistic phone, no large floating graphics. Phone display only a small natural camera view without readable text. Calm, credible, human, sophisticated, not posed stock photo. No logos, words, signage, watermark, sci-fi holograms, or artificial glow.
 
-## Build
+## Current version
 
-`npm run build` builds the usual Next.js application.
-
-`node scripts/export-static.mjs` optionally creates `out/` for static review/hosting. This sets `KAIRO_STATIC_EXPORT=1` only for its child build; normal Next.js hosting behavior is unchanged.
+This file preserves the original image prompts. The current corporate outline, enquiry workflow and server build instructions are in `docs/corporate-outline.md`.
