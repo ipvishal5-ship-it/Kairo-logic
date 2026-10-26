@@ -2388,3 +2388,12 @@ button {
 @media(min-width:601px){.digital-intro{padding:24px 27px}.digital-vault{width:64px;height:64px}.digital-toolbar{padding-top:15px;padding-bottom:15px}.digital-view-heading{padding-top:21px;min-height:100px}.digital-record{min-height:91px;padding:15px 0}.digital-record-tag{display:none}.digital-security{padding-top:16px;padding-bottom:16px}}
 
 @media(max-width:600px){.digital-view-buttons{display:grid;grid-template-columns:.85fr 1fr 1.1fr;gap:4px;padding:0 6px}.digital-view-buttons button{min-width:0;white-space:normal;text-align:center;line-height:1.45;padding:17px 0;justify-content:flex-start}.digital-intro>div:last-child{min-width:0}.digital-record{min-width:0}}
+
+/* Corporate identity: a connected K and a wordmark that holds at small widths. */
+.brand{gap:16px}
+.brand-mark{width:52px;height:52px}
+.brand-type{gap:9px}
+.brand-type strong{font-family:Space,Inter,Arial,sans-serif;font-size:31px;font-weight:700;letter-spacing:.025em;line-height:1}
+.brand-type>span{font-size:12px;font-weight:600;letter-spacing:.23em;line-height:1.2;color:#b7cce0}
+.brand-link:hover .brand-mark{color:#fff}
+@media(max-width:600px){.brand{gap:11px}.brand-mark{width:41px;height:41px}.brand-type{gap:7px}.brand-type strong{font-size:23px;letter-spacing:.018em}.brand-type>span{font-size:10px;letter-spacing:.21em}.footer-main .brand-mark{width:41px;height:41px}}

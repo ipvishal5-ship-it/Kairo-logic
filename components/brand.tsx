@@ -3,17 +3,16 @@ export default function Brand({ inverse = false }: { inverse?: boolean }) {
     <span className={`brand ${inverse ? "brand-inverse" : ""}`}>
       <svg
         className="brand-mark"
-        width="48"
-        height="48"
-        viewBox="0 0 48 48"
+        width="52"
+        height="52"
+        viewBox="0 0 52 52"
         aria-hidden="true"
       >
-        <path d="M5 5h10v38H5z" fill="currentColor" />
-        <path d="M19 24 35 5h12L30 24l17 19H35z" fill="currentColor" />
-        <path d="M19 24 27 14h7l-8 10 8 10h-7z" fill="#22b99b" />
+        <path d="M5 5h10v42H5zM20 23 36 5h11L30 26zM20 29l10-6 17 24H35z" fill="currentColor" />
+        <path d="m20 26 6-6 6 6-6 6z" fill="#75dfc3" />
       </svg>
       <span className="brand-type">
-        <strong>kairologic</strong>
+        <strong>KAIROLOGIC</strong>
         <span>TECHNOLOGY</span>
       </span>
     </span>
