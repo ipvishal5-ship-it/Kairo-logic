@@ -126,10 +126,10 @@ export default function CaseWorkflow() {
             </linearGradient>
           </defs>
           {[
-            { d: "M156 135 C236 135 213 247 310 247", name: "data" },
-            { d: "M141 337 C230 337 222 278 310 278", name: "documents" },
-            { d: "M529 408 C499 408 452 316 400 301", name: "field" },
-            { d: "M423 239 C505 239 454 112 542 112", name: "outcome" },
+            { d: step === 1 ? "M156 135 C230 135 220 310 300 310" : "M156 135 C236 135 213 247 310 247", name: "data" },
+            { d: step === 1 ? "M141 450 C230 450 210 390 290 390" : "M141 337 C230 337 222 278 310 278", name: "documents" },
+            { d: step === 1 ? "M270 600 C270 520 360 500 360 420" : "M529 408 C499 408 452 316 400 301", name: "field" },
+            { d: step === 1 ? "M400 330 C460 330 440 260 500 260" : "M423 239 C505 239 454 112 542 112", name: "outcome" },
           ].map((p, i) => (
             <g
               key={p.name}
@@ -249,18 +249,34 @@ export default function CaseWorkflow() {
             </>
           ) : step === 1 ? (
             <>
-              <strong>
-                {prepared ? "ABC Industries" : "Approved template"}
-              </strong>
-              <p>
-                {prepared
-                  ? "Case details populated. Ready for review."
-                  : "Select the preview to populate sample fields."}
+              <div className={`document-sheet ${prepared ? "is-populated" : ""}`}>
+                <div className="document-sheet-heading">
+                  <span className="document-rule" aria-hidden="true" />
+                  <strong>Case summary</strong>
+                  <span>Approved template · sample</span>
+                </div>
+                <dl className="document-fields" key={prepared ? "filled" : "empty"}>
+                  {[
+                    ["Borrower", "ABC Industries", "Borrower name"],
+                    ["Property", "Industrial unit", "Property type"],
+                    ["Location", "Mumbai", "Case location"],
+                  ].map(([label, value, placeholder], index) => (
+                    <div className="document-field" key={label} style={{ animationDelay: `${index * 230}ms` }}>
+                      <dt>{label}</dt>
+                      <dd>{prepared ? value : <span className="document-placeholder">{placeholder}</span>}
+                        {prepared && <Check size={17} aria-hidden="true" />}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="document-sheet-status" role="status">
+                  {prepared ? <><Check size={18} /> Ready for review</> : <><Layers size={18} /> Waiting for case details</>}
+                </div>
+              </div>
+              <p className="document-instruction">
+                {prepared ? "Sample details filled from the case record." : "See case details fill an approved template."}
               </p>
-              <button
-                className="mapping-trigger"
-                onClick={() => setPrepared(!prepared)}
-              >
+              <button className="mapping-trigger" onClick={() => setPrepared(!prepared)}>
                 {prepared ? "Reset preview" : "Populate fields"}
                 <ArrowRight size={17} />
               </button>
