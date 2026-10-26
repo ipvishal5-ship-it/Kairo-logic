@@ -65,13 +65,11 @@ export default function Contact() {
       <section id="contact" className="contact section">
         <div className="container contact-grid">
           <Reveal className="contact-copy">
-            <p className="eyebrow">LET’S MAKE WORK FLOW</p>
+            <p className="eyebrow">YOUR NEXT MOVE</p>
             <h2>
-              A clearer process
+              Less chasing.
               <br />
-              starts with
-              <br />
-              <span>a conversation.</span>
+              <span>More recovery.</span>
             </h2>
             <p>
               Tell us what your team manages today. We’ll discuss the workflow,
@@ -219,7 +217,7 @@ export default function Contact() {
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} Kairologic Technology</span>
-          <span>Bring structure. Move work forward.</span>
+          <span>One case. One record. Total control.</span>
         </div>
       </footer>
     </>

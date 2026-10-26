@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Brand from "./brand";
 const links = [
-  { href: "#platform", label: "The solution" },
-  { href: "#approach", label: "Our approach" },
-  { href: "#security", label: "Security" },
+  { href: "#platform", label: "The workflow" },
+  { href: "#dashboard", label: "The visibility" },
+  { href: "#security", label: "The control" },
 ];
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function Header() {
             className="brand-link"
             aria-label="Kairologic Technology home"
           >
-            <Brand />
+            <Brand inverse />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             {links.map((l) => (
