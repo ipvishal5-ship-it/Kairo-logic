@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Database, FolderOpen, FileText, Users, LockKeyhole, Check, Layers, History, ShieldCheck } from "lucide-react";
+import { BrandMark } from "./brand";
 const views = [
   {label:"Records", icon:Database, title:"Everything has its place.", description:"Structured records. Connected information.", rows:[
     {icon:FolderOpen, title:"Case records", detail:"Details, documents and actions together", tag:"Organised"},
@@ -21,7 +22,7 @@ const views = [
 export default function DigitalWorkspace(){
   const [active,setActive]=useState(0);const view=views[active];
   return <div className="digital-workspace" aria-label="Illustrative digital workspace">
-    <div className="digital-toolbar"><span><span className="digital-k">K</span> YOUR WORKSPACE</span><span>Illustrative setup</span></div>
+    <div className="digital-toolbar"><span><span className="digital-k"><BrandMark className="digital-k-mark" /></span> YOUR WORKSPACE</span><span>Illustrative setup</span></div>
     <div className="digital-intro"><div className="digital-vault" aria-hidden="true"><Database size={36}/><span><LockKeyhole size={16}/></span></div><div><p>ONE CONNECTED SYSTEM</p><h3>A place for every record.</h3></div></div>
     <div className="digital-view-buttons" role="group" aria-label="Explore workspace views">{views.map((v,i)=>{const Icon=v.icon;return <button key={v.label} aria-pressed={i===active} onClick={()=>setActive(i)}><Icon size={20}/>{v.label}</button>})}</div>
     <div className="digital-view" aria-live="polite"><div className="digital-view-heading"><h4>{view.title}</h4><p>{view.description}</p></div>

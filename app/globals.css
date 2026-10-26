@@ -2397,3 +2397,7 @@ button {
 .brand-type>span{font-size:12px;font-weight:600;letter-spacing:.23em;line-height:1.2;color:#b7cce0}
 .brand-link:hover .brand-mark{color:#fff}
 @media(max-width:600px){.brand{gap:11px}.brand-mark{width:41px;height:41px}.brand-type{gap:7px}.brand-type strong{font-size:23px;letter-spacing:.018em}.brand-type>span{font-size:10px;letter-spacing:.21em}.footer-main .brand-mark{width:41px;height:41px}}
+
+/* The record-to-one-case mark also appears in the illustrative workspace. */
+.digital-k{display:inline-flex;align-items:center;justify-content:center;width:37px;height:37px;padding:4px;color:#edf4ff}
+.digital-k-mark{display:block;width:27px;height:27px;flex:none}
