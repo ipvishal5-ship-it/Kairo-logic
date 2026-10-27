@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Brand from "@/components/brand";
 
 export const dynamic = "force-dynamic";
@@ -10,9 +11,9 @@ export const metadata = {
 export default async function Enquiries() {
   return (
     <main className="c-main c-shell c-prose c-owner-inbox">
-      <a href="/">
+      <Link href="/">
         <Brand />
-      </a>
+      </Link>
       <div className="inbox-heading">
         <div>
           <p className="eyebrow">REVIEW</p>
@@ -21,9 +22,9 @@ export default async function Enquiries() {
             Customer submissions from the contact form are logged directly to your Vercel deployment console.
           </p>
         </div>
-        <a className="text-link" href="/">
+        <Link className="text-link" href="/">
           Back to website
-        </a>
+        </Link>
       </div>
       <div className="inbox-empty">
         All form enquiries are securely captured and recorded.
