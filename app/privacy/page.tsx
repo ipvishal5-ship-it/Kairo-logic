@@ -1,12 +1,10 @@
-import Brand from "@/components/brand";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 export const metadata = { title: "Enquiry privacy notice | Kairologic" };
 export default function Privacy() {
   return (
-    <main className="utility-page privacy-page container">
-      <a href="/">
-        <Brand />
-      </a>
-      <p className="eyebrow">YOUR INFORMATION</p>
+    <><Header /><main id="main" className="c-main c-shell c-prose">
+      <p className="c-section-label">Your information</p>
       <h1>Enquiry privacy notice</h1>
       <p>
         When you submit an enquiry, we collect your name, email address,
@@ -41,9 +39,9 @@ export default function Privacy() {
         Submit an enquiry using the same email address and tell us what you
         would like to correct or delete.
       </p>
-      <a className="button primary" href="/#contact">
+      <a className="c-button" href="/contact">
         Return to the enquiry form
       </a>
-    </main>
+    </main><Footer /></>
   );
 }

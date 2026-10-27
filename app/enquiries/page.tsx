@@ -15,7 +15,7 @@ export default async function Enquiries() {
       env.ENQUIRY_REVIEWER_EMAIL.trim().toLowerCase();
   if (!allowed)
     return (
-      <main className="utility-page container">
+      <main className="c-main c-shell c-prose c-owner-inbox">
         <a href="/">
           <Brand />
         </a>
@@ -23,7 +23,7 @@ export default async function Enquiries() {
         <p>This area is restricted to the site owner.</p>
         {!user ? (
           <a
-            className="button primary"
+            className="c-button"
             href={chatGPTSignInPath("/enquiries")}
             target="_top"
           >
@@ -49,7 +49,7 @@ export default async function Enquiries() {
       }>()
     : null;
   return (
-    <main className="utility-page container">
+    <main className="c-main c-shell c-prose c-owner-inbox">
       <a href="/">
         <Brand />
       </a>

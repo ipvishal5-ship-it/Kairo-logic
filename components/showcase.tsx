@@ -17,7 +17,7 @@ export default function Showcase() {
       <section className="hero firm-hero" id="home">
         <div className="container firm-hero-grid">
           <div className="firm-hero-copy">
-            <p className="eyebrow"><i className="signal-dot" /> WORKFLOW SYSTEMS. BUILT AROUND YOUR TEAM.</p>
+            <p className="eyebrow">Case &amp; workflow workspace</p>
             <h1><span>Your data, structured.</span><span className="hero-accent">Your team, connected.</span></h1>
             <p className="firm-intro">A clear place for your records, documents and daily work.</p>
             <p className="firm-description">We build your digital workspace around your process, with organised information, clear responsibilities and access defined by role.</p>

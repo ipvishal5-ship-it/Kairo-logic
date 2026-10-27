@@ -13,7 +13,7 @@ export default function Brand({ inverse = false }: { inverse?: boolean }) {
       <BrandMark />
       <span className="brand-type">
         <strong>KAIROLOGIC</strong>
-        <span>TECHNOLOGY</span>
+        <span>Technologies</span>
       </span>
     </span>
   );

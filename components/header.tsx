@@ -1,81 +1,25 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import Link from "./site-link";
+import { usePathname } from "next/navigation";
 import Brand from "./brand";
-const links = [
-  { href: "#platform", label: "The workflow" },
-  { href: "#dashboard", label: "The visibility" },
-  { href: "#security", label: "The control" },
-];
+const links = [{ href: "/about", label: "Company" }, { href: "/technologies", label: "Technologies" }];
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const toggle = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!open) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        toggle.current?.focus();
-      }
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
+    function handleKey(event: KeyboardEvent) {
+      if (event.key === "Escape") { setOpen(false); toggle.current?.focus(); }
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, [open]);
-  return (
-    <>
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
-      <header className="site-header">
-        <div className="container header-inner">
-          <a
-            href="#home"
-            className="brand-link"
-            aria-label="Kairologic Technology home"
-          >
-            <Brand inverse />
-          </a>
-          <nav className="desktop-nav" aria-label="Main navigation">
-            {links.map((l) => (
-              <a href={l.href} key={l.href}>
-                {l.label}
-              </a>
-            ))}
-          </nav>
-          <div className="header-actions">
-            <a href="#contact" className="header-contact">
-              Let’s connect <ArrowUpRight size={21} />
-            </a>
-            <button
-              ref={toggle}
-              className="menu-toggle"
-              onClick={() => setOpen(!open)}
-              aria-expanded={open}
-              aria-controls="mobile-navigation"
-              aria-label={open ? "Close menu" : "Open menu"}
-            >
-              {open ? <X /> : <Menu />}
-            </button>
-          </div>
-        </div>
-        {open && (
-          <nav
-            className="mobile-nav container"
-            id="mobile-navigation"
-            aria-label="Mobile navigation"
-          >
-            {[
-              ...links,
-              { href: "#contact", label: "Request a demonstration" },
-            ].map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
-                {l.label}
-                <ArrowUpRight size={20} />
-              </a>
-            ))}
-          </nav>
-        )}
-      </header>
-    </>
-  );
+  return <><a className="c-skip" href="#main">Skip to content</a><header className="c-header"><div className="c-shell c-header-inner">
+    <Link href="/" className="c-brand-link" aria-label="Kairologic Technologies home" onClick={() => setOpen(false)}><Brand /></Link>
+    <nav className="c-desktop-nav" aria-label="Main navigation">{links.map(link => <Link key={link.href} href={link.href} aria-current={pathname?.startsWith(link.href) ? "page" : undefined}>{link.label}</Link>)}</nav>
+    <Link href="/contact" className="c-button c-header-cta">Talk to our team</Link>
+    <button ref={toggle} className="c-menu-button" aria-expanded={open} aria-controls="company-mobile-nav" aria-label={open ? "Close navigation" : "Open navigation"} onClick={() => setOpen(!open)}><span>{open ? "Close" : "Menu"}</span><span className={`c-menu-glyph ${open ? "is-open" : ""}`} aria-hidden="true"><i /><i /></span></button>
+  </div>{open && <nav id="company-mobile-nav" className="c-mobile-nav c-shell" aria-label="Mobile navigation">{[{ href: "/", label: "Home" }, ...links, { href: "/contact", label: "Talk to our team" }].map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}</Link>)}</nav>}</header></>;
 }

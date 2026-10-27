@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./corporate.css";
 export const metadata: Metadata = {
-  title: "Kairologic Technology | Your data, structured. Your team, connected.",
+  title: { default: "Kairologic Technologies | Technology built around your work", template: "%s | Kairologic Technologies" },
   description:
-    "Connected records, document automation and clear dashboards. Workflow implementation configured around your team.",
+    "Business systems, document workflows and connected information. Kairologic Technologies designs and configures technology around the way your team works.",
   openGraph: {
-    title: "Kairologic Technology",
-    description: "Your data, structured. Your team, connected.",
+    title: "Kairologic Technologies",
+    description: "Technology built around your work.",
     type: "website",
   },
 };
