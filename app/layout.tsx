@@ -1,34 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const space = Space_Grotesk({ variable: "--font-space", subsets: ["latin"] });
-const jb = JetBrains_Mono({ variable: "--font-jb", subsets: ["latin"] });
-
+import "./corporate.css";
 export const metadata: Metadata = {
-  title: "Kairologic Technology — SARFAESI Intelligence",
+  title: { default: "Kairologic Technologies | Technology built around your work", template: "%s | Kairologic Technologies" },
   description:
-    "One case. One record. One source of information — from data to recovery. Intelligent SARFAESI case management for Banks, NBFCs, HFCs & ARCs.",
+    "Business systems, document workflows and connected information. Kairologic Technologies designs and configures technology around the way your team works.",
   openGraph: {
-    title: "Kairologic Technology — SARFAESI Intelligence",
-    description:
-      "One case. One record. One source of information — from data to recovery.",
+    title: "Kairologic Technologies",
+    description: "Technology built around your work.",
     type: "website",
   },
 };
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${space.variable} ${jb.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-ink text-text selection:bg-accent selection:text-white">{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

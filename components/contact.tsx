@@ -1,73 +1,225 @@
 "use client";
-
-import { motion } from "motion/react";
-import { ArrowRight, Phone, MapPin, Globe } from "lucide-react";
-import { Reveal } from "./motion-primitives";
-import { useEffect, useState } from "react";
-
+import { useRef, useState, type FormEvent } from "react";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  LoaderCircle,
+  ArrowRight,
+} from "lucide-react";
+import Brand from "./brand";
+import { createRequestId } from "@/lib/request-id";
+import Reveal from "./reveal";
 export default function Contact() {
-  const [year, setYear] = useState(2026);
-  useEffect(() => setYear(new Date().getFullYear()), []);
+  const [state, setState] = useState<"idle" | "sending" | "success" | "error">(
+    "idle",
+  );
+  const [error, setError] = useState("");
+  const requestId = useRef("");
+  const success = useRef<HTMLDivElement>(null);
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (state === "sending") return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setError("");
+    setState("sending");
+    try {
+      if (!requestId.current) requestId.current = createRequestId();
+      const response = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: requestId.current,
+          name: data.get("name"),
+          email: data.get("email"),
+          organisation: data.get("organisation"),
+          message: data.get("message"),
+          consent: data.get("consent") === "on",
+          website: data.get("website"),
+        }),
+      });
+      const raw: unknown = await response.json().catch(() => ({}));
+      const result =
+        raw && typeof raw === "object"
+          ? (raw as { ok?: boolean; error?: string })
+          : {};
+      if (!response.ok || !result.ok)
+        throw new Error(
+          result.error || "We couldn’t save your enquiry. Please try again.",
+        );
+      setState("success");
+      form.reset();
+      requestId.current = "";
+      requestAnimationFrame(() => success.current?.focus());
+    } catch (e) {
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Please check your connection and try again.",
+      );
+      setState("error");
+    }
+  }
   return (
-    <section id="contact" className="border-t border-line/60">
-      <div className="relative overflow-hidden bg-grid">
-        <div className="bg-glow absolute inset-0 pointer-events-none" />
-        <div className="relative mx-auto max-w-6xl px-5 py-28 text-center">
-          <Reveal>
-            <p className="eyebrow mb-6">The Objective</p>
-            <h2 className="mx-auto max-w-3xl font-display text-3xl font-semibold tracking-tight text-text sm:text-5xl md:leading-tight">
-              Spend less time collecting data.{" "}
-              <span className="text-accent">Spend more time on recovery.</span>
+    <>
+      <section id="contact" className="contact section">
+        <div className="container contact-grid">
+          <Reveal className="contact-copy">
+            <p className="eyebrow">YOUR NEXT MOVE</p>
+            <h2>
+              Less chasing.
+              <br />
+              <span>More recovery.</span>
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-base text-muted">
-              Empowering Banks, FIs, HFCs & ARCs with intelligent SARFAESI solutions.
+            <p>
+              Tell us what your team manages today. We’ll discuss the workflow,
+              the setup and a focused demonstration.
             </p>
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              href="tel:+919892333340"
-              className="group mt-10 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-sm font-medium text-white transition hover:opacity-90"
-            >
-              Request a demo
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </motion.a>
-          </Reveal>
-        </div>
-      </div>
-
-      <footer className="border-t border-line/60">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-5 py-12 md:flex-row md:items-start">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent font-display text-sm font-bold text-white">
-                K
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-[15px] font-semibold tracking-wide text-text">KAIROLOGIC</span>
-                <span className="font-mono text-[9px] tracking-[0.3em] text-muted">TECHNOLOGY</span>
-              </span>
+            <div className="contact-expect">
+              <span className="teal-dot" /> Your process. Your priorities. A
+              practical next step.
             </div>
-            <p className="mt-4 max-w-xs text-xs leading-5 text-muted">
-              One case. One record. One source of information — from data to recovery.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 text-sm text-muted">
-            <a href="tel:+919892333340" className="flex items-center gap-2.5 transition hover:text-text">
-              <Phone className="h-4 w-4 text-accent" /> 9892 333 340
-            </a>
-            <span className="flex items-center gap-2.5">
-              <MapPin className="h-4 w-4 text-accent" />
-              504, Atlanta Estate, Opp. Oberoi Mall, Goregaon East, Mumbai
-            </span>
-            <a href="https://www.sarfaesi.in" className="flex items-center gap-2.5 transition hover:text-text">
-              <Globe className="h-4 w-4 text-accent" /> www.sarfaesi.in
-            </a>
+          </Reveal>
+          <div className="enquiry-card">
+            {state === "success" ? (
+              <div
+                className="form-success"
+                ref={success}
+                tabIndex={-1}
+                role="status"
+              >
+                <CheckCircle2 size={48} />
+                <h3>Your enquiry is received.</h3>
+                <p>
+                  Your request has been saved. We’ll use the email you provided
+                  to follow up.
+                </p>
+                <button
+                  className="button primary"
+                  onClick={() => setState("idle")}
+                >
+                  Send another enquiry <ArrowRight size={20} />
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={submit} aria-label="Request a demonstration">
+                <h3>Let’s understand your workflow.</h3>
+                <p className="form-intro">
+                  A few details are all we need to start.
+                </p>
+                <div className="form-row">
+                  <div className="form-field">
+                    <label htmlFor="name">Your name</label>
+                    <input
+                      id="name"
+                      name="name"
+                      autoComplete="name"
+                      required
+                      minLength={2}
+                      maxLength={100}
+                      placeholder="Full name"
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label htmlFor="email">Work email</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      maxLength={254}
+                      placeholder="you@organisation.com"
+                    />
+                  </div>
+                </div>
+                <div className="form-field">
+                  <label htmlFor="organisation">
+                    Organisation <span>(optional)</span>
+                  </label>
+                  <input
+                    id="organisation"
+                    name="organisation"
+                    autoComplete="organization"
+                    maxLength={160}
+                    placeholder="Organisation name"
+                  />
+                </div>
+                <div className="form-field">
+                  <label htmlFor="message">
+                    What would you like to improve?
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    minLength={10}
+                    maxLength={3000}
+                    rows={4}
+                    placeholder="Tell us about your case records, documents or reporting."
+                  />
+                </div>
+                <div className="form-trap" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+                <label className="consent">
+                  <input name="consent" type="checkbox" required />
+                  <span>
+                    You may contact me about this enquiry.{" "}
+                    <a href="/privacy">Privacy notice</a>
+                  </span>
+                </label>
+                {error && (
+                  <p className="form-error" role="alert">
+                    {error}
+                  </p>
+                )}
+                <button
+                  className="button primary submit-button"
+                  disabled={state === "sending"}
+                  type="submit"
+                >
+                  {state === "sending" ? (
+                    <>
+                      Saving your enquiry{" "}
+                      <LoaderCircle className="spin" size={22} />
+                    </>
+                  ) : (
+                    <>
+                      Request a demonstration <ArrowUpRight size={22} />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
           </div>
         </div>
-        <div className="border-t border-line/60 py-5 text-center text-xs text-muted">
-          © {year} Kairologic Technology. All rights reserved.
+      </section>
+      <footer className="site-footer">
+        <div className="container footer-main">
+          <a href="#home" aria-label="Kairologic home">
+            <Brand inverse />
+          </a>
+          <p>
+            Connected work.
+            <br />
+            Considered technology.
+          </p>
+          <a href="/privacy">
+            Privacy notice <ArrowUpRight size={19} />
+          </a>
+        </div>
+        <div className="container footer-bottom">
+          <span>© {new Date().getFullYear()} Kairologic Technology</span>
+          <span>One case. One record. Total control.</span>
         </div>
       </footer>
-    </section>
+    </>
   );
 }
