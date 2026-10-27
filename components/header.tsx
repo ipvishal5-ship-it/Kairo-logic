@@ -72,7 +72,7 @@ export default function Header() {
                 />
               </Link>
 
-              {/* 2-Row x 2-Column Mega Dropdown Panel */}
+              {/* 2-Row Unified Mega Dropdown Panel */}
               <div
                 className={`c-dropdown-menu ${dropdownOpen ? "is-active" : ""}`}
                 role="menu"
@@ -89,82 +89,71 @@ export default function Header() {
                   </Link>
                 </div>
 
-                <div className="c-dropdown-grid">
-                  {/* Row 1: SARFAESI (opens product page) and Kairologic Ops */}
-                  <div className="c-dropdown-row">
-                    <Link
-                      href="/technologies/workflow"
-                      className="c-dropdown-card"
-                      onClick={() => setDropdownOpen(false)}
-                      role="menuitem"
-                    >
-                      <div className="c-dropdown-card-top">
-                        <span className="c-dropdown-card-badge">SARFAESI · PRODUCT</span>
-                        <ArrowRight size={15} className="c-dropdown-card-arrow" />
-                      </div>
-                      <h4 className="c-dropdown-card-title">SARFAESI</h4>
-                      <p className="c-dropdown-card-desc">
-                        Direct access to our flagship recovery workspace: automated notice timelines & secured asset intelligence.
-                      </p>
-                    </Link>
+                <div className="c-dropdown-product-list">
+                  {/* Row 1: Left: SARFAESI | Right: Kairologic Ops (Directly opens product page) */}
+                  <Link
+                    href="/technologies/workflow"
+                    className="c-dropdown-product-row"
+                    onClick={() => setDropdownOpen(false)}
+                    role="menuitem"
+                  >
+                    <div className="c-row-col c-row-col-domain">
+                      <span className="c-col-tag">DOMAIN</span>
+                      <h4 className="c-col-title">SARFAESI</h4>
+                      <p className="c-col-desc">Secured Asset Recovery</p>
+                    </div>
 
-                    <Link
-                      href="/technologies/workflow"
-                      className="c-dropdown-card"
-                      onClick={() => setDropdownOpen(false)}
-                      role="menuitem"
-                    >
-                      <div className="c-dropdown-card-top">
-                        <span className="c-dropdown-card-badge">OPERATIONS</span>
-                        <ArrowRight size={15} className="c-dropdown-card-arrow" />
-                      </div>
-                      <h4 className="c-dropdown-card-title">Kairologic Ops</h4>
-                      <p className="c-dropdown-card-desc">
-                        End-to-end case workflows, collaborative officer dispatch & real-time compliance oversight.
-                      </p>
-                    </Link>
-                  </div>
+                    <div className="c-row-divider" aria-hidden="true" />
 
-                  {/* Row 2: Manufacturing (non-directing) and Kairologic Sales & Service Cloud (non-directing) */}
-                  <div className="c-dropdown-row">
-                    <a
-                      href="#manufacturing"
-                      className="c-dropdown-card"
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      role="menuitem"
-                      aria-disabled="true"
-                    >
-                      <div className="c-dropdown-card-top">
-                        <span className="c-dropdown-card-badge is-soon">COMING SOON</span>
-                        <Clock size={14} className="c-dropdown-card-arrow" />
+                    <div className="c-row-col c-row-col-platform">
+                      <div className="c-platform-meta">
+                        <span className="c-col-tag c-col-tag-platform">SOLUTION PLATFORM</span>
+                        <span className="c-badge-pill c-badge-live">OPEN PRODUCT PAGE</span>
                       </div>
-                      <h4 className="c-dropdown-card-title">Manufacturing</h4>
-                      <p className="c-dropdown-card-desc">
-                        Plant operations routing, inventory traceability & shop-floor digital tracking systems.
+                      <h4 className="c-col-title">Kairologic Ops</h4>
+                      <p className="c-col-desc">
+                        Live legal notice timelines, case operations & automated secured-asset tracking.
                       </p>
-                    </a>
+                    </div>
 
-                    <a
-                      href="#sales-service"
-                      className="c-dropdown-card"
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                      role="menuitem"
-                      aria-disabled="true"
-                    >
-                      <div className="c-dropdown-card-top">
-                        <span className="c-dropdown-card-badge is-soon">COMING SOON</span>
-                        <Clock size={14} className="c-dropdown-card-arrow" />
+                    <div className="c-row-action-icon">
+                      <ArrowRight size={18} />
+                    </div>
+                  </Link>
+
+                  {/* Row 2: Left: Manufacturing | Right: Kairologic Sales and Service Cloud (Non-directing) */}
+                  <a
+                    href="#manufacturing"
+                    className="c-dropdown-product-row is-soon"
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                    role="menuitem"
+                    aria-disabled="true"
+                  >
+                    <div className="c-row-col c-row-col-domain">
+                      <span className="c-col-tag">DOMAIN</span>
+                      <h4 className="c-col-title">Manufacturing</h4>
+                      <p className="c-col-desc">Industrial Production</p>
+                    </div>
+
+                    <div className="c-row-divider" aria-hidden="true" />
+
+                    <div className="c-row-col c-row-col-platform">
+                      <div className="c-platform-meta">
+                        <span className="c-col-tag c-col-tag-platform">SOLUTION PLATFORM</span>
+                        <span className="c-badge-pill c-badge-soon">COMING SOON</span>
                       </div>
-                      <h4 className="c-dropdown-card-title">Kairologic Sales and Service Cloud</h4>
-                      <p className="c-dropdown-card-desc">
-                        Customer enquiry pipelines, field service automation & delivery SLA monitoring engine.
+                      <h4 className="c-col-title">Kairologic Sales and Service Cloud</h4>
+                      <p className="c-col-desc">
+                        Plant shop-floor traceability, customer enquiries & field service SLA tracking.
                       </p>
-                    </a>
-                  </div>
+                    </div>
+
+                    <div className="c-row-action-icon">
+                      <Clock size={16} />
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -210,14 +199,9 @@ export default function Header() {
                   href="/technologies/workflow"
                   onClick={() => setOpen(false)}
                 >
-                  <span>SARFAESI (Product)</span>
-                  <ArrowRight size={16} />
-                </Link>
-                <Link
-                  href="/technologies/workflow"
-                  onClick={() => setOpen(false)}
-                >
-                  <span>Kairologic Ops</span>
+                  <div>
+                    <strong>SARFAESI</strong> · Kairologic Ops
+                  </div>
                   <ArrowRight size={16} />
                 </Link>
                 <a
@@ -225,16 +209,10 @@ export default function Header() {
                   onClick={(e) => e.preventDefault()}
                   style={{ color: "var(--c-muted)" }}
                 >
-                  <span>Manufacturing</span>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", background: "rgba(0,0,0,0.06)", padding: "2px 6px" }}>Soon</span>
-                </a>
-                <a
-                  href="#sales-service"
-                  onClick={(e) => e.preventDefault()}
-                  style={{ color: "var(--c-muted)" }}
-                >
-                  <span>Kairologic Sales and Service Cloud</span>
-                  <span style={{ fontSize: "12px", textTransform: "uppercase", background: "rgba(0,0,0,0.06)", padding: "2px 6px" }}>Soon</span>
+                  <div>
+                    <strong>Manufacturing</strong> · Kairologic Sales and Service Cloud
+                  </div>
+                  <span style={{ fontSize: "11px", textTransform: "uppercase", background: "rgba(0,0,0,0.06)", padding: "2px 6px" }}>Soon</span>
                 </a>
               </div>
             </div>
