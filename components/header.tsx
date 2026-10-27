@@ -25,11 +25,12 @@ export default function Header() {
     return () => document.removeEventListener("keydown", handleKey);
   }, [open, dropdownOpen]);
 
-  // Close menus on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setDropdownOpen(false);
     setOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <>

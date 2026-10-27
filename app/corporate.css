@@ -21,7 +21,7 @@ button, input, textarea { font-family: inherit; }
 html { scroll-padding-top: 115px; }
 .c-shell { width: calc(100% - 96px); max-width: 1376px; margin-inline: auto; }
 .c-main { background: var(--c-paper); color: var(--c-ink); }
-.c-main :is(h1,h2,h3), .c-invitation h2 { font-family: var(--c-type); font-weight: 600; line-height: 1.1; letter-spacing: -.045em; text-wrap: balance; }
+.c-main :is(h1,h2,h3), .c-invitation h2 { font-family: var(--c-type); font-weight: 600; line-height: 1.1; letter-spacing: -.045em; }
 .c-main h1 { font-size: clamp(54px, 6.15vw, 94px); }
 .c-main h1 em { font-style: normal; color: var(--c-green); }
 .c-main h2, .c-invitation h2 { font-size: clamp(38px, 4.1vw, 60px); }

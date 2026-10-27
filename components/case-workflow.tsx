@@ -9,7 +9,6 @@ import {
   Play,
   Pause,
   RotateCcw,
-  ArrowUpRight,
   Layers,
   ChartNoAxesCombined,
 } from "lucide-react";
@@ -55,10 +54,12 @@ export default function CaseWorkflow() {
   const [source, setSource] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [prepared, setPrepared] = useState(false);
-  const [reduced, setReduced] = useState(false);
+  const [reduced, setReduced] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
   useEffect(() => {
-    const media = matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(media.matches);
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReduced(media.matches);
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
