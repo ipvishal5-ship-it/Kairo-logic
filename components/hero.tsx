@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, FileText, MapPin, Shield } from "lucide-react";
-import Image from "next/image";
 import { caseRecord, caseChips } from "@/lib/data";
 
 export default function Hero() {
@@ -58,21 +57,54 @@ export default function Hero() {
 
         {/* self-assembling case record card + property visual */}
         <motion.div {...fade(0.5)} className="space-y-5">
-          {/* hero image slot — replace with generated image */}
+          {/* hero property visualization — abstract SVG, no external image dependency */}
           <motion.div
             initial={reduce ? false : { opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="card overflow-hidden"
+            className="card relative overflow-hidden"
           >
-            <Image
-              src="/images/hero-industrial-estate.jpg"
-              alt="Industrial property in Mumbai — a SARFAESI secured asset"
-              width={1024}
-              height={576}
-              className="h-56 w-full object-cover sm:h-64"
-              priority
-            />
+            <div className="relative h-56 w-full sm:h-64">
+              <svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 640 384"
+                preserveAspectRatio="xMidYMid slice"
+                aria-hidden
+              >
+                <defs>
+                  <linearGradient id="heroGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(79, 124, 255, 0.35)" />
+                    <stop offset="50%" stopColor="rgba(79, 124, 255, 0.12)" />
+                    <stop offset="100%" stopColor="rgba(34, 211, 170, 0.08)" />
+                  </linearGradient>
+                  <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="rgba(30, 42, 58, 0.5)" />
+                    <stop offset="100%" stopColor="rgba(10, 14, 20, 0.7)" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="384" fill="url(#gridGradient)" />
+                <rect x="20" y="20" width="600" height="344" rx="12" fill="url(#heroGradient)" />
+                <rect x="80" y="60" width="480" height="240" rx="8" fill="rgba(255,255,255,0.06)" />
+                <rect x="120" y="90" width="80" height="80" rx="4" fill="rgba(79,124,255,0.4)" />
+                <rect x="220" y="110" width="60" height="60" rx="4" fill="rgba(34,211,170,0.35)" />
+                <rect x="300" y="80" width="100" height="100" rx="4" fill="rgba(79,124,255,0.25)" />
+                <rect x="420" y="100" width="40" height="40" rx="3" fill="rgba(34,211,170,0.3)" />
+                <path
+                  d="M 120 200 L 560 200"
+                  stroke="rgba(255,255,255,0.1)"
+                  strokeWidth="1"
+                  strokeDasharray="4 4"
+                />
+                <path
+                  d="M 120 230 L 560 230"
+                  stroke="rgba(255,255,255,0.08)"
+                  strokeWidth="1"
+                  strokeDasharray="4 4"
+                />
+                <circle cx="440" cy="140" r="8" fill="rgba(79,124,255,0.5)" />
+                <circle cx="480" cy="170" r="6" fill="rgba(34,211,170,0.45)" />
+              </svg>
+            </div>
             <div className="flex items-center justify-between px-5 py-3">
               <span className="flex items-center gap-2 text-sm text-muted">
                 <MapPin className="h-4 w-4 text-accent2" /> Secured asset · Mumbai

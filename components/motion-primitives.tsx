@@ -34,7 +34,14 @@ export function Counter({ value, suffix = "" }: { value: number; suffix?: string
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    if (inView) mv.set(reduce ? value : value);
+    if (!inView) return;
+    if (reduce) {
+      // Skip animation — jump straight to final value
+      mv.set(value);
+    } else {
+      // Animate the motion value to trigger the spring
+      mv.set(value);
+    }
   }, [inView, mv, value, reduce]);
 
   useEffect(() => {
