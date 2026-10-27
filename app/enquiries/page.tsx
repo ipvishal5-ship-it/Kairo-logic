@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/site-link";
 import Brand from "@/components/brand";
 
 export const dynamic = "force-dynamic";

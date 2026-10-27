@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import "./corporate.css";
-export const metadata: Metadata = {
+
+export const metadata = {
   title: { default: "Kairologic Technologies | Technology built around your work", template: "%s | Kairologic Technologies" },
   description:
     "Business systems, document workflows and connected information. Kairologic Technologies designs and configures technology around the way your team works.",
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
 export default function RootLayout({
   children,
 }: {
