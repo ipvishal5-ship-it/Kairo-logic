@@ -61,22 +61,22 @@ html { scroll-padding-top: 115px; }
 .c-nav-item-dropdown:hover .c-dropdown-chevron,
 .c-nav-item-dropdown:focus-within .c-dropdown-chevron { transform: rotate(180deg); }
 
-/* Navigation Dropdown Menu */
+/* Navigation Dropdown Menu (Minimalist Single-Line) */
 .c-nav-item-dropdown { position: relative; display: flex; align-items: center; }
 .c-dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  width: 680px;
-  max-width: calc(100vw - 40px);
+  width: 580px;
+  max-width: calc(100vw - 32px);
   background: #ffffff;
   border: 1px solid var(--c-rule);
-  box-shadow: 0 24px 60px rgba(16, 43, 58, 0.14), 0 4px 16px rgba(16, 43, 58, 0.05);
-  padding: 22px;
+  box-shadow: 0 20px 48px rgba(16, 43, 58, 0.12), 0 4px 12px rgba(16, 43, 58, 0.04);
+  padding: 12px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.18s;
   pointer-events: none;
   z-index: 100;
 }
@@ -85,69 +85,136 @@ html { scroll-padding-top: 115px; }
 .c-nav-item-dropdown:focus-within .c-dropdown-menu,
 .c-dropdown-menu.is-active { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
-.c-dropdown-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--c-rule); }
-.c-dropdown-header-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); }
-.c-dropdown-header-link { font-size: 14px; font-weight: 600; color: var(--c-green); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
-.c-dropdown-header-link:hover { text-decoration: underline; }
+.c-dropdown-items-wrap { display: flex; flex-direction: column; gap: 8px; }
 
-/* Unified 2-Column Product Rows (Only 2 Rows Total) */
-.c-dropdown-product-list { display: flex; flex-direction: column; gap: 14px; }
-
-.c-dropdown-product-row {
-  display: grid;
-  grid-template-columns: 180px 1px 1fr 30px;
+/* The sleek single-line row item */
+.c-dropdown-line-item {
+  display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px 22px;
+  justify-content: space-between;
+  padding: 15px 20px;
   background: var(--c-paper);
-  border: 1.5px solid rgba(188, 200, 197, 0.75);
+  border: 1.5px solid transparent;
   text-decoration: none !important;
   color: var(--c-ink) !important;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  position: relative;
 }
 
-.c-dropdown-product-row:hover {
+.c-dropdown-line-item:hover {
   background: #edf6f1;
   border-color: var(--c-green) !important;
-  box-shadow: 0 10px 30px rgba(24, 87, 70, 0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 87, 70, 0.1);
+  transform: translateY(-1px);
 }
 
-.c-dropdown-product-row.is-soon {
+.c-dropdown-line-item.is-soon {
   cursor: default;
 }
 
-.c-row-divider {
-  width: 1px;
-  height: 52px;
-  background: rgba(188, 200, 197, 0.6);
-  transition: background 0.2s ease;
+.c-dropdown-line-item.is-soon:hover {
+  background: #f5f9f6;
+  border-color: rgba(24, 87, 70, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(16, 43, 58, 0.06);
+  transform: translateY(-1px);
 }
 
-.c-dropdown-product-row:hover .c-row-divider {
-  background: rgba(24, 87, 70, 0.3);
+.c-dropdown-line-item.is-soon:hover .c-line-domain {
+  color: var(--c-green);
 }
 
-.c-row-col { display: flex; flex-direction: column; }
-.c-row-col-domain { min-width: 0; }
-.c-row-col-platform { min-width: 0; }
+.c-dropdown-line-item.is-soon:hover .c-line-platform {
+  color: var(--c-ink);
+}
 
-.c-col-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 4px; }
-.c-col-tag-platform { color: var(--c-green); }
+.c-dropdown-line-item.is-soon:hover .c-line-sep {
+  background: var(--c-green);
+  opacity: 0.75;
+  transform: scaleY(1.12);
+}
 
-.c-col-title { font-size: 18px; font-weight: 700; color: var(--c-ink); line-height: 1.25; margin: 0 0 3px; transition: color 0.18s ease; }
-.c-dropdown-product-row:hover .c-col-title { color: var(--c-green); }
-.c-col-desc { font-size: 13.5px; line-height: 1.4; color: var(--c-muted); margin: 0; }
+/* Left part containing: SARFAESI | Kairologic Ops */
+.c-line-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--c-type);
+}
 
-.c-platform-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 3px; }
-.c-badge-pill { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; }
-.c-badge-live { background: rgba(24, 87, 70, 0.1); color: var(--c-green); }
-.c-badge-soon { background: rgba(67, 88, 99, 0.12); color: var(--c-muted); }
+.c-line-domain {
+  font-size: 19px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+  transition: color 0.18s ease;
+}
 
-.c-row-action-icon { display: flex; align-items: center; justify-content: center; color: var(--c-rule); transition: transform 0.2s ease, color 0.2s ease; }
-.c-dropdown-product-row:hover .c-row-action-icon { color: var(--c-green); transform: translateX(4px); }
+.c-dropdown-line-item:hover .c-line-domain {
+  color: var(--c-green);
+}
+
+/* Small elegant vertical line separator | */
+.c-line-sep {
+  display: inline-block;
+  width: 1.5px;
+  height: 20px;
+  background: var(--c-rule);
+  opacity: 0.85;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.c-dropdown-line-item:hover .c-line-sep {
+  background: var(--c-green);
+  opacity: 1;
+  transform: scaleY(1.15);
+}
+
+.c-line-platform {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--c-muted);
+  transition: color 0.18s ease;
+}
+
+.c-dropdown-line-item:hover .c-line-platform {
+  color: var(--c-ink);
+}
+
+/* Right-side meta / action badge */
+.c-line-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.c-line-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.c-badge-live {
+  background: rgba(24, 87, 70, 0.1);
+  color: var(--c-green);
+}
+
+.c-badge-soon {
+  background: rgba(67, 88, 99, 0.12);
+  color: var(--c-muted);
+}
+
+.c-line-arrow {
+  color: var(--c-rule);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.c-dropdown-line-item:hover .c-line-arrow {
+  color: var(--c-green);
+  transform: translateX(3px);
+}
 
 .c-menu-button { display: none; }
 .c-mobile-nav { padding-block: 8px 28px; }
