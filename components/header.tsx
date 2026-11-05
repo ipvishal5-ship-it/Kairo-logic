@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "./site-link";
 import { usePathname } from "next/navigation";
 import Brand from "./brand";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import {
+  ChevronDown,
+  ArrowRight,
+  ShieldCheck,
+  Scale,
+  Factory,
+} from "lucide-react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -39,6 +45,7 @@ export default function Header() {
       </a>
       <header className="c-header">
         <div className="c-shell c-header-inner">
+          {/* Brand Logo */}
           <Link
             href="/"
             className="c-brand-link"
@@ -51,81 +58,132 @@ export default function Header() {
             <Brand />
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="c-desktop-nav" aria-label="Main navigation">
+            {/* Technologies Dropdown */}
             <div
               ref={dropdownRef}
               className="c-nav-item-dropdown"
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
-              <Link
-                href="/technologies"
-                className="c-nav-dropdown-trigger"
+              <button
+                type="button"
+                className={`c-nav-dropdown-trigger ${dropdownOpen ? "is-open" : ""}`}
                 aria-haspopup="true"
                 aria-expanded={dropdownOpen}
                 aria-current={pathname?.startsWith("/technologies") ? "page" : undefined}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <span>Technologies</span>
                 <ChevronDown
-                  className="c-dropdown-chevron"
-                  size={16}
+                  className={`c-dropdown-chevron ${dropdownOpen ? "is-rotated" : ""}`}
+                  size={14}
                   aria-hidden="true"
                 />
-              </Link>
+              </button>
 
-              {/* Sleek Single-Line Dropdown */}
+              {/* Clean, Creative, Visible Dual-Identity Dropdown */}
               <div
-                className={`c-dropdown-menu ${dropdownOpen ? "is-active" : ""}`}
+                className={`c-dropdown-clean-menu ${dropdownOpen ? "is-active" : ""}`}
                 role="menu"
                 aria-label="Technologies sub-menu"
               >
-                <div className="c-dropdown-items-wrap">
-                  {/* Line 1: SARFAESI | Kairologic Ops (Directly links to product page) */}
+                <div className="c-clean-menu-header">
+                  <span>ENTERPRISE OPERATING SUITE</span>
+                </div>
+
+                <div className="c-clean-menu-list">
+                  {/* Item 1: SARFAESI | Kairologic Ops */}
                   <Link
                     href="/technologies/workflow"
-                    className="c-dropdown-line-item"
+                    className="c-clean-menu-item item-sarfaesi"
                     onClick={() => setDropdownOpen(false)}
                     role="menuitem"
                   >
-                    <div className="c-line-content">
-                      <span className="c-line-domain">SARFAESI</span>
-                      <span className="c-line-sep" aria-hidden="true" />
-                      <span className="c-line-platform">Kairologic Ops</span>
+                    <div className="c-clean-icon icon-green">
+                      <ShieldCheck size={18} />
                     </div>
-                    <div className="c-line-meta">
-                      <span className="c-line-badge c-badge-live">LIVE</span>
-                      <ArrowRight size={16} className="c-line-arrow" />
+                    <div className="c-clean-names">
+                      <span className="c-clean-domain">SARFAESI</span>
+                      <span className="c-clean-sep" aria-hidden="true" />
+                      <span className="c-clean-platform">Kairologic Ops</span>
                     </div>
+                    <ArrowRight size={15} className="c-clean-arrow" />
                   </Link>
 
-                  {/* Line 2: Manufacturing | Kairologic Sales & Service Cloud (Non-directing for now) */}
-                  <a
-                    href="#manufacturing"
-                    className="c-dropdown-line-item is-soon"
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
+                  {/* Item 2: ecourt  */}
+                  <Link
+                    href="/technologies/ecourt-filing"
+                    className="c-clean-menu-item item-lex"
+                    onClick={() => setDropdownOpen(false)}
                     role="menuitem"
-                    aria-disabled="true"
                   >
-                    <div className="c-line-content">
-                      <span className="c-line-domain">Manufacturing</span>
-                      <span className="c-line-sep" aria-hidden="true" />
-                      <span className="c-line-platform">Kairologic Sales &amp; Service Cloud</span>
+                    <div className="c-clean-icon icon-blue">
+                      <Scale size={18} />
                     </div>
-                    <div className="c-line-meta">
-                      <span className="c-line-badge c-badge-soon">SOON</span>
+                    <div className="c-clean-names">
+                      <span className="c-clean-domain">eCourt Filing</span>
+                      <span className="c-clean-sep" aria-hidden="true" />
+                      <span className="c-clean-platform">Kairologic Lex</span>
                     </div>
-                  </a>
+                    <ArrowRight size={15} className="c-clean-arrow" />
+                  </Link>
+
+                  {/* Item 3: Manufacturing | Kairologic Sales & Service Cloud */}
+                  <Link
+                    href="/technologies/manufacturing"
+                    className="c-clean-menu-item item-mfg"
+                    onClick={() => setDropdownOpen(false)}
+                    role="menuitem"
+                  >
+                    <div className="c-clean-icon icon-amber">
+                      <Factory size={18} />
+                    </div>
+                    <div className="c-clean-names">
+                      <span className="c-clean-domain">Manufacturing</span>
+                      <span className="c-clean-sep" aria-hidden="true" />
+                      <span className="c-clean-platform">Kairologic Sales &amp; Service Cloud</span>
+                    </div>
+                    <ArrowRight size={15} className="c-clean-arrow" />
+                  </Link>
+                </div>
+
+                <div className="c-clean-menu-footer">
+                  <Link
+                    href="/technologies"
+                    className="c-clean-all-link"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <span>View all technologies</span>
+                    <ArrowRight size={12} />
+                  </Link>
                 </div>
               </div>
             </div>
+
+            {/* Approach Link */}
+            <Link href="/#approach" className="c-nav-link">
+              Approach
+            </Link>
+
+            {/* Need a solution Link */}
+            <Link
+              href="/need-a-solution"
+              className={`c-nav-link ${pathname === "/need-a-solution" ? "is-active" : ""}`}
+              aria-current={pathname === "/need-a-solution" ? "page" : undefined}
+            >
+              Need a solution
+            </Link>
           </nav>
 
+          {/* Action CTA */}
           <Link href="/contact" className="c-button c-header-cta">
-            Talk to our team
+            <span>Talk to our team</span>
+            <ArrowRight size={15} className="c-cta-arrow" />
           </Link>
 
+          {/* Mobile Menu Toggle Button */}
           <button
             ref={toggle}
             className="c-menu-button"
@@ -145,13 +203,14 @@ export default function Header() {
           </button>
         </div>
 
+        {/* Mobile Navigation Drawer */}
         {open && (
           <nav
             id="company-mobile-nav"
             className="c-mobile-nav c-shell"
             aria-label="Mobile navigation"
           >
-            <Link href="/" onClick={() => setOpen(false)}>
+            <Link href="/" onClick={() => setOpen(false)} className="c-mobile-main-link">
               Home
             </Link>
 
@@ -161,32 +220,76 @@ export default function Header() {
                 <Link
                   href="/technologies/workflow"
                   onClick={() => setOpen(false)}
+                  className="c-mobile-sublink"
                 >
-                  <div className="c-line-content">
-                    <span className="c-line-domain" style={{ fontSize: "16px" }}>SARFAESI</span>
-                    <span className="c-line-sep" aria-hidden="true" style={{ height: "14px" }} />
-                    <span className="c-line-platform" style={{ fontSize: "15px" }}>Kairologic Ops</span>
+                  <div className="c-mobile-item-title">
+                    <span className="c-mobile-icon c-icon-green">
+                      <ShieldCheck size={16} />
+                    </span>
+                    <div className="c-mobile-names">
+                      <strong>SARFAESI</strong>
+                      <span className="c-mobile-sep" />
+                      <span>Kairologic Ops</span>
+                    </div>
                   </div>
-                  <ArrowRight size={16} />
+                  <ArrowRight size={15} />
                 </Link>
-                <a
-                  href="#manufacturing"
-                  onClick={(e) => e.preventDefault()}
-                  style={{ color: "var(--c-muted)" }}
+
+                <Link
+                  href="/technologies/ecourt-filing"
+                  onClick={() => setOpen(false)}
+                  className="c-mobile-sublink"
                 >
-                  <div className="c-line-content">
-                    <span className="c-line-domain" style={{ fontSize: "16px" }}>Manufacturing</span>
-                    <span className="c-line-sep" aria-hidden="true" style={{ height: "14px" }} />
-                    <span className="c-line-platform" style={{ fontSize: "15px" }}>Kairologic Sales &amp; Service Cloud</span>
+                  <div className="c-mobile-item-title">
+                    <span className="c-mobile-icon c-icon-blue">
+                      <Scale size={16} />
+                    </span>
+                    <div className="c-mobile-names">
+                      <strong>eCourt Filing</strong>
+                      <span className="c-mobile-sep" />
+                      <span>Kairologic Lex</span>
+                    </div>
                   </div>
-                  <span className="c-line-badge c-badge-soon">Soon</span>
-                </a>
+                  <ArrowRight size={15} />
+                </Link>
+
+                <Link
+                  href="/technologies/manufacturing"
+                  onClick={() => setOpen(false)}
+                  className="c-mobile-sublink"
+                >
+                  <div className="c-mobile-item-title">
+                    <span className="c-mobile-icon c-icon-amber">
+                      <Factory size={16} />
+                    </span>
+                    <div className="c-mobile-names">
+                      <strong>Manufacturing</strong>
+                      <span className="c-mobile-sep" />
+                      <span>Kairologic Sales &amp; Service Cloud</span>
+                    </div>
+                  </div>
+                  <ArrowRight size={15} />
+                </Link>
               </div>
             </div>
 
-            <Link href="/contact" onClick={() => setOpen(false)}>
-              Talk to our team
+            <Link href="/#approach" onClick={() => setOpen(false)} className="c-mobile-main-link">
+              Approach
             </Link>
+
+            <Link href="/need-a-solution" onClick={() => setOpen(false)} className="c-mobile-main-link">
+              Need a solution
+            </Link>
+
+            <Link href="/contact" onClick={() => setOpen(false)} className="c-mobile-main-link">
+              Contact
+            </Link>
+
+            <div className="c-mobile-cta-wrap">
+              <Link href="/contact" onClick={() => setOpen(false)} className="c-button c-mobile-cta">
+                Talk to our team <ArrowRight size={16} />
+              </Link>
+            </div>
           </nav>
         )}
       </header>

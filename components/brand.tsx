@@ -7,13 +7,22 @@ export function BrandMark({ className = "brand-mark" }: { className?: string }) 
   );
 }
 
-export default function Brand({ inverse = false }: { inverse?: boolean }) {
+export default function Brand({
+  inverse = false,
+  tagline = "Right time right move",
+}: {
+  inverse?: boolean;
+  tagline?: string;
+}) {
   return (
     <span className={`brand ${inverse ? "brand-inverse" : ""}`}>
       <BrandMark />
       <span className="brand-type">
-        <strong>KAIROLOGIC</strong>
-        <span>Technologies</span>
+        <strong className="brand-title">
+          <span className="brand-kairo">KAIRO</span>
+          <span className="brand-logic">LOGIC</span>
+        </strong>
+        <span className="brand-tagline">{tagline}</span>
       </span>
     </span>
   );

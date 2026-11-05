@@ -4,7 +4,7 @@ import Brand from "@/components/brand";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Enquiries | Kairologic",
+  title: "Enquiry Inbox",
   robots: { index: false, follow: false },
 };
 

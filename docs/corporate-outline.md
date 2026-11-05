@@ -27,7 +27,7 @@ The private `/enquiries` inbox requires dispatch-authenticated identity and an e
 
 The static review export has been migrated to the supported Vinext server runtime so submissions can be stored durably. React application source remains under `app/` and `components/`. The maintained Sites Vite/Worker integration is retained. D1 schema and generated migration metadata are committed under `db/` and `drizzle/`.
 
-Use the Sites installation and build helpers. Standalone commands: `npm run dev`, `npm run build`, `npx tsc --noEmit`, and `npm run db:generate` when the database schema changes. Apply local migrations before testing the enquiry API. Hosted migrations are applied during publication.
+Use the Sites installation and build helpers. Standalone commands: `npm run dev` (Next.js with Turbopack; starts in seconds and compiles routes on demand), `npm run build`, `npx tsc --noEmit`, `npm run dev:preview` (the Cloudflare Worker/Vinext preview stack, slower to start, used to verify D1 and worker behavior locally), and `npm run db:generate` when the database schema changes. Apply local migrations before testing the enquiry API. Hosted migrations are applied during publication.
 
 ## Research basis
 

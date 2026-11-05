@@ -1,7 +1,6 @@
 "use client";
 import { useState, type KeyboardEvent } from "react";
 import {
-  ArrowRight,
   ArrowUpRight,
   FileText,
   MapPin,
@@ -10,6 +9,7 @@ import {
   Scale,
   Users,
 } from "lucide-react";
+
 const roles = [
   {
     label: "Management",
@@ -33,6 +33,7 @@ const roles = [
     selected: 2,
   },
 ];
+
 const pipeline = [
   { label: "Filing", value: 19 },
   { label: "Order pending", value: 31 },
@@ -40,10 +41,12 @@ const pipeline = [
   { label: "Auction & sale", value: 22 },
   { label: "Closed", value: 130 },
 ];
+
 export default function Portfolio() {
   const [role, setRole] = useState(0);
   const [stage, setStage] = useState(2);
   const r = roles[role];
+
   function keys(e: KeyboardEvent<HTMLDivElement>) {
     const n =
       e.key === "ArrowRight"
@@ -63,6 +66,7 @@ export default function Portfolio() {
       .querySelectorAll<HTMLButtonElement>('[role="tab"]')
       [n]?.focus();
   }
+
   return (
     <div className="portfolio-shell">
       <div className="portfolio-toolbar">
@@ -71,6 +75,7 @@ export default function Portfolio() {
         </span>
         <span className="illustrative-label">Sample data</span>
       </div>
+
       <div
         className="role-switcher"
         role="tablist"
@@ -92,13 +97,14 @@ export default function Portfolio() {
               }}
               key={x.label}
             >
-              <Icon size={22} />
-              {x.label}
-              <ArrowUpRight size={18} />
+              <Icon size={20} />
+              <span>{x.label}</span>
+              <ArrowUpRight size={17} />
             </button>
           );
         })}
       </div>
+
       <div
         className="portfolio-headline"
         id="perspective-panel"
@@ -111,15 +117,18 @@ export default function Portfolio() {
         </div>
         <div className="portfolio-total">
           <strong>248</strong>
-          <span>total cases</span>
+          <span>TOTAL CASES</span>
         </div>
       </div>
+
       <div className="portfolio-body">
+        {/* Left Column: Universal Case Pipeline */}
         <div className="pipeline-chart">
           <div className="chart-label-row">
             <h4>The case pipeline</h4>
-            <span>Select a stage</span>
+            <span className="chart-sub-guide">Select a stage</span>
           </div>
+
           <div
             className="pipeline-rows"
             role="group"
@@ -132,69 +141,68 @@ export default function Portfolio() {
                 onClick={() => setStage(i)}
                 key={p.label}
               >
-                <span>{p.label}</span>
+                <span className="pipeline-stage-name">{p.label}</span>
                 <span className="pipeline-track">
                   <i
                     className={i === 4 ? "closed-fill" : ""}
                     style={{ width: `${(p.value / 130) * 100}%` }}
                   />
                 </span>
-                <strong>{p.value}</strong>
+                <span className="pipeline-value-badge">{p.value}</span>
               </button>
             ))}
           </div>
-          <div className="pipeline-selection" aria-live="polite">
-            <span className="selection-marker" />
-            <span>
-              <strong>{pipeline[stage].value} cases</strong> ·{" "}
-              {pipeline[stage].label}
-            </span>
-            <ArrowRight size={20} />
-          </div>
         </div>
+
+        {/* Right Column: Circular Donut Gauge Cockpit */}
         <div className="portfolio-insight">
           {role === 0 ? (
-            <>
+            <div className="closure-cockpit">
               <div className="chart-label-row">
                 <h4>Closure progress</h4>
               </div>
-              <div className="closure-ring">
+
+              <div className="closure-ring" aria-label="130 of 248 sample cases closed">
                 <svg
                   viewBox="0 0 200 200"
                   role="img"
-                  aria-label="130 of 248 sample cases closed"
                 >
-                  <circle cx="100" cy="100" r="78" className="ring-base" />
+                  <defs>
+                    <linearGradient id="portfolio-ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#34d399" />
+                      <stop offset="100%" stopColor="#10b981" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="100" cy="100" r="76" className="ring-base" />
                   <circle
                     cx="100"
                     cy="100"
-                    r="78"
+                    r="76"
                     className="ring-complete"
                     pathLength="100"
                     strokeDasharray="52.419 100"
                   />
                 </svg>
-                <div>
+                <div className="closure-ring-center">
                   <strong>
                     52<span>%</span>
                   </strong>
-                  <span>closed</span>
+                  <span>CLOSED</span>
                 </div>
               </div>
-              <p className="closure-legend">
+
+              <div className="closure-legend">
                 <span>
-                  <i />
-                  130 closed
+                  <i /> 130 closed
                 </span>
                 <span>
-                  <i />
-                  118 active
+                  <i /> 118 active
                 </span>
-              </p>
-            </>
+              </div>
+            </div>
           ) : role === 1 ? (
             <div className="role-evidence legal-evidence">
-              <FileText size={32} />
+              <FileText size={30} />
               <span className="eyebrow">LINKED TO THE CASE</span>
               <h4>
                 The order.
@@ -203,9 +211,9 @@ export default function Portfolio() {
                 <br />
                 The next step.
               </h4>
-              <p>Section 14 order received.</p>
+              <p>Court order verified.</p>
               <div>
-                <Check size={19} /> Ready for possession planning
+                <Check size={18} /> Ready for next action
               </div>
             </div>
           ) : (
@@ -215,7 +223,7 @@ export default function Portfolio() {
                 alt="Illustrative property inspection"
               />
               <div>
-                <MapPin size={23} />
+                <MapPin size={22} />
                 <h4>
                   Evidence from
                   <br />
