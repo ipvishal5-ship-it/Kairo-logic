@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
   font-family: "Manrope";
   src: url("/fonts/manrope-variable.ttf") format("truetype");
   font-weight: 200 800;
@@ -7,15 +7,15 @@
 }
 
 :root {
-  --c-paper: #f8f8f2;
-  --c-ink: #102b3a;
-  --c-muted: #435863;
-  --c-mint: #cce3d6;
-  --c-green: #185746;
-  --c-rule: #bcc8c5;
-  --c-type: "Manrope", Arial, sans-serif;
+  --c-paper: var(--ice);
+  --c-ink: var(--ink);
+  --c-muted: var(--ink);
+  --c-mint: var(--mint);
+  --c-green: var(--green);
+  --c-rule: var(--line);
+  --c-type: 'Bricolage Grotesque', var(--font-heading), sans-serif;
 }
-body { background: var(--c-paper); color: var(--c-ink); font-family: var(--c-type); font-size: 20px; line-height: 1.6; }
+body { background: var(--ice); color: var(--ink); font-family: var(--font-body), 'Hanken Grotesk', system-ui, sans-serif; font-size: 20px; line-height: 1.6; }
 button, input, textarea { font-family: inherit; }
 ::selection { background: var(--c-mint); color: var(--c-ink); }
 html { scroll-padding-top: 115px; }
@@ -837,7 +837,7 @@ html { scroll-padding-top: 115px; }
 .c-owner-inbox .inbox-card { background: white; border-color: var(--c-rule); }
 .c-owner-inbox .inbox-card h2 { font-size: 25px; }
 
-.product-detail { background: #0a0e14; color: #e7ecf3; font: 20px/1.6 var(--c-type); }
+.product-detail { background: var(--frost); color: var(--ink); font: 20px/1.6 var(--c-type); border: 1px solid var(--line); }
 .product-detail :is(h1,h2,h3,h4) { font-family: var(--c-type); }
 .product-detail p { font-size: 20px; }
 .product-detail .eyebrow { font: 500 18px/1.6 var(--c-type); letter-spacing: 0; }
