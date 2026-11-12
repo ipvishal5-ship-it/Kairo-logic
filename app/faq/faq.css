@@ -1,0 +1,208 @@
+.faq-page {
+  --ink: #102A43;
+  --green: #16876D;
+  --mint: #7FE0C3;
+  --ice: #E3EDEA;
+  --frost: #F6FAF9;
+  --line: rgba(16, 42, 67, 0.16);
+  --sec: clamp(72px, 9vw, 128px);
+  background: var(--ice);
+  color: var(--ink);
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.faq-page .wrap {
+  padding-inline: clamp(20px, 5vw, 72px);
+  width: 100%;
+}
+
+.faq-page .faq-hero {
+  padding-top: clamp(32px, 5vw, 72px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+
+.faq-page .faq-eb {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+.faq-page .faq-hero h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  font-size: clamp(40px, 5.4vw, 84px);
+  line-height: 0.98;
+  color: var(--ink);
+  max-width: 14ch;
+}
+
+.faq-page .faq-hero h1 span {
+  color: var(--green);
+}
+
+.faq-page .faq-lead {
+  margin-top: 22px;
+  max-width: 50ch;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.faq-page .faq-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 28px;
+}
+
+.faq-page .faq-jumps a {
+  display: inline-block;
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: var(--frost);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.faq-page .faq-jumps a:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.faq-page .fq {
+  padding-top: clamp(24px, 3vw, 48px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+  scroll-margin-top: 96px;
+}
+
+.faq-page .fq-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 24px;
+  max-width: 900px;
+}
+
+.faq-page .fq h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  font-size: clamp(34px, 4.4vw, 64px);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.faq-page .fq-link {
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.faq-page .fql {
+  margin-top: clamp(20px, 3vw, 32px);
+  max-width: 900px;
+}
+
+.faq-page .fq details {
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+}
+
+.faq-page .fq details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-page .fq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: clamp(19px, 2vw, 26px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.faq-page .fq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-page .fq summary::after {
+  content: '+';
+  font: 400 30px 'Hanken Grotesk', system-ui, sans-serif;
+  transition: transform 0.3s;
+  flex: none;
+}
+
+.faq-page .fq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-page .fq p {
+  margin-top: 14px;
+  max-width: 64ch;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.faq-page .cl {
+  background: #CFE5DD;
+  padding: var(--sec) 0;
+  margin-top: clamp(24px, 4vw, 48px);
+}
+
+.faq-page .cl .wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+
+.faq-page .cl h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.faq-page .cl p {
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.6;
+  max-width: 38ch;
+  margin: 20px 0 28px;
+  opacity: 0.85;
+}
+
+.faq-page a:focus-visible,
+.faq-page summary:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .faq-page .cl .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-page * {
+    transition: none !important;
+  }
+}
+

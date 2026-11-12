@@ -39,7 +39,7 @@ export default function ApproachSection() {
   }, []);
 
   return (
-    <section className="apr">
+    <section id="approach" className="apr">
       <div className="wrap">
         <div className="aph">
           <div>

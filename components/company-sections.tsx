@@ -479,7 +479,7 @@ const productFeatures = [
     href: "/technologies/workflow",
     cta: "See task workflows",
     visualTitle: "Daily Task Board",
-    accent: "#185746",
+    accent: "#7FE0C3",
     heroBg: "var(--c-mint)",
     hero: { strong: "Active Task Pipeline", sub: "Assigned with clear ownership and due dates" },
     bottom: [
@@ -497,7 +497,7 @@ const productFeatures = [
     href: "/technologies/workflow",
     cta: "See approval workflows",
     visualTitle: "Document Review Pipeline",
-    accent: "#1a6a8a",
+    accent: "#93D5FF",
     heroBg: "#e2eff5",
     hero: { strong: "Review & Sign-Off Hub", sub: "Step-by-step approvals without delays" },
     bottom: [
@@ -515,7 +515,7 @@ const productFeatures = [
     href: "/technologies/workflow",
     cta: "See live reporting",
     visualTitle: "Live Operations Radar",
-    accent: "#8c6b23",
+    accent: "#F2B84B",
     heroBg: "#f7f0e1",
     hero: { strong: "Overall Work Status", sub: "Live status across all active deliverables" },
     bottom: [

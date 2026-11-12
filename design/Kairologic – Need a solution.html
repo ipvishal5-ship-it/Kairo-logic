@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kairologic – Need a solution</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#102A43;--green:#16876D;--mint:#7FE0C3;--ice:#E3EDEA;--frost:#F6FAF9;--band:#CFE5DD;--amber:#F2B84B;--line:rgba(16,42,67,.16);--sec:clamp(72px,10vw,144px);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{background:var(--ice);color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif}
+::selection{background:var(--mint);color:var(--ink)}
+.wrap{padding:0 clamp(20px,5vw,72px);width:100%}
+a{color:inherit}a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.035em;text-wrap:balance}
+h1{font-size:clamp(40px,5.4vw,88px);line-height:.98}h2{font-size:clamp(34px,4.6vw,68px);line-height:1}
+.cap{max-width:46ch;font-size:clamp(16px,1.3vw,19px);line-height:1.6;opacity:.85}
+mark{color:inherit;background:linear-gradient(transparent 58%,rgba(127,224,195,.75) 58%) 0 0/0 100% no-repeat;transition:background-size .9s cubic-bezier(.2,.8,.2,1) .3s}.in mark{background-size:100% 100%}
+.btns{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center;margin-top:28px}
+.btn,.pill{display:inline-block;background:var(--ink);color:var(--ice);padding:15px 26px;border-radius:99px;font-weight:600;text-decoration:none;font-size:15px;white-space:nowrap;transition:transform .25s}.pill{padding:12px 20px}.btn:hover,.pill:hover{transform:translateY(-2px)}
+.lnk{font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--green)}
+/* header */
+.hd{position:sticky;top:0;z-index:20;background:rgba(227,237,234,.92);backdrop-filter:blur(6px)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:76px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque';font-weight:700;line-height:1;white-space:nowrap;text-decoration:none}.logo svg{width:38px;height:38px}.logo small{display:block;font:500 11px 'Hanken Grotesk';opacity:.7;margin-top:4px}.logo em{font-style:normal;color:var(--green)}
+nav{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500}nav a:not(.pill){text-decoration:none;padding-bottom:4px;background:linear-gradient(var(--green),var(--green)) 0 100%/0 1.5px no-repeat;transition:background-size .35s}nav a:not(.pill):hover,nav a.cur{background-size:100% 1.5px}
+/* hero */
+.track{height:190svh}.sticky{position:sticky;top:0;min-height:calc(100svh - 76px);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:center;padding-bottom:40px}
+.sticky{top:76px}.track{margin-top:-1px}
+.hero p.small{margin-top:16px;max-width:46ch;font-size:15px;line-height:1.55;opacity:.7}
+.hero .cap{margin-top:24px}
+.hv{position:relative;width:min(100%,560px);justify-self:end;padding:30px}.hv::before,.fr::before{content:'';position:absolute;inset:0;pointer-events:none;--c:linear-gradient(var(--line),var(--line));background:var(--c) 0 0/16px 1px,var(--c) 0 0/1px 16px,var(--c) 100% 0/16px 1px,var(--c) 100% 0/1px 16px,var(--c) 0 100%/16px 1px,var(--c) 0 100%/1px 16px,var(--c) 100% 100%/16px 1px,var(--c) 100% 100%/1px 16px;background-repeat:no-repeat}
+.hv svg{width:100%;display:block;overflow:visible}.pc{transform-box:fill-box;transform-origin:center;will-change:transform}
+/* problems */
+.pr{padding:var(--sec) 0}.pr h2{max-width:12em}
+.pg{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,5vw,80px);align-items:center;margin-top:clamp(32px,5vw,64px)}
+.pl{list-style:none;padding:0;border-top:1px solid var(--line)}.pl li{border-bottom:1px solid var(--line)}
+.pb{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;color:inherit;text-align:left;font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(22px,2.4vw,34px);letter-spacing:-.03em;line-height:1.1;padding:22px 0;cursor:pointer;transition:transform .4s cubic-bezier(.2,.8,.2,1),color .3s}
+.pb i{font-style:normal;font:600 13px 'Hanken Grotesk';opacity:.55;letter-spacing:0;white-space:nowrap}.pb.on{color:var(--green);transform:translateX(12px)}.pb.on i{opacity:1}
+.fr{position:relative;padding:30px}.fr .g{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pn{background:var(--frost);border:1px solid var(--line);aspect-ratio:4/3}.pn svg{width:100%;height:100%;display:block}
+.pn *{transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s,fill .5s,stroke .5s}.pn rect,.pn circle{transform-box:fill-box;transform-origin:center}
+.k{fill:var(--ink)}.mp{display:none;padding:0 0 24px}.mp .pn{aspect-ratio:16/10}
+/* panel 1 */
+.p1 .a{transform:translate(-34px,26px) rotate(-14deg)}.p1 .b{transform:translate(44px,-22px) rotate(11deg)}.p1 .c{transform:translate(-18px,34px) rotate(8deg)}
+.p1.fix .a,.p1.fix .b,.p1.fix .c{transform:none}.p1.fix rect{fill:var(--green)}
+/* panel 2 */
+.p2 .d1{transform:translate(-18px,-14px)}.p2 .d2{transform:translate(-6px,-5px)}.p2 .d3{transform:translate(6px,5px)}.p2 .d4{transform:translate(18px,14px)}.p2 rect{opacity:.35}.p2 .d4{opacity:.9}
+.p2.fix rect{transform:none}.p2.fix .d1,.p2.fix .d2,.p2.fix .d3{opacity:0}.p2.fix .d4{opacity:1;fill:var(--green)}.p2 .ck{opacity:0;fill:none;stroke:#E4F0EC;stroke-width:5}.p2.fix .ck{opacity:1}
+/* panel 3 */
+.p3 .bk{fill:var(--amber);transform:translateX(112px)}.p3.fix .bk{fill:var(--green);transform:none}.p3 .dl{stroke:var(--ink);stroke-width:2;stroke-dasharray:5 5}
+/* panel 4 */
+.p4 .bn{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4;opacity:.4}.p4 .dt{fill:var(--green);opacity:0;transform:scale(0)}
+.p4.fix .bn{fill:var(--ink);stroke:var(--ink);stroke-dasharray:0;opacity:1}.p4.fix .dt{opacity:1;transform:none}
+/* platforms */
+.pf{padding:0 0 var(--sec)}.pf .cap{margin-top:22px}
+.pfg{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,5vw,80px);margin-top:clamp(32px,5vw,64px);align-items:start}
+.rw{display:block;text-decoration:none;position:relative;padding:clamp(22px,3vw,36px) 0;border-top:1px solid var(--line)}.rw:last-child{border-bottom:1px solid var(--line)}
+.rw::before{content:'';position:absolute;inset:0 -20px;background:rgba(127,224,195,.22);transform:scaleX(0);transform-origin:0 50%;transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:-1}.rw:hover::before,.rw:focus-visible::before{transform:none}
+.rw h3{font-size:clamp(32px,4.6vw,72px);line-height:.98;transition:transform .5s cubic-bezier(.2,.8,.2,1)}.rw:hover h3,.rw:focus-visible h3{transform:translateX(14px)}
+.rw p{margin-top:12px;max-width:36ch;font-size:clamp(16px,1.3vw,19px);line-height:1.5;opacity:.85}.rw span{display:inline-block;margin-top:14px;font-weight:600;font-size:15px;color:var(--green)}
+.lg{position:sticky;top:110px;padding:30px}.lg svg{width:100%;display:block}.lg path{transition:opacity .5s,fill .5s}.lg.s0 .o,.lg.s1 .o{opacity:.18}
+.lg[data-l="0"] .bd,.lg[data-l="1"] .kk,.lg[data-l="2"] .nd{opacity:1}.lg[data-l="0"] .bd{fill:#16876D}.lg[data-l="1"] .kk{fill:#16876D}.lg[data-l="0"] .kk,.lg[data-l="0"] .nd,.lg[data-l="1"] .bd,.lg[data-l="1"] .nd,.lg[data-l="2"] .bd,.lg[data-l="2"] .kk{opacity:.2}.lg[data-l="2"] .nd{fill:#16876D}
+.lg .nd{transform-box:fill-box;transform-origin:center;transition:transform .5s,opacity .5s,fill .5s}.lg[data-l="2"] .nd{transform:scale(1.8)}
+/* steps */
+.st{padding:0 0 var(--sec)}.st h2{max-width:10em}
+.ln{position:relative;margin-top:clamp(40px,6vw,80px)}
+.rail{position:absolute;left:0;right:0;top:7px;height:2px;background:var(--line)}.rail b{position:absolute;left:0;top:0;height:100%;width:calc(var(--q,0)*100%);background:var(--green)}
+.nodeS{position:absolute;top:0;left:calc(var(--q,0)*(100% - 16px));width:16px;height:16px;background:var(--green)}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,3vw,40px);padding-top:44px}.sp{opacity:.4;transition:opacity .5s}.sp.on{opacity:1}
+.sp em{font:600 13px 'Hanken Grotesk';font-style:normal;color:var(--green)}.sp h3{font-size:clamp(20px,1.9vw,26px);line-height:1.1;margin:8px 0 10px}.sp p{font-size:15px;line-height:1.55;opacity:.85}
+/* stats */
+.sx{padding:0 0 var(--sec)}.sxg{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.sxg div{padding:28px 20px 0;border-left:1px solid var(--line);transition:background .4s}.sxg div:first-child{padding-left:0;border-left:0}.sxg div:hover{background:rgba(127,224,195,.2)}
+.sxg b{display:block;font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(44px,7vw,112px);line-height:.95;letter-spacing:-.04em;color:var(--green)}.sxg span{display:block;margin:14px 0 24px;font-size:15px;line-height:1.5;opacity:.8;max-width:22ch}
+/* closing + footer */
+.cb{background:var(--band);padding:var(--sec) 0}.cb .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}.cb .cap{margin-top:22px}
+footer{background:#0E2536;color:#E4F0EC;padding:56px 0 0;overflow:hidden}footer .top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}footer .logo em{color:var(--mint)}
+footer .tag{font:700 clamp(24px,2.6vw,36px)/1.1 'Bricolage Grotesque';letter-spacing:-.03em;max-width:12em;text-align:right}
+footer .lk{display:flex;gap:28px;flex-wrap:wrap;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid rgba(228,240,236,.18);font-size:14px}footer .lk div{display:flex;gap:24px;flex-wrap:wrap}footer .lk a{text-decoration:none;opacity:.8}footer .lk a:hover{opacity:1;color:var(--mint)}
+footer .wm{font:700 clamp(60px,17vw,260px)/.8 'Bricolage Grotesque';letter-spacing:-.05em;opacity:.07;margin:24px 0 -.1em;white-space:nowrap}
+@media(max-width:900px){.track{height:auto}.sticky{position:static;min-height:0;padding-top:24px;padding-bottom:8px;grid-template-columns:1fr;gap:20px;align-content:center}.hv{justify-self:center;width:min(100%,420px)}.pg,.pfg{grid-template-columns:1fr}.lg{display:none}.sg{grid-template-columns:repeat(2,1fr);row-gap:32px}}
+@media(max-width:760px){.fr,.hv{padding:16px}.sg{grid-template-columns:1fr;row-gap:28px;padding-top:0;padding-left:44px}.rail{left:7px;right:auto;top:0;bottom:0;width:2px}.rail b{width:100%;height:calc(var(--q,0)*100%)}.nodeS{left:0;top:calc(var(--q,0)*(100% - 16px))}.pb i{display:none}.fr{display:none}.mp{display:block}.pb.on{transform:none}nav a:not(.pill){display:none}.sxg{grid-template-columns:1fr 1fr}.sxg div:nth-child(3){padding-left:0;border-left:0}.footer .tag{text-align:left}footer .tag{text-align:left}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.track{height:auto}.sticky{position:static}mark{background-size:100% 100%}.sp{opacity:1}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><g id="mk"><path fill="#102A43" d="M8 10h17v18H8zM8 31h17v18H8zM8 52h17v18H8zM28 34 51 10h19L43 40zM28 46l15-6 27 30H51z"/><path fill="#16876D" d="M27 33h14v14H27z"/></g></defs></svg>
+<header class="hd"><div class="wrap">
+<a class="logo" href="#"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#mk"/></svg><span>KAIRO<em>LOGIC</em><small>Right time right move</small></span></a>
+<nav><a href="#">Technologies</a><a href="#">Approach</a><a href="#" class="cur">Need a solution</a><a href="#" class="pill">Talk to our team</a></nav>
+</div></header>
+
+<main>
+<section class="track hero" id="top"><div class="wrap sticky" style="max-width:none">
+<div class="in" id="h1w">
+<h1>Need a <span style="color:var(--green)">solution?</span></h1>
+<p class="cap">Every organisation we work with started with the same sentence: “there must be <mark>a better way</mark> to do this.”</p>
+<p class="small">Scattered records, manual chasing, missed deadlines, no live view. We build — and configure — systems that remove exactly that.</p>
+<div class="btns"><a class="btn" href="#">Describe your problem →</a><a class="lnk" href="#platforms">Or browse our platforms</a></div>
+</div>
+<div class="hv" aria-hidden="true"><svg viewBox="-40 -30 160 140" id="hs">
+<g id="dc"></g>
+<path class="pc" data-d="-60,-30,-12" fill="#102A43" d="M8 10h17v18H8z"/><path class="pc" data-d="-46,34,10" fill="#102A43" d="M8 31h17v18H8z"/><path class="pc" data-d="-52,60,-8" fill="#102A43" d="M8 52h17v18H8z"/>
+<path class="pc" data-d="48,-34,14" fill="#102A43" d="M28 34 51 10h19L43 40z"/><path class="pc" data-d="58,48,-12" fill="#102A43" d="M28 46l15-6 27 30H51z"/><path class="pc" data-d="10,-44,0" fill="#16876D" d="M27 33h14v14H27z"/>
+</svg></div>
+</div></section>
+
+<section class="pr"><div class="wrap">
+<div class="rv" data-in><h2>Four problems <mark>we exist to solve.</mark></h2><p class="cap" style="margin-top:22px">Sound familiar?</p></div>
+<div class="pg">
+<ul class="pl">
+<li><button class="pb" data-i="0">Records scattered everywhere<i>See it fixed</i></button></li>
+<li><button class="pb" data-i="1">Slow, repetitive manual work<i>See it fixed</i></button></li>
+<li><button class="pb" data-i="2">Deadlines slipping quietly<i>See it fixed</i></button></li>
+<li><button class="pb" data-i="3">No live visibility<i>See it fixed</i></button></li>
+</ul>
+<div class="fr" aria-hidden="true"><div class="g">
+<div class="pn p1"><svg viewBox="0 0 200 150"><rect class="k a" x="60" y="26" width="80" height="26"/><rect class="k b" x="60" y="62" width="80" height="26"/><rect class="k c" x="60" y="98" width="80" height="26"/></svg></div>
+<div class="pn p2"><svg viewBox="0 0 200 150"><rect class="k d1" x="60" y="40" width="80" height="60"/><rect class="k d2" x="60" y="40" width="80" height="60"/><rect class="k d3" x="60" y="40" width="80" height="60"/><rect class="k d4" x="60" y="40" width="80" height="60"/><path class="ck" d="M84 72l12 12 22-24"/></svg></div>
+<div class="pn p3"><svg viewBox="0 0 200 150"><path d="M20 75h160" stroke="rgba(16,42,67,.16)" stroke-width="2"/><path class="dl" d="M130 25v100"/><rect class="bk" x="24" y="58" width="50" height="34"/></svg></div>
+<div class="pn p4"><svg viewBox="0 0 200 150"><rect class="bn" x="40" y="30" width="100" height="22"/><rect class="bn" x="40" y="64" width="100" height="22"/><rect class="bn" x="40" y="98" width="100" height="22"/><circle class="dt" cx="164" cy="41" r="7"/><circle class="dt" cx="164" cy="75" r="7"/><circle class="dt" cx="164" cy="109" r="7"/></svg></div>
+</div></div>
+</div></div></section>
+
+<section class="pf" id="platforms"><div class="wrap">
+<div data-in><h2>One of these platforms <mark>probably already fits.</mark></h2><p class="cap">They are configured, living systems — not demos. Pick the closest match and see the product walkthrough.</p></div>
+<div class="pfg">
+<div id="rows">
+<a class="rw" href="#" data-l="0"><h3>SARFAESI Operations</h3><p>When statutory recovery work is drowning in manual filings and timelines.</p><span>See the platform →</span></a>
+<a class="rw" href="#" data-l="1"><h3>Kairologic Lex</h3><p>When litigation teams are chasing cause lists and hearing updates across courts.</p><span>See the platform →</span></a>
+<a class="rw" href="#" data-l="2"><h3>Manufacturing Suite</h3><p>When a large plant is still run on folders, Excel sheets and verbal updates.</p><span>See the platform →</span></a>
+</div>
+<div class="lg hv" id="lg" aria-hidden="true"><svg viewBox="0 0 80 80"><path class="bd" fill="#102A43" d="M8 10h17v18H8zM8 31h17v18H8zM8 52h17v18H8z"/><path class="kk" fill="#102A43" d="M28 34 51 10h19L43 40zM28 46l15-6 27 30H51z"/><path class="nd" fill="#16876D" d="M27 33h14v14H27z"/></svg></div>
+</div></div></section>
+
+<section class="st"><div class="wrap">
+<div data-in><h2>Nothing quite fits? <mark>That is our favourite brief.</mark></h2><p class="cap" style="margin-top:22px">Our approach is to make the system fit the work it serves. If your problem sits between two platforms or outside them entirely, we shape a workspace around it.</p></div>
+<div class="ln" id="ln"><div class="rail"><b></b></div><div class="nodeS"></div>
+<div class="sg">
+<div class="sp"><em>01</em><h3>You describe the work</h3><p>A 30-minute conversation about what your team does daily — no forms, no jargon. Just the real process, pain points included.</p></div>
+<div class="sp"><em>02</em><h3>We map it to a system</h3><p>We identify where records, responsibilities and reporting connect — and where software removes friction instead of adding it.</p></div>
+<div class="sp"><em>03</em><h3>Configure, don’t rebuild</h3><p>Our platforms are configured to your workflow, not coded from scratch. That means faster rollout and lower risk.</p></div>
+<div class="sp"><em>04</em><h3>Validate with your team</h3><p>We hand over only after your own people confirm the system matches how they actually work — then support continues.</p></div>
+</div></div></div></section>
+
+<section class="sx"><div class="wrap"><div class="sxg">
+<div><b>Hours</b><span>of manual filing &amp; lookup eliminated weekly</span></div>
+<div><b>Zero</b><span>missed statutory or delivery deadlines, by design</span></div>
+<div><b>One</b><span>system of record instead of scattered folders</span></div>
+<div><b>Live</b><span>visibility for management, every day</span></div>
+</div></div></section>
+
+<section class="cb"><div class="wrap"><div data-in><h2>What should <mark>work better?</mark></h2><p class="cap">Tell us about the work your team manages and where you want to improve it.</p></div><a class="btn" href="#">Tell us about your project</a></div></section>
+</main>
+
+<footer><div class="wrap">
+<div class="top"><a class="logo" href="#"><svg viewBox="0 0 80 80" aria-hidden="true"><path fill="#E4F0EC" d="M8 10h17v18H8zM8 31h17v18H8zM8 52h17v18H8zM28 34 51 10h19L43 40zM28 46l15-6 27 30H51z"/><path fill="#7FE0C3" d="M27 33h14v14H27z"/></svg><span>KAIRO<em>LOGIC</em><small>Right time right move</small></span></a><p class="tag">Technology built around your work.</p></div>
+<div class="lk"><span>© 2026 Kairologic Technologies</span><div><a href="#">Need a solution</a><a href="#">Technologies</a><a href="#">Contact</a><a href="#">Privacy</a></div></div>
+<div class="wm" aria-hidden="true">KAIROLOGIC</div>
+</div></footer>
+
+<script>
+(function(){
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* in-view marks */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.35});
+document.querySelectorAll('[data-in]').forEach(function(n){io.observe(n)});
+setTimeout(function(){document.getElementById('h1w').classList.add('in')},300);
+/* hero: pieces assemble into the logo on scroll */
+var NS='http://www.w3.org/2000/svg',dc=document.getElementById('dc'),dec=[[-30,-14,12,10],[-22,40,8,14],[96,6,14,10],[102,54,10,12],[74,84,12,10],[-8,92,16,8],[30,-24,9,9],[88,-18,11,9]],dr=[];
+dec.forEach(function(d,i){var r=document.createElementNS(NS,'rect');r.setAttribute('x',d[0]);r.setAttribute('y',d[1]);r.setAttribute('width',d[2]);r.setAttribute('height',d[3]);r.setAttribute('fill','#102A43');r.setAttribute('opacity','.35');r.setAttribute('class','pc');dc.appendChild(r);dr.push([r,d])});
+var ps=[].slice.call(document.querySelectorAll('.hv .pc[data-d]')).map(function(p){var a=p.dataset.d.split(',').map(Number);return[p,a]});
+var tr=document.querySelector('.track');
+function ease(t){return 1-Math.pow(1-t,3)}
+function draw(p){var e=ease(p),k=1-e;
+ps.forEach(function(x){x[0].style.transform='translate('+x[1][0]*k+'px,'+x[1][1]*k+'px) rotate('+x[1][2]*k+'deg)'});
+dr.forEach(function(x,i){var cx=36-x[1][0],cy=40-x[1][1];x[0].style.transform='translate('+cx*e*.6+'px,'+cy*e*.6+'px) scale('+(1-e)+')';x[0].style.opacity=.35*(1-e)})}
+if(rm)draw(1);else draw(0);
+/* problems */
+var pn=[].slice.call(document.querySelectorAll('.pn')),pb=[].slice.call(document.querySelectorAll('.pb'));
+var mp=[],mq=matchMedia('(max-width:760px)');
+pb.forEach(function(b,i){var c=document.createElement('div');c.className='mp';c.setAttribute('aria-hidden','true');c.dataset.i=i;var n=pn[i].cloneNode(true);c.appendChild(n);b.parentNode.appendChild(c);mp.push(n)});
+function setP(i,on){pn[i].classList.toggle('fix',on);mp[i].classList.toggle('fix',on);pb[i].classList.toggle('on',on)}
+var pio=new IntersectionObserver(function(es){if(!mq.matches)return;es.forEach(function(e){var i=+e.target.dataset.i;if(e.isIntersecting){setP(i,true)}else if(e.boundingClientRect.top>innerHeight/2){setP(i,false)}})},{rootMargin:'-30% 0px -30% 0px'});
+if(!rm)document.querySelectorAll('.mp').forEach(function(c){pio.observe(c)});
+pb.forEach(function(b,i){var on=function(){if(mq.matches)return;setP(i,true)},off=function(){if(mq.matches||b.dataset.pin)return;setP(i,false)};
+b.addEventListener('mouseenter',on);b.addEventListener('focus',on);b.addEventListener('mouseleave',off);b.addEventListener('blur',off);
+b.addEventListener('click',function(){if(mq.matches){setP(i,!pn[i].classList.contains('fix'));return}if(b.dataset.pin){delete b.dataset.pin;setP(i,false)}else{b.dataset.pin=1;setP(i,true)}})});
+/* platforms: logo part lights */
+var lg=document.getElementById('lg');
+document.querySelectorAll('.rw').forEach(function(r){var on=function(){lg.dataset.l=r.dataset.l},off=function(){delete lg.dataset.l};r.addEventListener('mouseenter',on);r.addEventListener('focus',on);r.addEventListener('mouseleave',off);r.addEventListener('blur',off)});
+/* steps: node travels with scroll */
+var ln=document.getElementById('ln'),sp=[].slice.call(document.querySelectorAll('.sp'));
+function steps(){var r=ln.getBoundingClientRect(),vh=innerHeight,q=rm?1:Math.max(0,Math.min(1,(vh*.75-r.top)/(r.height+vh*.1)));
+ln.style.setProperty('--q',q);sp.forEach(function(s,i){s.classList.toggle('on',q>=i/4-.02)})}
+var tk=0;function on(){if(tk)return;tk=requestAnimationFrame(function(){tk=0;
+if(!rm&&innerWidth>900){var h=tr.offsetHeight-innerHeight,y=-tr.getBoundingClientRect().top;draw(Math.max(0,Math.min(1,y/(h*.8))))}
+else if(!rm){var hr=document.querySelector('.track .hv').getBoundingClientRect();draw(Math.max(0,Math.min(1,(innerHeight*.85-hr.top)/(innerHeight*.5))))}
+steps()})}
+addEventListener('scroll',on,{passive:true});addEventListener('resize',on);on();
+})();
+</script>
+</body>
+</html>

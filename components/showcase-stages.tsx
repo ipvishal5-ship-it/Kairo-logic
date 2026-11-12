@@ -96,7 +96,7 @@ export default function ShowcaseStages() {
   }, []);
 
   return (
-    <section className="tech">
+    <section id="showcase" className="tech">
       <div className="wrap">
         <div className="thead">
           <h2>See the work come together.</h2>

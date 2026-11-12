@@ -19,7 +19,7 @@ body { background: var(--ice); color: var(--ink); font-family: var(--font-body),
 button, input, textarea { font-family: inherit; }
 ::selection { background: var(--c-mint); color: var(--c-ink); }
 html { scroll-padding-top: 115px; }
-.c-shell { width: calc(100% - 96px); max-width: 1376px; margin-inline: auto; }
+.c-shell { width: 100%; padding-inline: clamp(20px, 5vw, 72px); margin-inline: auto; }
 .c-main { background: var(--c-paper); color: var(--c-ink); }
 .c-main :is(h1,h2,h3), .c-invitation h2 { font-family: var(--c-type); font-weight: 600; line-height: 1.1; letter-spacing: -.045em; }
 .c-main h1 { font-size: clamp(54px, 6.15vw, 94px); }
@@ -4040,8 +4040,9 @@ html { scroll-padding-top: 115px; }
 /* ── 8. SAFE AREA / NOTCH SUPPORT (iPhone X+) ── */
 @supports (padding: env(safe-area-inset-left)) {
   .c-shell {
-    padding-left: max(0px, env(safe-area-inset-left));
-    padding-right: max(0px, env(safe-area-inset-right));
+    width: 100% !important;
+    padding-left: max(clamp(20px, 5vw, 72px), env(safe-area-inset-left));
+    padding-right: max(clamp(20px, 5vw, 72px), env(safe-area-inset-right));
   }
   .c-mobile-nav {
     padding-bottom: max(40px, env(safe-area-inset-bottom)) !important;

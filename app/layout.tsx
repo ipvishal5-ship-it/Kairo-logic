@@ -1,4 +1,7 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
+import AnalyticsTracker from "@/components/analytics-tracker";
 import "./globals.css";
 import "./corporate.css";
 
@@ -16,6 +19,8 @@ const hankenGrotesk = Hanken_Grotesk({
   display: "swap",
 });
 
+const googleSiteVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim();
+
 export const metadata = {
   title: { default: "Kairologic Technologies | Technology built around your work", template: "%s | Kairologic Technologies" },
   description:
@@ -25,6 +30,9 @@ export const metadata = {
     description: "Technology built around your work.",
     type: "website",
   },
+  ...(googleSiteVerification
+    ? { verification: { google: googleSiteVerification } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -42,7 +50,15 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={hankenGrotesk.className}>{children}</body>
+      <body className={hankenGrotesk.className}>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <AnalyticsTracker
+          gaId={process.env.NEXT_PUBLIC_GA_ID}
+          clarityId={process.env.NEXT_PUBLIC_CLARITY_ID}
+        />
+      </body>
     </html>
   );
 }

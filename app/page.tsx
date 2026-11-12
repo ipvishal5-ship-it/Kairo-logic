@@ -10,7 +10,8 @@ import ClosingBand from "@/components/closing-band";
 export default function Home() {
   return (
     <>
-      <HomeHero header={<Header />} />
+      <Header />
+      <HomeHero />
       <main id="main" className="c-main">
         <StatementSection />
         <ShowcaseStages />

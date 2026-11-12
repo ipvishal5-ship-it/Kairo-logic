@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { OPS_FAQS } from "@/lib/ops-lex-faqs";
 
 const CHIP_ITEMS = [
   "Spreadsheets",
@@ -388,7 +389,20 @@ export function OpsSections() {
         </div>
       </section>
 
-      {/* SECTION 5: Closing band */}
+      {/* SECTION 5: Questions, answered. */}
+      <section className="wrap fq" id="faq">
+        <h2>Questions, answered.</h2>
+        <div className="fql">
+          {OPS_FAQS.map((item) => (
+            <details key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 6: Closing band */}
       <section className="cl">
         <div className="wrap">
           <div>
@@ -397,9 +411,14 @@ export function OpsSections() {
               Tell us about the work your team manages and where you want to
               improve it.
             </p>
-            <Link className="btn" href="/contact">
-              Tell us about your project
-            </Link>
+            <div className="btns">
+              <Link className="btn" href="/contact">
+                Tell us about your project
+              </Link>
+              <a className="lnk" href="#faq">
+                Browse FAQs
+              </a>
+            </div>
           </div>
           <div />
         </div>

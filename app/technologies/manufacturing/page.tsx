@@ -1,116 +1,79 @@
-import Link from "@/components/site-link";
+import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { ShowcaseHero } from "@/components/manufacturing/ShowcaseHero";
-import { BeforeAfter } from "@/components/manufacturing/BeforeAfter";
-import { PlantWorkflow } from "@/components/manufacturing/PlantWorkflow";
-import { WorkflowDiagram } from "@/components/manufacturing/WorkflowDiagram";
-import { LiveDashboard } from "@/components/manufacturing/LiveDashboard";
-import { InstantSearch } from "@/components/manufacturing/InstantSearch";
-import { ClosingCTA } from "@/components/manufacturing/ClosingCTA";
+import ManufacturingHeroDemo from "@/components/manufacturing-hero-demo";
+import ManufacturingSections from "@/components/manufacturing-sections";
+import { SITE_CONFIG } from "@/lib/site-config";
+import {
+  getManufacturingJsonLd,
+  MANUFACTURING_SEO,
+} from "@/lib/manufacturing-data";
+import "./mfg.css";
 
-export const metadata = {
-  title: "Manufacturing Cloud — Sales & Service",
-  description:
-    "Connected sales quotation, shopfloor machine production, and after-sales service for modern manufacturing enterprises.",
+const canonicalUrl = `${SITE_CONFIG.url}${MANUFACTURING_SEO.path}`;
+
+export const metadata: Metadata = {
+  title: { absolute: MANUFACTURING_SEO.title },
+  description: MANUFACTURING_SEO.description,
+  alternates: {
+    canonical: canonicalUrl,
+  },
+  openGraph: {
+    title: MANUFACTURING_SEO.title,
+    description: MANUFACTURING_SEO.description,
+    url: canonicalUrl,
+    type: "website",
+  },
 };
 
 export default function ManufacturingPage() {
+  const jsonLd = getManufacturingJsonLd(SITE_CONFIG.url);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
-      <main id="main" className="c-main">
-        <nav className="c-breadcrumb c-shell" aria-label="Breadcrumb">
+      <main id="main" className="mfg-page">
+        <div className="wrap bc">
           <Link href="/technologies">Technologies</Link>
-          <span aria-hidden="true">/</span>
-          <span>Manufacturing Cloud</span>
-        </nav>
+          <span>/</span>
+          <b>Manufacturing Suite</b>
+        </div>
 
-        {/* ==================================================================
-            CREATIVE HERO: FACTORY FLOOR VISUAL WITH GRADIENT MESH
-            ================================================================== */}
-        <section className="c-shell mfg-creative-hero">
-          <div className="mfg-hero-gradient-mesh">
-            <div className="mfg-hero-glow glow-1" />
-            <div className="mfg-hero-glow glow-2" />
-            <div className="mfg-hero-glow glow-3" />
-          </div>
-
-          <div className="mfg-hero-content">
-            <div className="mfg-hero-badge">
-              <span className="mfg-pulse-dot" /> Kairologic Manufacturing Cloud
-            </div>
-            <h1 className="mfg-hero-title">
-              Your factory,<br />
-              <em>one digital spine.</em>
+        <section className="wrap mfg-hero">
+          <div>
+            <div className="eb">Kairologic Manufacturing</div>
+            <h1>
+              Your factory should run on a system,
+              <span>not on one person.</span>
             </h1>
-            <p className="mfg-hero-subtitle">
-              From quote to assembly to service — every machine, every order,
-              every warranty on a single live thread. No silos. No paperwork
-              delays.
+            <p className="lead">
+              When one manager holds every worker record, shift and delivery in
+              an Excel file, a single absence stops the work. Kairologic is
+              factory workforce management built around your process: every
+              worker, shift and task is recorded as it happens, so anyone with
+              access can keep the factory running.
             </p>
-
-            <div className="mfg-hero-stats">
-              <div className="mfg-stat">
-                <span className="mfg-stat-number">5 Mins</span>
-                <span className="mfg-stat-label">Quote turnaround</span>
-              </div>
-              <div className="mfg-stat">
-                <span className="mfg-stat-number">100%</span>
-                <span className="mfg-stat-label">Digital work orders</span>
-              </div>
-              <div className="mfg-stat">
-                <span className="mfg-stat-number">1 Scan</span>
-                <span className="mfg-stat-label">Lifelong machine care</span>
-              </div>
-            </div>
-
-            <div className="mfg-hero-actions">
-              <Link href="/contact" className="c-button c-button-primary">
-                Talk to our manufacturing team
+            <div className="btns">
+              <Link className="btn" href="/contact">
+                Book a live demo
               </Link>
-              <Link href="#factory-flow" className="c-button c-button-ghost">
-                See the 3-step workflow
-              </Link>
+              <a className="lnk" href="#how">
+                See how we build it ↓
+              </a>
             </div>
           </div>
 
-          <div className="mfg-hero-visual">
-            <div className="mfg-machine-frame">
-              <div className="mfg-conveyor">
-                <div className="mfg-roller r1" />
-                <div className="mfg-roller r2" />
-                <div className="mfg-roller r3" />
-                <div className="mfg-box box-1" />
-                <div className="mfg-box box-2" />
-                <div className="mfg-box box-3" />
-              </div>
-              <div className="mfg-robot-arm">
-                <div className="mfg-arm-segment seg-1" />
-                <div className="mfg-arm-segment seg-2" />
-                <div className="mfg-arm-gripper" />
-              </div>
-              <div className="mfg-qr-badge">
-                <div className="mfg-qr-corner tl" />
-                <div className="mfg-qr-corner tr" />
-                <div className="mfg-qr-corner bl" />
-                <div className="mfg-qr-corner br" />
-                <div className="mfg-qr-center" />
-              </div>
-            </div>
-          </div>
+          <ManufacturingHeroDemo />
         </section>
 
-        <ShowcaseHero />
-        <BeforeAfter />
-        <PlantWorkflow />
-        <WorkflowDiagram />
-        <LiveDashboard />
-        <InstantSearch />
-        <ClosingCTA />
+        <ManufacturingSections />
       </main>
       <Footer />
     </>
   );
 }
-

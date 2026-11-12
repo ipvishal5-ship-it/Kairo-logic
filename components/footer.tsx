@@ -24,8 +24,9 @@ export default function Footer() {
         <div className="bot">
           <span>© 2026 Kairologic Technologies</span>
           <nav aria-label="Footer navigation">
-            <Link href="/need-a-solution">Need a solution</Link>
+            <Link href="/need-a-solution">How we build</Link>
             <Link href="/technologies">Technologies</Link>
+            <Link href="/faq">FAQ</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/privacy">Privacy</Link>
           </nav>

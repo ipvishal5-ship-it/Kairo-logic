@@ -1,8 +1,12 @@
 import Link from "next/link";
-import TechnologiesDropdown from "./technologies-dropdown";
+import HeaderNav from "./header-nav";
 import MobileMenu from "./mobile-menu";
 
-export default function Header() {
+export interface HeaderProps {
+  activeNav?: "need-a-solution" | "faq";
+}
+
+export default function Header({ activeNav }: HeaderProps = {}) {
   return (
     <header className="site-header">
       <div className="header-inner-row">
@@ -22,18 +26,15 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav" aria-label="Main navigation">
-          <TechnologiesDropdown />
-          <Link href="/#approach">Approach</Link>
-          <Link href="/need-a-solution">Need a solution</Link>
+        {/* Desktop Navigation — centered column */}
+        <HeaderNav activeNav={activeNav} />
+
+        {/* CTA — right column (desktop) / part of mobile actions */}
+        <div className="header-cta">
           <Link className="pill" href="/contact">
             Talk to our team
           </Link>
-        </nav>
-
-        {/* Mobile Header Actions (visible below 760px) */}
-        <div className="mobile-header-actions">
+          {/* Mobile: hamburger alongside a compact pill */}
           <Link className="pill mobile-pill" href="/contact">
             Talk to our team
           </Link>

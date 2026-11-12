@@ -4,29 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface TechItem {
-  name: string;
-  desc: string;
-  href: string;
-}
-
-const TECH_ITEMS: TechItem[] = [
-  {
-    name: "SARFAESI Operations",
-    desc: "Statutory recovery workflows, DM/CMM automation & auction tracking",
-    href: "/technologies/workflow",
-  },
-  {
-    name: "Kairologic Lex (e-Court filing)",
-    desc: "Cause list monitoring, hearing radar & automated court filing",
-    href: "/technologies/ecourt-filing",
-  },
-  {
-    name: "Manufacturing Suite",
-    desc: "Centralised worker records, shift allocation & delivery tracking",
-    href: "/technologies/manufacturing",
-  },
-];
+import { TECH_NAV_ITEMS } from "./technologies-dropdown";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -157,7 +135,7 @@ export default function MobileMenu() {
                 aria-expanded={techOpen}
                 onClick={() => setTechOpen((prev) => !prev)}
               >
-                <span>Technologies</span>
+                <span>Need a solution</span>
                 <svg
                   className={`dropdown-chevron ${techOpen ? "open" : ""}`}
                   width="18"
@@ -176,14 +154,22 @@ export default function MobileMenu() {
 
               {techOpen && (
                 <div className="mobile-accordion-content">
-                  {TECH_ITEMS.map((item) => (
+                  {TECH_NAV_ITEMS.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       className="mobile-tech-item"
                       onClick={() => setIsOpen(false)}
                     >
-                      <span className="tech-item-name">{item.name}</span>
+                      <span className="tech-item-name">
+                        <span>{item.domain}</span>
+                        <span className="tech-item-sep" aria-hidden="true">
+                          |
+                        </span>
+                        <span className="tech-item-platform">
+                          {item.platform}
+                        </span>
+                      </span>
                       <span className="tech-item-desc">{item.desc}</span>
                     </Link>
                   ))}
@@ -191,22 +177,22 @@ export default function MobileMenu() {
               )}
             </div>
 
-            {/* Approach */}
-            <Link
-              href="/#approach"
-              className="mobile-nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              Approach
-            </Link>
-
-            {/* Need a solution */}
+            {/* How we build */}
             <Link
               href="/need-a-solution"
               className="mobile-nav-link"
               onClick={() => setIsOpen(false)}
             >
-              Need a solution
+              How we build
+            </Link>
+
+            {/* FAQ */}
+            <Link
+              href="/faq"
+              className="mobile-nav-link"
+              onClick={() => setIsOpen(false)}
+            >
+              FAQ
             </Link>
 
             {/* Pill CTA */}

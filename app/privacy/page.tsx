@@ -32,6 +32,13 @@ export default function Privacy() {
           automated or repeated submissions. The form does not ask for a phone
           number.
         </p>
+        <h2>Website analytics and performance</h2>
+        <p>
+          We use aggregated page-view, performance, and interaction telemetry to
+          understand which pages and workflows visitors find useful. No personal
+          enquiry fields (such as your name, email address, or message) are sent
+          to analytics services.
+        </p>
         <h2>Keep the first message brief</h2>
         <p>
           Please do not include confidential files, sensitive identity documents

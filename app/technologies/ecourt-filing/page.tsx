@@ -1,33 +1,98 @@
-import Link from "@/components/site-link";
+import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { EcourtHero } from "@/components/ecourt/EcourtHero";
-import { OldVsNew } from "@/components/ecourt/OldVsNew";
-import { FilingShowcase } from "@/components/ecourt/FilingShowcase";
-import { SafetyPrivacy } from "@/components/ecourt/SafetyPrivacy";
-import { EcourtCTA } from "@/components/ecourt/EcourtCTA";
+import LexHeroDiagram from "@/components/lex-hero-diagram";
+import LexBeforeAfter from "@/components/lex-before-after";
+import LexSections from "@/components/lex-sections";
+import { buildProductPageJsonLd, LEX_FAQS } from "@/lib/ops-lex-faqs";
+import { SITE_CONFIG } from "@/lib/site-config";
+import "./lex.css";
 
-export const metadata = {
-  title: "Kairologic Lex — eCourt Filing Automation",
-  description:
-    "One click prepares a court filing: merge, cover page, OCR, compression, page numbering, bank seal and portal-ready splitting. Runs fully offline — documents never leave the office PC.",
+const canonicalUrl = `${SITE_CONFIG.url}/technologies/ecourt-filing`;
+const pageTitle = "Kairologic Lex | E-court filing | Kairologic Technologies";
+const pageDescription =
+  "Merging, compressing, converting scans to text, paginating every page, applying the bank seal, splitting for the portal. The whole routine runs unattended on your own PC, and the documents never leave the office.";
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: pageDescription,
+  alternates: { canonical: canonicalUrl },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: canonicalUrl,
+    type: "website",
+  },
 };
 
 export default function EcourtFilingPage() {
+  const jsonLd = buildProductPageJsonLd({
+    siteUrl: SITE_CONFIG.url,
+    path: "/technologies/ecourt-filing",
+    name: "Kairologic Lex: Offline E-Court Filing Automation",
+    serviceType: "Offline legal document preparation and e-court filing software",
+    description: pageDescription,
+    breadcrumbName: "Kairologic Lex",
+    faqs: LEX_FAQS,
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
-      <main id="main" className="min-h-screen bg-slate-950 text-slate-200 overflow-x-hidden">
-        <nav className="c-breadcrumb c-shell !text-slate-400 border-b border-slate-900/80 [&_a]:!text-slate-300 [&_a:hover]:!text-teal-300 [&_span]:!text-slate-600" aria-label="Breadcrumb">
+      <main id="main" className="lex-page">
+        <div className="wrap bc">
           <Link href="/technologies">Technologies</Link>
-          <span aria-hidden="true">/</span>
-          <span>eCourt Filing (Kairologic Lex)</span>
-        </nav>
-        <EcourtHero />
-        <OldVsNew />
-        <FilingShowcase />
-        <SafetyPrivacy />
-        <EcourtCTA />
+          <span>/</span>
+          <b>E-court filing (Kairologic Lex)</b>
+        </div>
+
+        <section className="wrap hero lex-hero">
+          <div>
+            <div className="eb">Kairologic Lex · E-court filing automation</div>
+            <h1>
+              A day of filing work,
+              <span>automated in one click.</span>
+            </h1>
+            <p className="lead">
+              Merging, compressing, converting scans to text, paginating every
+              page, applying the bank seal and splitting for the portal. The
+              whole routine runs unattended on your own PC, and the documents
+              never leave the office.
+            </p>
+            <div className="btns">
+              <a className="btn" href="#steps">
+                See how it works
+              </a>
+              <a className="lnk" href="#ba">
+                The manual routine, visualised
+              </a>
+            </div>
+            <div className="stats">
+              <div>
+                <b>1 Click</b>
+                <span>complete workflow automated</span>
+              </div>
+              <div>
+                <b>Hands-Free</b>
+                <span>runs unattended</span>
+              </div>
+              <div>
+                <b>100% Local</b>
+                <span>documents stay on your PC</span>
+              </div>
+            </div>
+          </div>
+
+          <LexHeroDiagram />
+        </section>
+
+        <LexBeforeAfter />
+        <LexSections />
       </main>
       <Footer />
     </>

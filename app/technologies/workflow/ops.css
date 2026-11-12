@@ -5,7 +5,7 @@
   --ice: #E3EDEA;
   --frost: #F6FAF9;
   --line: rgba(16, 42, 67, 0.16);
-  --sec: clamp(72px, 10vw, 144px);
+  --sec: clamp(72px, 9vw, 128px);
 }
 
 .ops-page {
@@ -13,10 +13,11 @@
   color: var(--ink);
   font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .ops-page .wrap {
-  padding: 0 clamp(20px, 5vw, 72px);
+  padding-inline: clamp(20px, 5vw, 72px);
   width: 100%;
 }
 
@@ -60,7 +61,7 @@
   font-weight: 700;
   letter-spacing: -0.035em;
   text-wrap: balance;
-  font-size: clamp(40px, 5.4vw, 88px);
+  font-size: clamp(40px, 5.2vw, 84px);
   line-height: 0.98;
   color: var(--ink);
 }
@@ -224,18 +225,19 @@
   background-size: 100% 100%;
 }
 
-.s2 {
+.ops-page .s2 {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
   gap: clamp(24px, 5vw, 80px);
   align-items: center;
-  padding: 0 0 var(--sec);
+  padding-top: 0;
+  padding-bottom: var(--sec);
 }
 .s2 h2 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
-  font-size: clamp(34px, 4.6vw, 68px);
+  font-size: clamp(34px, 4.4vw, 64px);
   line-height: 1;
 }
 .s2 p {
@@ -317,19 +319,20 @@
   position: absolute;
   left: 5.5%;
   bottom: 18px;
-  font-size: 13px;
-  opacity: 0.7;
+  font-size: 14px;
+  opacity: 0.78;
 }
 
 /* Section 3: Connected details. Less repeated work. */
-.wd {
-  padding: 0 0 var(--sec);
+.ops-page .wd {
+  padding-top: 0;
+  padding-bottom: var(--sec);
 }
 .wd h2 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
-  font-size: clamp(34px, 4.6vw, 68px);
+  font-size: clamp(34px, 4.4vw, 64px);
   line-height: 1;
   max-width: 13em;
 }
@@ -339,11 +342,12 @@
 .r2 {
   position: relative;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr 96px;
+  grid-template-columns: 1.1fr 1fr 96px;
   gap: clamp(16px, 3vw, 40px);
   align-items: center;
   padding: clamp(22px, 3vw, 40px) 0;
   border-top: 1px solid var(--line);
+  isolation: isolate;
   cursor: pointer;
 }
 .r2:last-child {
@@ -365,7 +369,7 @@
 .w2 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
-  font-size: clamp(44px, 7vw, 112px);
+  font-size: clamp(34px, 4.6vw, 72px);
   line-height: 0.95;
   letter-spacing: -0.04em;
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -459,14 +463,15 @@
 }
 
 /* Section 4: Built around your process */
-.hw {
-  padding: 0 0 var(--sec);
+.ops-page .hw {
+  padding-top: 0;
+  padding-bottom: var(--sec);
 }
 .hw h2 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
-  font-size: clamp(34px, 4.6vw, 68px);
+  font-size: clamp(34px, 4.4vw, 64px);
   line-height: 1;
 }
 .hw .sub {
@@ -562,7 +567,69 @@
   opacity: 1;
 }
 
-/* Section 5: Closing Band */
+/* Section 5: Questions, answered. (#faq) */
+.ops-page .fq {
+  padding-top: 0;
+  padding-bottom: var(--sec);
+}
+.ops-page .fq h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  font-size: clamp(34px, 4.4vw, 64px);
+  line-height: 1;
+  color: var(--ink);
+}
+.ops-page .fql {
+  margin-top: clamp(24px, 4vw, 48px);
+  max-width: 900px;
+}
+.ops-page .fq details {
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+}
+.ops-page .fq details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.ops-page .fq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: clamp(19px, 2vw, 28px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.ops-page .fq summary:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+}
+.ops-page .fq summary::-webkit-details-marker {
+  display: none;
+}
+.ops-page .fq summary::after {
+  content: '+';
+  font: 400 30px 'Hanken Grotesk', system-ui, sans-serif;
+  transition: transform 0.3s;
+  flex: none;
+}
+.ops-page .fq details[open] summary::after {
+  transform: rotate(45deg);
+}
+.ops-page .fq p {
+  margin-top: 14px;
+  max-width: 62ch;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* Section 6: Closing Band */
 .cl {
   background: #CFE5DD;
   padding: var(--sec) 0;
@@ -576,8 +643,8 @@
 .cl h2 {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
-  font-size: clamp(44px, 7vw, 112px);
-  line-height: 0.94;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 0.96;
   letter-spacing: -0.04em;
 }
 .cl p {
@@ -586,6 +653,12 @@
   max-width: 36ch;
   margin: 24px 0 32px;
   opacity: 0.85;
+}
+.cl .btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 26px;
+  align-items: center;
 }
 .cl .btn {
   display: inline-block;
