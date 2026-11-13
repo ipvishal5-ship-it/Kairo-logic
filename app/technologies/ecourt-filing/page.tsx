@@ -12,7 +12,7 @@ import "./lex.css";
 const canonicalUrl = `${SITE_CONFIG.url}/technologies/ecourt-filing`;
 const pageTitle = "Kairologic Lex | E-court filing | Kairologic Technologies";
 const pageDescription =
-  "Merging, compressing, converting scans to text, paginating every page, applying the bank seal, splitting for the portal. The whole routine runs unattended on your own PC, and the documents never leave the office.";
+  "Merging, compressing, selective OCR, paginating every page, applying the bank seal, and splitting for the portal. Complete filing preparation running directly in your web browser on any device.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -30,8 +30,8 @@ export default function EcourtFilingPage() {
   const jsonLd = buildProductPageJsonLd({
     siteUrl: SITE_CONFIG.url,
     path: "/technologies/ecourt-filing",
-    name: "Kairologic Lex: Offline E-Court Filing Automation",
-    serviceType: "Offline legal document preparation and e-court filing software",
+    name: "Kairologic Lex: Cloud E-Court Filing Automation",
+    serviceType: "Cloud-based legal document preparation and e-court filing service",
     description: pageDescription,
     breadcrumbName: "Kairologic Lex",
     faqs: LEX_FAQS,
@@ -59,10 +59,10 @@ export default function EcourtFilingPage() {
               <span>automated in one click.</span>
             </h1>
             <p className="lead">
-              Merging, compressing, converting scans to text, paginating every
-              page, applying the bank seal and splitting for the portal. The
-              whole routine runs unattended on your own PC, and the documents
-              never leave the office.
+              Merging, compressing, converting scans to searchable text,
+              paginating every page, applying the bank seal and splitting
+              for the portal. Open your browser, drop your case files,
+              and let the web service process the entire filing in seconds.
             </p>
             <div className="btns">
               <a className="btn" href="#steps">
@@ -82,8 +82,8 @@ export default function EcourtFilingPage() {
                 <span>runs unattended</span>
               </div>
               <div>
-                <b>100% Local</b>
-                <span>documents stay on your PC</span>
+                <b>Zero Install</b>
+                <span>runs in any web browser</span>
               </div>
             </div>
           </div>

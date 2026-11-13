@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 1520" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap');
+      text {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .card-shadow {
+        filter: drop-shadow(0 10px 22px rgba(15, 61, 62, 0.08));
+      }
+    </style>
+
+    <!-- Marker for straight downward vertical connecting arrows -->
+    <marker id="downArrow" viewBox="0 0 12 12" refX="6" refY="10" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 2 1 L 6 10 L 10 1 z" fill="#0F3D3E" />
+    </marker>
+  </defs>
+
+  <!-- Outer Mobile Canvas with Light Mint Background -->
+  <rect width="390" height="1520" rx="24" fill="#EEF5F3" />
+  <rect x="1" y="1" width="388" height="1518" rx="23" fill="none" stroke="#D5E3E0" strokeWidth="1.5" />
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       STEP 1 (MOBILE): UPLOAD
+       ══════════════════════════════════════════════════════════════════ -->
+  <!-- Step 1 Label -->
+  <g transform="translate(24, 32)">
+    <rect x="0" y="0" width="118" height="32" rx="16" fill="#0F3D3E" />
+    <text x="59" y="21" fill="#FFFFFF" fontSize="16" fontWeight="700" textAnchor="middle">1. Upload</text>
+  </g>
+
+  <!-- Step 1 Card -->
+  <g class="card-shadow" transform="translate(24, 76)">
+    <rect width="342" height="388" rx="20" fill="#FFFFFF" stroke="#D5E3E0" strokeWidth="1.5" />
+
+    <!-- Card Title -->
+    <text x="24" y="44" fill="#12302F" fontSize="22" fontWeight="700">Drop your files</text>
+    <text x="24" y="68" fill="#12302F" opacity="0.75" fontSize="15" fontWeight="500">In any browser on any device</text>
+
+    <!-- Browser Window Mockup -->
+    <g transform="translate(20, 86)">
+      <rect width="302" height="206" rx="12" fill="#F8FBFA" stroke="#D5E3E0" strokeWidth="1.2" />
+      
+      <!-- Top Bar -->
+      <rect width="302" height="34" rx="12 12 0 0" fill="#E6EFEF" />
+      <circle cx="20" cy="17" r="4.5" fill="#FF5F56" />
+      <circle cx="34" cy="17" r="4.5" fill="#FFBD2E" />
+      <circle cx="48" cy="17" r="4.5" fill="#27C93F" />
+      <rect x="66" y="7" width="220" height="20" rx="10" fill="#FFFFFF" />
+      <text x="78" y="21" fill="#0F3D3E" fontSize="13" fontWeight="600">app.kairologic.com</text>
+
+      <!-- Dropzone -->
+      <rect x="16" y="48" width="270" height="144" rx="10" fill="#FFFFFF" stroke="#1FB58F" strokeWidth="1.5" strokeDasharray="6 5" />
+      
+      <!-- PDF Icon -->
+      <g transform="translate(120, 62)">
+        <path d="M 0 0 L 22 0 L 32 10 L 32 40 L 0 40 Z" fill="#EEF5F3" stroke="#0F3D3E" strokeWidth="1.5" />
+        <path d="M 22 0 L 22 10 L 32 10 Z" fill="#A8E6CF" stroke="#0F3D3E" strokeWidth="1.5" />
+        <rect x="4" y="16" width="24" height="12" rx="2" fill="#0F3D3E" />
+        <text x="16" y="25" fill="#FFFFFF" fontSize="9" fontWeight="800" textAnchor="middle">PDF</text>
+      </g>
+      <text x="151" y="128" fill="#12302F" fontSize="15" fontWeight="700" textAnchor="middle">OriginalSuit_8472.pdf</text>
+      <text x="151" y="148" fill="#0F3D3E" opacity="0.65" fontSize="13" fontWeight="500" textAnchor="middle">Drop case documents here</text>
+      <rect x="86" y="160" width="130" height="22" rx="11" fill="#EEF5F3" />
+      <text x="151" y="175" fill="#0F3D3E" fontSize="12" fontWeight="600" textAnchor="middle">Upload Ready</text>
+    </g>
+
+    <!-- Devices Row -->
+    <g transform="translate(20, 304)">
+      <line x1="0" y1="0" x2="302" y2="0" stroke="#D5E3E0" strokeWidth="1" />
+      <text x="151" y="22" fill="#12302F" opacity="0.75" fontSize="13" fontWeight="600" textAnchor="middle">READY ON ANY DEVICE</text>
+      
+      <g transform="translate(38, 34)">
+        <!-- Laptop -->
+        <g transform="translate(0, 0)">
+          <rect x="4" y="0" width="40" height="26" rx="3" fill="#EEF5F3" stroke="#0F3D3E" strokeWidth="1.5" />
+          <line x1="0" y1="26" x2="48" y2="26" stroke="#0F3D3E" strokeWidth="3" strokeLinecap="round" />
+          <text x="24" y="40" fill="#12302F" fontSize="13" fontWeight="600" textAnchor="middle">Laptop</text>
+        </g>
+        <!-- PC -->
+        <g transform="translate(90, 0)">
+          <rect x="4" y="0" width="40" height="26" rx="3" fill="#EEF5F3" stroke="#0F3D3E" strokeWidth="1.5" />
+          <line x1="24" y1="26" x2="24" y2="30" stroke="#0F3D3E" strokeWidth="2" />
+          <line x1="12" y1="30" x2="36" y2="30" stroke="#0F3D3E" strokeWidth="2" strokeLinecap="round" />
+          <text x="24" y="40" fill="#12302F" fontSize="13" fontWeight="600" textAnchor="middle">PC</text>
+        </g>
+        <!-- iPad -->
+        <g transform="translate(180, 0)">
+          <rect x="8" y="0" width="30" height="28" rx="4" fill="#EEF5F3" stroke="#0F3D3E" strokeWidth="1.5" />
+          <text x="23" y="40" fill="#12302F" fontSize="13" fontWeight="600" textAnchor="middle">iPad</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       DOWN ARROW 1: Step 1 -> Step 2
+       ══════════════════════════════════════════════════════════════════ -->
+  <line x1="195" y1="472" x2="195" y2="508" stroke="#0F3D3E" strokeWidth="3" marker-end="url(#downArrow)" />
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       STEP 2 (MOBILE): CLOUD PROCESSING
+       ══════════════════════════════════════════════════════════════════ -->
+  <!-- Step 2 Label -->
+  <g transform="translate(24, 520)">
+    <rect x="0" y="0" width="186" height="32" rx="16" fill="#0F3D3E" />
+    <text x="93" y="21" fill="#FFFFFF" fontSize="16" fontWeight="700" textAnchor="middle">2. Cloud processing</text>
+  </g>
+
+  <!-- Step 2 Card -->
+  <g class="card-shadow" transform="translate(24, 564)">
+    <rect width="342" height="392" rx="20" fill="#0F3D3E" stroke="#1FB58F" strokeWidth="1.8" />
+
+    <!-- Card Title -->
+    <text x="171" y="44" fill="#FFFFFF" fontSize="22" fontWeight="700" textAnchor="middle">Cloud engine processes</text>
+    <text x="171" y="68" fill="#A8E6CF" fontSize="15" fontWeight="500" textAnchor="middle">Automated legal dossier pipeline</text>
+
+    <!-- Cloud Icon in its own area ABOVE text -->
+    <g transform="translate(126, 84)">
+      <path d="M 22 44 
+               A 18 18 0 0 1 20 12 
+               A 26 26 0 0 1 70 8 
+               A 20 20 0 0 1 90 38 
+               A 14 14 0 0 1 80 54 
+               L 22 54 
+               A 12 12 0 0 1 22 44 Z" 
+            fill="#12494A" stroke="#A8E6CF" strokeWidth="2.5" strokeLinejoin="round" />
+      <circle cx="46" cy="34" r="10" fill="#A8E6CF" fillOpacity="0.25" stroke="#A8E6CF" strokeWidth="1.5" />
+      <circle cx="46" cy="34" r="4.5" fill="#1FB58F" />
+    </g>
+
+    <!-- Checklist -->
+    <g transform="translate(24, 160)">
+      <!-- Line 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="14" cy="15" r="12" fill="#12494A" />
+        <path d="M 8 15 L 12 19 L 20 11" fill="none" stroke="#1FB58F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="36" y="20" fill="#FFFFFF" fontSize="16" fontWeight="600">Selective OCR</text>
+      </g>
+      <!-- Line 2 -->
+      <g transform="translate(0, 42)">
+        <circle cx="14" cy="15" r="12" fill="#12494A" />
+        <path d="M 8 15 L 12 19 L 20 11" fill="none" stroke="#1FB58F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="36" y="20" fill="#FFFFFF" fontSize="16" fontWeight="600">300 DPI conversion</text>
+      </g>
+      <!-- Line 3 -->
+      <g transform="translate(0, 84)">
+        <circle cx="14" cy="15" r="12" fill="#12494A" />
+        <path d="M 8 15 L 12 19 L 20 11" fill="none" stroke="#1FB58F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="36" y="20" fill="#FFFFFF" fontSize="16" fontWeight="600">Pagination and Bates numbers</text>
+      </g>
+      <!-- Line 4 -->
+      <g transform="translate(0, 126)">
+        <circle cx="14" cy="15" r="12" fill="#12494A" />
+        <path d="M 8 15 L 12 19 L 20 11" fill="none" stroke="#1FB58F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="36" y="20" fill="#FFFFFF" fontSize="16" fontWeight="600">Digital seal and bank seal</text>
+      </g>
+    </g>
+
+    <!-- Stat banner -->
+    <g transform="translate(20, 326)">
+      <rect width="302" height="50" rx="12" fill="#12494A" stroke="#1FB58F" strokeWidth="1.2" />
+      <text x="151" y="32" fill="#FFFFFF" fontSize="17" fontWeight="700" textAnchor="middle">142 pages | 186 MB to 94 MB</text>
+    </g>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       DOWN ARROW 2: Step 2 -> Step 3
+       ══════════════════════════════════════════════════════════════════ -->
+  <line x1="195" y1="964" x2="195" y2="1000" stroke="#0F3D3E" strokeWidth="3" marker-end="url(#downArrow)" />
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       STEP 3 (MOBILE): PORTAL-READY SPLIT
+       ══════════════════════════════════════════════════════════════════ -->
+  <!-- Step 3 Label -->
+  <g transform="translate(24, 1012)">
+    <rect x="0" y="0" width="186" height="32" rx="16" fill="#0F3D3E" />
+    <text x="93" y="21" fill="#FFFFFF" fontSize="16" fontWeight="700" textAnchor="middle">3. Portal-ready split</text>
+  </g>
+
+  <!-- Step 3 Card -->
+  <g class="card-shadow" transform="translate(24, 1056)">
+    <rect width="342" height="388" rx="20" fill="#FFFFFF" stroke="#D5E3E0" strokeWidth="1.5" />
+
+    <!-- Card Title -->
+    <text x="24" y="44" fill="#12302F" fontSize="22" fontWeight="700">Filing-ready parts</text>
+    <text x="24" y="68" fill="#12302F" opacity="0.75" fontSize="15" fontWeight="500">Prepared for immediate upload</text>
+
+    <!-- Stacked Doc 1 -->
+    <g transform="translate(20, 86)">
+      <rect width="302" height="78" rx="12" fill="#F8FBFA" stroke="#D5E3E0" strokeWidth="1.2" />
+      <rect x="0" y="0" width="6" height="78" rx="12 0 0 12" fill="#1FB58F" />
+      <text x="18" y="28" fill="#0F3D3E" fontSize="17" fontWeight="800">Part 01</text>
+      <text x="82" y="28" fill="#1FB58F" fontSize="15" fontWeight="700">|  48 MB</text>
+      <text x="18" y="50" fill="#12302F" fontSize="15" fontWeight="700">Pages 1-64</text>
+      <text x="18" y="68" fill="#12302F" opacity="0.75" fontSize="13" fontWeight="500">Index and Pleadings</text>
+    </g>
+
+    <!-- Stacked Doc 2 -->
+    <g transform="translate(20, 174)">
+      <rect width="302" height="78" rx="12" fill="#F8FBFA" stroke="#D5E3E0" strokeWidth="1.2" />
+      <rect x="0" y="0" width="6" height="78" rx="12 0 0 12" fill="#1FB58F" />
+      <text x="18" y="28" fill="#0F3D3E" fontSize="17" fontWeight="800">Part 02</text>
+      <text x="82" y="28" fill="#1FB58F" fontSize="15" fontWeight="700">|  46 MB</text>
+      <text x="18" y="50" fill="#12302F" fontSize="15" fontWeight="700">Pages 65-142</text>
+      <text x="18" y="68" fill="#12302F" opacity="0.75" fontSize="13" fontWeight="500">Exhibits and Orders</text>
+    </g>
+
+    <!-- Green Pill Badge -->
+    <g transform="translate(20, 264)">
+      <rect width="302" height="42" rx="21" fill="#A8E6CF" />
+      <circle cx="26" cy="21" r="9" fill="#1FB58F" />
+      <path d="M 22 21 L 25 24 L 30 18" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="44" y="27" fill="#0F3D3E" fontSize="15" fontWeight="700">Under the 50 MB portal limit</text>
+    </g>
+
+    <!-- Action Button -->
+    <g transform="translate(20, 318)">
+      <rect width="302" height="52" rx="16" fill="#0F3D3E" />
+      <circle cx="36" cy="26" r="12" fill="#12494A" />
+      <path d="M 30 26 L 34 30 L 42 22" fill="none" stroke="#1FB58F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="58" y="32" fill="#FFFFFF" fontSize="17" fontWeight="700">Export Verified Dossiers</text>
+    </g>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       BOTTOM STRIP PILL (MOBILE)
+       ══════════════════════════════════════════════════════════════════ -->
+  <g transform="translate(20, 1460)">
+    <rect width="350" height="44" rx="22" fill="#0F3D3E" />
+    <text x="175" y="27" fill="#FFFFFF" fontSize="12" fontWeight="600" textAnchor="middle">Zero install · Zero local CPU load · Windows, Mac, iPad</text>
+  </g>
+</svg>
+

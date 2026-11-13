@@ -20,7 +20,7 @@ export const GENERAL_FAQS: readonly ProductFaqItem[] = [
   {
     question: "Can Kairologic run offline or on our own office computers?",
     answer:
-      "Yes, depending on the product. Kairologic Lex runs 100% locally on your office PC with zero cloud uploads, while Kairologic Ops and Manufacturing Suite provide role-based shared workspaces accessible across your team.",
+      "Kairologic Lex runs entirely in your web browser with zero software installation, so your team can open and prepare filings on any PC, laptop, or tablet. Kairologic Ops and Manufacturing Suite also run seamlessly in the browser.",
   },
   {
     question: "What happens after the system is handed over?",
@@ -30,7 +30,7 @@ export const GENERAL_FAQS: readonly ProductFaqItem[] = [
   {
     question: "What devices or IT setup does our team need?",
     answer:
-      "Kairologic Ops and Kairologic Manufacturing run in any modern desktop or mobile browser with role-based access, so your team needs no special hardware. Kairologic Lex runs directly on your office Windows PC with no internet connection required.",
+      "Kairologic Lex runs straight from your web browser, so you can upload documents, trigger OCR, and download portal dossiers on any desktop or tablet without installing anything. Kairologic Ops and Kairologic Manufacturing run equally well across all modern web browsers.",
   },
   {
     question: "How do pricing and rollout work?",
@@ -85,15 +85,15 @@ export const OPS_FAQS: readonly ProductFaqItem[] = [
  */
 export const LEX_FAQS: readonly ProductFaqItem[] = [
   {
-    question: "Do our court or bank documents ever leave our office PC?",
+    question: "Do we need to install any heavy software or PDF drivers on our computers?",
     answer:
-      "Never. Kairologic Lex runs 100% locally on your own office PC with zero uploads, no cloud storage and no accounts. Confidential case files stay on your machine.",
+      "No installation is required. Kairologic Lex is an instant web service: open your browser, drop your case files, and the cloud engine carries out merging, high-accuracy OCR, Bates stamping, compression, and splitting on demand.",
   },
   {
     question:
-      "Does text recognition (OCR) work without an internet connection?",
+      "Does text recognition (OCR) and document processing happen in the cloud?",
     answer:
-      "Yes. The entire engine, including selective OCR for scanned pages, runs offline with the internet disconnected.",
+      "Yes. The heavy document processing and OCR engine run server-side in the cloud. It accurately converts non-searchable scans into crisp, searchable text without stressing your local machine's memory or CPU.",
   },
   {
     question: "What happens to typed PDFs versus scanned pages?",

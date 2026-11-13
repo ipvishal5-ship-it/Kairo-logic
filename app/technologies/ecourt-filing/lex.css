@@ -647,9 +647,15 @@
   opacity: 0.8;
   text-wrap: pretty;
 }
+.lex-page .lc {
+  position: relative;
+  width: 100%;
+}
 .lex-page .lc svg {
   width: 100%;
+  height: auto;
   display: block;
+  overflow: visible;
 }
 .lex-page .bnc {
   animation: bn 2.4s ease-in-out infinite;

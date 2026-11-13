@@ -258,7 +258,7 @@ export const EcourtHero = () => {
               {[
                 { value: "1 Click", label: "Complete routine automated" },
                 { value: "Hands-Free", label: "Runs in background unattended" },
-                { value: "100% Local", label: "Zero files leave your PC" },
+                { value: "Cloud-Secure", label: "Role-based access, anywhere" },
               ].map((s) => (
                 <div key={s.label} className="ec-stat bg-[#070d18] px-3.5 py-4 sm:px-4 sm:py-5 flex flex-col justify-between">
                   <div className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-200 to-teal-300 tracking-tight">
@@ -566,12 +566,12 @@ export const EcourtHero = () => {
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-slate-300">
                     <ShieldCheck size={12} className="text-blue-400" />
-                    <span>Zero Cloud Uploads · Offline Engines</span>
+                    <span>Encrypted · Role-Based Access · Cloud Delivery</span>
                   </span>
                 </div>
                 <div className="font-mono text-[11px] text-slate-400 flex items-center gap-1.5">
                   <Cpu size={12} className="text-cyan-400" />
-                  <span>Local Engine: <strong className="text-slate-300 font-normal">Unattended CPU processing</strong></span>
+                  <span>Cloud Engine: <strong className="text-slate-300 font-normal">Unattended server-side processing</strong></span>
                 </div>
               </div>
             </div>

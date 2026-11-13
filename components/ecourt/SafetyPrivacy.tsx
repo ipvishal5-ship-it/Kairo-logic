@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
-  ShieldCheck, WifiOff, Lock, CheckCheck, FileSearch,
-  Scan, FileText,
+  ShieldCheck, Lock, CheckCheck, FileSearch,
+  Scan, FileText, Cloud, KeyRound,
 } from "lucide-react";
 
 const verificationFeatures = [
@@ -37,7 +37,7 @@ export const SafetyPrivacy = () => {
     <section ref={rootRef} className="relative pt-12 pb-20 lg:pt-16 lg:pb-28 bg-slate-950 border-t border-slate-800/60 overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         
-        {/* Privacy Banner - Clean Framer Motion Entrance (Zero Animation Clash) */}
+        {/* Cloud Security Banner */}
         <motion.div
           className="relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/40 via-slate-900/80 to-slate-900/80 p-8 lg:p-12 mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -48,23 +48,23 @@ export const SafetyPrivacy = () => {
           <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-emerald-500/15 blur-[100px] pointer-events-none" />
           <div className="relative grid lg:grid-cols-[auto_1fr] gap-8 lg:gap-10 items-center">
             <div className="flex h-20 w-20 lg:h-24 lg:w-24 items-center justify-center rounded-2xl border border-emerald-500/40 bg-emerald-500/15 shrink-0">
-              <WifiOff className="h-10 w-10 lg:h-12 lg:w-12 text-emerald-300" />
+              <Cloud className="h-10 w-10 lg:h-12 lg:w-12 text-emerald-300" />
             </div>
             <div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-                The documents never leave the office.
+                Your documents, secured in the cloud.
               </h2>
               <p className="mt-4 text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl">
-                No uploads. No cloud. No accounts. The whole engine runs locally on your
-                office PC — even text recognition works with the internet
-                disconnected. Court and bank documents stay exactly where
-                confidential files belong: on your machine.
+                Kairologic Lex runs as a web service, so your team works from any
+                authorised device without installing software or passing files around.
+                Every document is encrypted in transit and at rest, with access gated
+                to the roles you define.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {[
-                  { icon: Lock, text: "Zero uploads" },
-                  { icon: WifiOff, text: "Works fully offline" },
-                  { icon: ShieldCheck, text: "Self-contained engines" },
+                  { icon: Lock, text: "Encrypted in transit and at rest" },
+                  { icon: KeyRound, text: "Role-based access control" },
+                  { icon: ShieldCheck, text: "No local installation needed" },
                 ].map((b) => (
                   <span key={b.text} className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-semibold text-emerald-300">
                     <b.icon className="h-4 w-4" /> {b.text}
@@ -83,7 +83,7 @@ export const SafetyPrivacy = () => {
             viewport={{ once: true }}
             className="inline-block rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold text-blue-300 tracking-widest uppercase"
           >
-            Document Integrity & Auditing
+            Document Integrity &amp; Auditing
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
