@@ -1,4 +1,5 @@
 import { enquirySchema } from "@/lib/enquiry-validation";
+import { processEnquiry } from "@/lib/enquiry-service";
 
 const json = (
   body: unknown,
@@ -38,8 +39,8 @@ export async function POST(request: Request) {
 
   const data = parsed.data;
 
-  // Log enquiry in deployment console (Vercel runtime logs)
-  console.log("[Kairologic Enquiry Received]:", {
+  // Process mailing and permanent storage (Google Sheets / Email / Console)
+  const result = await processEnquiry({
     id: data.id,
     name: data.name,
     email: data.email,
@@ -48,5 +49,14 @@ export async function POST(request: Request) {
     timestamp: new Date().toISOString(),
   });
 
-  return json({ ok: true }, 201);
+  return json(
+    {
+      ok: true,
+      delivered: {
+        email: result.emailSent,
+        sheets: result.sheetsSaved,
+      },
+    },
+    201,
+  );
 }
