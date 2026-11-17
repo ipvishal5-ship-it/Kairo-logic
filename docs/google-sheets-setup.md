@@ -94,3 +94,4 @@ function handleEnquiry(e) {
 4. Ensure **Who has access** is set to **`Anyone`**.
 5. Click **Deploy**.
 6. When you test the `/exec` link in your browser again, you will see `{"status":"success"}` and the row will appear in your Google Sheet!
+

@@ -98,6 +98,9 @@ export default function ManufacturingCleanShowcase() {
                 src="/images/hero-industrial-estate.webp"
                 alt="Connected manufacturing plant facility"
                 className="mfg-plant-photo"
+                loading="lazy"
+                width={600}
+                height={400}
               />
               <div className="mfg-plant-overlay">
                 <span className="mfg-live-badge">● Plant Floor Active</span>

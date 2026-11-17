@@ -204,6 +204,9 @@ export default function ManufacturingChocolateShowcase() {
                     src="/images/hero-industrial-estate.webp"
                     alt="Connected factory"
                     className="mfg-footer-img"
+                    loading="lazy"
+                    width={600}
+                    height={200}
                   />
                   <div className="mfg-footer-overlay">
                     <span>Connected Plant Operating System</span>

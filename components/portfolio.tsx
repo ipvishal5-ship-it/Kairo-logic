@@ -221,6 +221,9 @@ export default function Portfolio() {
               <img
                 src="/images/field-inspection.webp"
                 alt="Illustrative property inspection"
+                loading="lazy"
+                width={320}
+                height={240}
               />
               <div>
                 <MapPin size={22} />

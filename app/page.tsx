@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Header from "@/components/header";
 import HomeHero from "@/components/home-hero";
 import Footer from "@/components/footer";
 import StatementSection from "@/components/statement-section";
 import ShowcaseStages from "@/components/showcase-stages";
-import MorphStory from "@/components/morph-story";
 import ApproachSection from "@/components/approach-section";
 import ClosingBand from "@/components/closing-band";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { getHomePageJsonLd } from "@/lib/seo-schema";
+
+const MorphStory = dynamic(() => import("@/components/morph-story"));
 
 export const metadata: Metadata = {
   title: "Kairologic Technologies | Technology built around your work",

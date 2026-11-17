@@ -184,6 +184,9 @@ export default function CaseWorkflow() {
           <img
             src="/images/field-inspection.webp"
             alt="Illustrative field visit"
+            loading="lazy"
+            width={320}
+            height={240}
           />
           <span>
             <MapPin size={19} />

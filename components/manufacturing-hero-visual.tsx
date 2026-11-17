@@ -11,6 +11,10 @@ export default function ManufacturingHeroVisual() {
           src="/images/hero-industrial-estate.webp"
           alt="Modern connected manufacturing plant"
           className="mfg-visual-img"
+          loading="eager"
+          fetchPriority="high"
+          width={1200}
+          height={675}
         />
         <div className="mfg-visual-overlay" />
 
