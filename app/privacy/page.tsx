@@ -1,7 +1,33 @@
+import type { Metadata } from "next";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { SITE_CONFIG } from "@/lib/site-config";
 
-export const metadata = { title: "Enquiry Privacy Notice" };
+const canonicalUrl = `${SITE_CONFIG.url}/privacy`;
+const title = "Enquiry Privacy Notice | Kairologic Technologies";
+const description =
+  "How Kairologic Technologies handles, secures, and protects enquiry information submitted via our website.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: {
+    canonical: canonicalUrl,
+  },
+  openGraph: {
+    title,
+    description,
+    url: canonicalUrl,
+    siteName: "Kairologic Technologies",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+};
 
 export default function Privacy() {
   return (

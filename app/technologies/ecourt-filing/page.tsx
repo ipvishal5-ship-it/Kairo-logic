@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     url: canonicalUrl,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+  },
 };
 
 export default function EcourtFilingPage() {

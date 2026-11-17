@@ -28,6 +28,12 @@ export const metadata: Metadata = {
     url: canonicalUrl,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "FAQ | Kairologic Technologies",
+    description:
+      "Answers to common questions about Kairologic platforms, offline e-court filing, SARFAESI workflows, and factory workforce systems.",
+  },
 };
 
 const FAQ_GROUPS = [

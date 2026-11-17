@@ -15,10 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
   ];
 
+  const now = new Date();
+
   return routes.map((route) => ({
     url: `${SITE_CONFIG.url}${route}`,
-    changeFrequency: "weekly",
+    lastModified: now,
+    changeFrequency: route === "" || route.startsWith("/technologies/") ? "weekly" : "monthly",
     priority: route === "" ? 1.0 : route.startsWith("/technologies/") ? 0.9 : 0.7,
   }));
 }
-
