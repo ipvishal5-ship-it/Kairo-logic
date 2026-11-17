@@ -266,12 +266,13 @@ export async function processEnquiry(data: EnquiryData): Promise<{
 
       const respText = await response.text();
 
-      if (response.ok) {
+      if (response.ok && !respText.includes('"status":"error"') && !respText.includes('<html') && !respText.includes('<!DOCTYPE')) {
         sheetsSaved = true;
         console.log("[Storage Dispatch] Google Sheets row saved successfully:", respText);
       } else {
-        errors.push(`Google Sheets error ${response.status}: ${respText}`);
-        console.error("[Storage Dispatch] Google Sheets failed with status:", response.status, respText);
+        const preview = respText.slice(0, 300);
+        errors.push(`Google Sheets returned unexpected response: ${preview}`);
+        console.error("[Storage Dispatch] Google Sheets failed:", response.status, preview);
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
