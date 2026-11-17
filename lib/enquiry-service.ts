@@ -9,6 +9,26 @@ export interface EnquiryData {
   timestamp?: string;
 }
 
+export interface DiagnosticsStatus {
+  hasRecipientEmail: boolean;
+  hasResend: boolean;
+  hasSmtpUser: boolean;
+  hasSmtpPass: boolean;
+  hasGoogleSheets: boolean;
+}
+
+export function getEnquiryDiagnostics(): DiagnosticsStatus {
+  return {
+    hasRecipientEmail: Boolean(
+      process.env.ENQUIRY_RECIPIENT_EMAIL || process.env.ENQUIRY_REVIEWER_EMAIL
+    ),
+    hasResend: Boolean(process.env.RESEND_API_KEY?.trim()),
+    hasSmtpUser: Boolean(process.env.SMTP_USER?.trim()),
+    hasSmtpPass: Boolean(process.env.SMTP_PASS?.trim()),
+    hasGoogleSheets: Boolean(process.env.GOOGLE_SHEETS_WEBHOOK_URL?.trim()),
+  };
+}
+
 function buildHtmlTemplate(data: EnquiryData, formattedDate: string): string {
   return `
 <!DOCTYPE html>
@@ -98,33 +118,57 @@ export async function processEnquiry(data: EnquiryData): Promise<{
   errors: string[];
 }> {
   const timestamp = data.timestamp || new Date().toISOString();
-  const formattedDate = new Date().toLocaleString("en-US", {
-    timeZone: "Asia/Kolkata",
-    dateStyle: "medium",
-    timeStyle: "short",
-  }) + " (IST)";
+  const formattedDate =
+    new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+      dateStyle: "medium",
+      timeStyle: "short",
+    }) + " (IST)";
 
   const emailHtml = buildHtmlTemplate(data, formattedDate);
   const emailText = buildPlainText(data, formattedDate);
 
   const recipient =
-    process.env.ENQUIRY_RECIPIENT_EMAIL ||
-    process.env.ENQUIRY_REVIEWER_EMAIL ||
+    process.env.ENQUIRY_RECIPIENT_EMAIL?.trim() ||
+    process.env.ENQUIRY_REVIEWER_EMAIL?.trim() ||
+    process.env.SMTP_USER?.trim() ||
     "ipvishal5@gmail.com";
 
   let emailSent = false;
   let sheetsSaved = false;
   const errors: string[] = [];
 
-  // 1. Send via Resend if RESEND_API_KEY is configured
-  if (process.env.RESEND_API_KEY) {
+  const resendApiKey = process.env.RESEND_API_KEY?.trim();
+  const smtpUser = process.env.SMTP_USER?.trim();
+  // Strip spaces if user pasted 16-char Google App Password like "xxxx yyyy zzzz wwww"
+  const smtpPass = process.env.SMTP_PASS?.trim().replace(/\s+/g, "");
+  const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL?.trim();
+
+  console.log("[Kairologic Enquiry Processing]:", {
+    id: data.id,
+    hasResend: Boolean(resendApiKey),
+    hasSmtp: Boolean(smtpUser && smtpPass),
+    hasSheets: Boolean(sheetsUrl),
+    recipient,
+  });
+
+  if (!resendApiKey && (!smtpUser || !smtpPass) && !sheetsUrl) {
+    const warning =
+      "No notification environment variables detected. If you configured variables in Vercel, ensure you selected 'Production' and REDEPLOYED your latest deployment.";
+    errors.push(warning);
+    console.warn(`[Kairologic Enquiry Warning]: ${warning}`);
+  }
+
+  // 1. Resend Delivery (if RESEND_API_KEY is configured)
+  if (resendApiKey) {
     try {
       const fromEmail =
-        process.env.RESEND_FROM_EMAIL || "Kairologic <onboarding@resend.dev>";
+        process.env.RESEND_FROM_EMAIL?.trim() ||
+        "Kairologic <onboarding@resend.dev>";
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${resendApiKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -152,21 +196,36 @@ export async function processEnquiry(data: EnquiryData): Promise<{
     }
   }
 
-  // 2. Send via SMTP / Nodemailer (e.g. Gmail App Password) if configured and Resend not used/failed
-  if (!emailSent && process.env.SMTP_USER && process.env.SMTP_PASS) {
+  // 2. SMTP / Gmail Delivery (via Nodemailer)
+  if (!emailSent && smtpUser && smtpPass) {
     try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST || "smtp.gmail.com",
-        port: Number(process.env.SMTP_PORT || 465),
-        secure: (process.env.SMTP_PORT || "465") === "465",
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-      });
+      const isCustomSmtp =
+        process.env.SMTP_HOST &&
+        process.env.SMTP_HOST.trim() !== "" &&
+        process.env.SMTP_HOST.trim() !== "smtp.gmail.com";
+
+      const transporter = isCustomSmtp
+        ? nodemailer.createTransport({
+            host: process.env.SMTP_HOST!.trim(),
+            port: Number(process.env.SMTP_PORT || 465),
+            secure: (process.env.SMTP_PORT || "465") === "465",
+            auth: {
+              user: smtpUser,
+              pass: smtpPass,
+            },
+            connectionTimeout: 10000,
+          })
+        : nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: smtpUser,
+              pass: smtpPass,
+            },
+            connectionTimeout: 10000,
+          });
 
       await transporter.sendMail({
-        from: `"Kairologic Contact" <${process.env.SMTP_USER}>`,
+        from: `"Kairologic Contact" <${smtpUser}>`,
         to: recipient,
         replyTo: data.email,
         subject: `[Kairologic Enquiry] Message from ${data.name}${data.organisation ? ` (${data.organisation})` : ""}`,
@@ -183,30 +242,36 @@ export async function processEnquiry(data: EnquiryData): Promise<{
     }
   }
 
-  // 3. Permanent, Inactivity-Proof Storage via Google Sheets Webhook
-  if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+  // 3. Permanent Google Sheets Webhook
+  if (sheetsUrl) {
     try {
-      const response = await fetch(process.env.GOOGLE_SHEETS_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: data.id,
-          timestamp,
-          formattedDate,
-          name: data.name,
-          email: data.email,
-          organisation: data.organisation || "",
-          message: data.message,
-        }),
+      // Note: Google Apps Script redirects with 302. Use text/plain with follow redirect
+      // to ensure the POST body is accepted without preflight rejection.
+      const payloadString = JSON.stringify({
+        id: data.id,
+        timestamp,
+        formattedDate,
+        name: data.name,
+        email: data.email,
+        organisation: data.organisation || "",
+        message: data.message,
       });
+
+      const response = await fetch(sheetsUrl, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        redirect: "follow",
+        body: payloadString,
+      });
+
+      const respText = await response.text();
 
       if (response.ok) {
         sheetsSaved = true;
-        console.log("[Storage Dispatch] Google Sheets row saved successfully");
+        console.log("[Storage Dispatch] Google Sheets row saved successfully:", respText);
       } else {
-        const errorText = await response.text();
-        errors.push(`Google Sheets webhook returned ${response.status}: ${errorText}`);
-        console.error("[Storage Dispatch] Google Sheets error:", errorText);
+        errors.push(`Google Sheets error ${response.status}: ${respText}`);
+        console.error("[Storage Dispatch] Google Sheets failed with status:", response.status, respText);
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
@@ -215,8 +280,8 @@ export async function processEnquiry(data: EnquiryData): Promise<{
     }
   }
 
-  // 4. Always log to console as fail-safe runtime record
-  console.log("[Kairologic Enquiry Processed]:", {
+  // 4. Always record in server console
+  console.log("[Kairologic Enquiry Processed Result]:", {
     id: data.id,
     name: data.name,
     email: data.email,
@@ -224,6 +289,8 @@ export async function processEnquiry(data: EnquiryData): Promise<{
     timestamp,
     emailSent,
     sheetsSaved,
+    errorCount: errors.length,
+    errors,
   });
 
   return { emailSent, sheetsSaved, errors };

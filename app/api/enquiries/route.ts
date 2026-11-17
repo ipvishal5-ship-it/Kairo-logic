@@ -1,5 +1,5 @@
 import { enquirySchema } from "@/lib/enquiry-validation";
-import { processEnquiry } from "@/lib/enquiry-service";
+import { processEnquiry, getEnquiryDiagnostics } from "@/lib/enquiry-service";
 
 const json = (
   body: unknown,
@@ -10,6 +10,30 @@ const json = (
     status,
     headers: { "Cache-Control": "no-store", ...extra },
   });
+
+/**
+ * Diagnostic GET endpoint to easily verify in the browser whether
+ * environment variables are properly loaded on Vercel.
+ */
+export async function GET() {
+  const diagnostics = getEnquiryDiagnostics();
+  return json({
+    status: "online",
+    time: new Date().toISOString(),
+    environmentVariables: {
+      recipientEmailConfigured: diagnostics.hasRecipientEmail,
+      resendConfigured: diagnostics.hasResend,
+      smtpConfigured: diagnostics.hasSmtpUser && diagnostics.hasSmtpPass,
+      googleSheetsConfigured: diagnostics.hasGoogleSheets,
+    },
+    note:
+      !diagnostics.hasResend &&
+      (!diagnostics.hasSmtpUser || !diagnostics.hasSmtpPass) &&
+      !diagnostics.hasGoogleSheets
+        ? "Warning: No notification credentials detected in runtime. If you added them in Vercel Project Settings, you must Redeploy your project."
+        : "Credentials detected.",
+  });
+}
 
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
@@ -56,6 +80,10 @@ export async function POST(request: Request) {
         email: result.emailSent,
         sheets: result.sheetsSaved,
       },
+      warning:
+        result.errors.length > 0
+          ? result.errors.join("; ")
+          : undefined,
     },
     201,
   );
