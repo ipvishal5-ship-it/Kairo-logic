@@ -11,24 +11,11 @@ A Google Sheet stored in your Google Drive will:
 
 ---
 
-## Bulletproof Setup Instructions
+## The Exact Apps Script Code
 
-### Step 1: Your Spreadsheet Headers
-In your Google Sheet **"Kairologic Website Enquiries"** (ID: `1VZQPRn3ItJf34mKX6ORw79bi3-VT29jarmbyQbPubBY`):
-Make sure the tab at the bottom is named **`Sheet1`**, and Row 1 has these headers:
-- **A1:** `Timestamp (IST)`
-- **B1:** `Name`
-- **C1:** `Email`
-- **D1:** `Organization`
-- **E1:** `Message`
-- **F1:** `Enquiry ID`
-- **G1:** `Raw ISO Time`
-
----
-
-### Step 2: Paste the Apps Script
-1. In your Google Sheet, click **Extensions** in the top menu -> **Apps Script**.
-2. Replace everything in the code editor with this exact script:
+In your Google Sheet **"Kairologic Website Enquiries"**:
+1. Click **Extensions** in the top menu -> **Apps Script**.
+2. Replace all code with this:
 
 ```javascript
 function doPost(e) {
@@ -44,9 +31,14 @@ function handleEnquiry(e) {
   try {
     lock.waitLock(10000);
 
-    // Targets your exact spreadsheet and Sheet1 tab
-    var SPREADSHEET_ID = "1VZQPRn3ItJf34mKX6ORw79bi3-VT29jarmbyQbPubBY";
-    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    // 1. Tries the container spreadsheet directly
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    // 2. If running standalone, opens via your exact spreadsheet URL (no ID typos)
+    if (!ss) {
+      ss = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1VZQPRn3ltJf34mKX6ORw79bi3-VT29jarmbyQbPubBY/edit");
+    }
+
     var sheet = ss.getSheetByName("Sheet1") || ss.getSheets()[0];
 
     var data = {};
@@ -91,28 +83,14 @@ function handleEnquiry(e) {
 }
 ```
 
-3. Click the **Save** icon (disk icon) in the toolbar.
+3. Click **Save** (disk icon).
 
 ---
 
-### Step 3: Deploy as Web App (CRITICAL SETTINGS)
-1. At the top right of the Apps Script window, click **Deploy** -> **Manage deployments** (or **New deployment**).
-2. If editing an existing deployment, click the **Pencil icon (Edit)**:
-   - **Version:** Click the dropdown and select **New version** *(Essential: Apps Script freezes code until you pick "New version")*.
-   - **Execute as:** `Me (your email)`
-   - **Who has access:** MUST be **`Anyone`** *(CRITICAL: If set to "Only myself", external server posts are blocked!)*
-3. Click **Deploy**.
-4. If Google shows an authorization popup:
-   - Click **Review permissions** -> Choose your account.
-   - Click **Advanced** (in small grey text) -> Click **Go to Untitled project (unsafe)** -> Click **Allow**.
-5. Copy the **Web app URL** that ends with **`/exec`** (Do NOT use the `/dev` URL).
-   - Format: `https://script.google.com/macros/s/AKfycb.../exec`
-
----
-
-### Step 4: Verify Your Vercel Environment Variable
-In your Vercel Project Settings -> **Environment Variables**:
-- Variable Name: `GOOGLE_SHEETS_WEBHOOK_URL`
-- Value: The URL copied above (ending in `/exec`).
-- Ensure the **Production** checkbox is checked!
-- If you updated it, trigger a **Redeploy** on Vercel so the server loads it.
+## Deploying the Update
+1. Click **Deploy** -> **Manage deployments**.
+2. Click the **Pencil (Edit)** icon.
+3. Change **Version** dropdown to **New version** *(Essential: updates the live script)*.
+4. Ensure **Who has access** is set to **`Anyone`**.
+5. Click **Deploy**.
+6. When you test the `/exec` link in your browser again, you will see `{"status":"success"}` and the row will appear in your Google Sheet!
