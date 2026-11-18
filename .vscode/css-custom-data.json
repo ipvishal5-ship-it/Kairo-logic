@@ -1,0 +1,21 @@
+{
+  "version": 1.1,
+  "properties": [
+    {
+      "name": "text-wrap",
+      "description": "Controls how text inside an element is wrapped. Supported values include wrap, nowrap, balance, and pretty.",
+      "references": [
+        {
+          "name": "MDN Reference",
+          "url": "https://developer.mozilla.org/docs/Web/CSS/text-wrap"
+        }
+      ],
+      "values": [
+        { "name": "wrap" },
+        { "name": "nowrap" },
+        { "name": "balance" },
+        { "name": "pretty" }
+      ]
+    }
+  ]
+}

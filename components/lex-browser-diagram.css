@@ -1,0 +1,702 @@
+/* ==========================================================================
+   Kairologic Lex — Native Browser Pipeline Diagram
+   Scoped exclusively under .lexdg-* to prevent global style leakage.
+   Tokens reused: ink #102A43, green #16876D, mint #7FE0C3, ice #E3EDEA, frost #F6FAF9, line rgba(16,42,67,.16)
+   ========================================================================== */
+
+.lexdg-root {
+  --ink: #102A43;
+  --green: #16876D;
+  --mint: #7FE0C3;
+  --ice: #E3EDEA;
+  --frost: #F6FAF9;
+  --line: rgba(16, 42, 67, 0.16);
+
+  position: relative;
+  background: var(--frost);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: clamp(18px, 2.4vw, 32px);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  overflow: visible;
+}
+
+.lexdg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 1. Install Steps Queue Row */
+.lexdg-iq {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 56px;
+  width: 100%;
+}
+
+.lexdg-cq {
+  position: relative;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  font: 600 14px 'Hanken Grotesk', system-ui, sans-serif;
+  color: var(--ink);
+  transition: opacity 0.5s ease;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.lexdg-cq em {
+  font: 700 12px 'Bricolage Grotesque', sans-serif;
+  font-style: normal;
+  color: var(--green);
+  margin-right: 8px;
+}
+
+/* Step bottom progress indicator */
+.lexdg-cq::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--mint) 55%, var(--line) 55%);
+}
+
+/* Strikethrough line */
+.lexdg-cq::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 50%;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(var(--s, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+.lexdg-iq.lexdg-dim .lexdg-cq {
+  opacity: 0.35;
+}
+
+/* Zero installation Badge */
+.lexdg-zr {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.lexdg-zr.lexdg-on {
+  opacity: 1;
+  transform: none;
+}
+
+.lexdg-zr b {
+  font: 700 clamp(52px, 6vw, 84px) / 0.8 'Bricolage Grotesque', sans-serif;
+  color: var(--green);
+  letter-spacing: -0.05em;
+  position: relative;
+  display: inline-block;
+}
+
+.lexdg-zr b::before {
+  content: '';
+  position: absolute;
+  inset: -14px -18px -8px -18px;
+  border: 2px solid var(--mint);
+  border-radius: 50%;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.6s 0.15s ease, opacity 0.6s 0.15s ease;
+  pointer-events: none;
+}
+
+.lexdg-zr.lexdg-on b::before {
+  transform: none;
+  opacity: 1;
+}
+
+.lexdg-zr span {
+  font: 600 14px 'Hanken Grotesk', system-ui, sans-serif;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* 2. Device Stage Area */
+.lexdg-area {
+  position: relative;
+  height: clamp(190px, 34vw, 330px);
+  margin-top: 30px;
+  width: 100%;
+}
+
+/* Ready in your browser pill badge */
+.lexdg-rc {
+  position: absolute;
+  left: 50%;
+  top: -22px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: #ffffff;
+  border-radius: 99px;
+  padding: 9px 16px;
+  font: 600 14px 'Hanken Grotesk', system-ui, sans-serif;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.6);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.3, 1.6, 0.4, 1);
+  -webkit-user-select: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.lexdg-rc.lexdg-on {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+.lexdg-rc svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.lexdg-rc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  border: 2px solid var(--mint);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lexdg-rc.lexdg-on::before {
+  animation: lexdg-pr 2.2s 0.5s 2;
+}
+
+@keyframes lexdg-pr {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.3, 1.9);
+    opacity: 0;
+  }
+}
+
+/* Ground shadow below devices */
+.lexdg-gs {
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  width: 64%;
+  height: 18px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(16, 42, 67, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.lexdg-gs.lexdg-on {
+  opacity: 1;
+}
+
+/* Device Shells */
+.lexdg-d {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) scale(0.92);
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.2, 0.9, 0.2, 1);
+  aspect-ratio: var(--ar);
+  max-width: 96%;
+}
+
+.lexdg-d.lexdg-on {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+.lexdg-pc {
+  height: 86%;
+  --ar: 16/10;
+  --r: 12px;
+}
+
+.lexdg-lp {
+  height: 72%;
+  --ar: 16/10;
+  --r: 10px;
+}
+
+.lexdg-tb2 {
+  height: 96%;
+  --ar: 3/4;
+  --r: 22px;
+}
+
+/* Hardware Frames */
+.lexdg-fr {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 6px solid var(--ink);
+  border-radius: var(--r);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 24px 50px -28px rgba(16, 42, 67, 0.55);
+  box-sizing: border-box;
+}
+
+/* Camera dot */
+.lexdg-pc::before,
+.lexdg-lp::before,
+.lexdg-tb2::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Diagonal glare overlay */
+.lexdg-fr::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0) 36%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* PC neck and foot */
+.lexdg-pc::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+  left: 40%;
+  right: 40%;
+  bottom: -13%;
+  height: 10%;
+  pointer-events: none;
+}
+
+.lexdg-pc .lexdg-ft {
+  position: absolute;
+  display: block;
+  left: 30%;
+  right: 30%;
+  bottom: -17%;
+  height: 4%;
+  background: var(--ink);
+  border-radius: 99px;
+  pointer-events: none;
+}
+
+/* Laptop base and thumb notch */
+.lexdg-lp::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+  left: -7%;
+  right: -7%;
+  bottom: -6%;
+  height: 6%;
+  border-radius: 0 0 14px 14px;
+  pointer-events: none;
+}
+
+.lexdg-lp .lexdg-ft {
+  position: absolute;
+  display: block;
+  left: 42%;
+  right: 42%;
+  bottom: -5.5%;
+  height: 2.4%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 0 0 8px 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Tablet */
+.lexdg-tb2 .lexdg-ft {
+  display: none;
+}
+
+/* Screen UI Content */
+.lexdg-ui {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lexdg-ui .lexdg-t {
+  height: 13%;
+  background: var(--frost);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.lexdg-ui .lexdg-t svg {
+  height: 70%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.lexdg-ui .lexdg-t s {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.lexdg-ui .lexdg-t i {
+  flex: 1;
+  height: 34%;
+  border-radius: 99px;
+  background: rgba(16, 42, 67, 0.1);
+  display: block;
+}
+
+.lexdg-ui .lexdg-t u {
+  width: 14%;
+  height: 42%;
+  border-radius: 99px;
+  background: var(--green);
+  display: block;
+  flex-shrink: 0;
+}
+
+.lexdg-ui .lexdg-b {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 8px;
+  padding: 8px;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+/* Tablet responsive screen layout */
+.lexdg-tb2 .lexdg-ui .lexdg-b {
+  grid-template-columns: 1fr;
+  grid-template-rows: 14% 1fr;
+}
+
+.lexdg-tb2 .lexdg-sd {
+  flex-direction: row;
+}
+
+.lexdg-sd {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.lexdg-sd b {
+  position: relative;
+  min-height: 10px;
+  flex: 1;
+  border-radius: 4px;
+  background: var(--ink);
+  display: block;
+}
+
+.lexdg-sd b:first-child {
+  background: var(--green);
+}
+
+.lexdg-sd b::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 1px;
+  background: var(--mint);
+}
+
+.lexdg-mn {
+  display: flex;
+  flex-direction: column;
+  gap: 6%;
+  min-width: 0;
+}
+
+.lexdg-mn .lexdg-hd {
+  display: flex;
+  gap: 6px;
+  height: 11%;
+}
+
+.lexdg-mn .lexdg-hd i {
+  flex: 1;
+  border-radius: 3px;
+  background: rgba(16, 42, 67, 0.1);
+  display: block;
+}
+
+.lexdg-mn .lexdg-hd i:first-child {
+  flex: 2;
+}
+
+.lexdg-zn {
+  flex: 1;
+  border: 2px dashed var(--line);
+  border-radius: 8px;
+  background: var(--frost);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.lexdg-zn::before {
+  content: '';
+  width: 22%;
+  aspect-ratio: 3/4;
+  background: #ffffff;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 7px 5px 0 -1px var(--mint);
+  background-image: linear-gradient(var(--line) 2px, transparent 2px);
+  background-size: 100% 18%;
+  background-position: 0 20%;
+}
+
+.lexdg-sg {
+  display: flex;
+  gap: 4px;
+  height: 9%;
+  min-height: 6px;
+}
+
+.lexdg-sg i {
+  flex: 1;
+  border-radius: 3px;
+  background: rgba(16, 42, 67, 0.12);
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.lexdg-sg i::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+/* Animations triggered when device is active (.lexdg-on) */
+.lexdg-d.lexdg-on .lexdg-sg i::after {
+  animation: lexdg-fx 0.5s forwards;
+}
+
+.lexdg-d.lexdg-on .lexdg-sg i:nth-child(1)::after {
+  animation-delay: 0.3s;
+}
+.lexdg-d.lexdg-on .lexdg-sg i:nth-child(2)::after {
+  animation-delay: 0.5s;
+}
+.lexdg-d.lexdg-on .lexdg-sg i:nth-child(3)::after {
+  animation-delay: 0.7s;
+}
+.lexdg-d.lexdg-on .lexdg-sg i:nth-child(4)::after {
+  animation-delay: 0.9s;
+}
+.lexdg-d.lexdg-on .lexdg-sg i:nth-child(5)::after {
+  animation-delay: 1.1s;
+}
+
+@keyframes lexdg-fx {
+  to {
+    transform: none;
+  }
+}
+
+.lexdg-d.lexdg-on .lexdg-zn::before {
+  animation: lexdg-dr 0.7s cubic-bezier(0.3, 1.4, 0.4, 1);
+}
+
+@keyframes lexdg-dr {
+  from {
+    transform: translateY(-130%);
+    opacity: 0;
+  }
+}
+
+.lexdg-ok {
+  position: absolute;
+  right: 8%;
+  bottom: 10%;
+  width: 20%;
+  max-width: 34px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--green);
+  transform: scale(0);
+}
+
+.lexdg-ok::after {
+  content: '';
+  position: absolute;
+  left: 32%;
+  top: 20%;
+  width: 28%;
+  height: 50%;
+  border: solid #ffffff;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+.lexdg-d.lexdg-on .lexdg-ok {
+  animation: lexdg-pp 0.45s 1.5s forwards cubic-bezier(0.3, 1.6, 0.4, 1);
+}
+
+@keyframes lexdg-pp {
+  to {
+    transform: none;
+  }
+}
+
+/* 3. Selector Buttons */
+.lexdg-sel {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.lexdg-sel button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 8px 16px;
+  font: 600 16px 'Hanken Grotesk', system-ui, sans-serif;
+  color: var(--ink);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.25s ease, border-color 0.25s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.lexdg-sel button:hover {
+  opacity: 1;
+}
+
+.lexdg-sel button.lexdg-active {
+  opacity: 1;
+  border-color: var(--green);
+}
+
+.lexdg-sel button:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+  .lexdg-root * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .lexdg-cq::after {
+    transform: scaleX(1) !important;
+  }
+
+  .lexdg-iq .lexdg-cq {
+    opacity: 0.35 !important;
+  }
+
+  .lexdg-zr {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .lexdg-zr b::before {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .lexdg-rc {
+    opacity: 1 !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .lexdg-rc::before {
+    display: none !important;
+  }
+
+  .lexdg-gs {
+    opacity: 1 !important;
+  }
+
+  .lexdg-d.lexdg-on {
+    opacity: 1 !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .lexdg-d .lexdg-zn::before {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .lexdg-d .lexdg-sg i::after {
+    transform: none !important;
+  }
+
+  .lexdg-d .lexdg-ok {
+    transform: none !important;
+  }
+}

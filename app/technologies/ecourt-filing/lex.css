@@ -647,28 +647,6 @@
   opacity: 0.8;
   text-wrap: pretty;
 }
-.lex-page .lc {
-  position: relative;
-  width: 100%;
-}
-.lex-page .lc svg {
-  width: 100%;
-  height: auto;
-  display: block;
-  overflow: visible;
-}
-.lex-page .bnc {
-  animation: bn 2.4s ease-in-out infinite;
-}
-@keyframes bn {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(18px, -14px);
-  }
-}
 
 /* Section: Three steps. Then it is just a habit. (.hw / #stp) */
 .lex-page .hw {
@@ -917,9 +895,6 @@
 @media (prefers-reduced-motion: reduce) {
   .lex-page * {
     transition: none !important;
-    animation: none !important;
-  }
-  .lex-page .bnc {
     animation: none !important;
   }
   .lex-page mark {
