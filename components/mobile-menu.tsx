@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,9 +10,14 @@ import { TECH_NAV_ITEMS } from "./technologies-dropdown";
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [techOpen, setTechOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close when pathname changes
   useEffect(() => {
@@ -72,7 +78,7 @@ export default function MobileMenu() {
         </svg>
       </button>
 
-      {isOpen && (
+      {isOpen && mounted && typeof document !== "undefined" && createPortal(
         <div
           className="mobile-sheet"
           role="dialog"
@@ -206,7 +212,8 @@ export default function MobileMenu() {
               </Link>
             </div>
           </nav>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
