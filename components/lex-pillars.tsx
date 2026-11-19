@@ -13,7 +13,7 @@ function CaseMgmtDiagram() {
 
   const stages = [
     { label: "Notice Served", color: "#16876D", status: "done" },
-    { label: "Sec 14 Filed", color: "#16876D", status: "done" },
+    { label: "Court Petition Filed", color: "#16876D", status: "done" },
     { label: "Order Received", color: "#16876D", status: "done" },
     { label: "Possession", color: "#F2B84B", status: "active" },
     { label: "Auction", color: "#1E2A3A", status: "pending" },
@@ -21,19 +21,19 @@ function CaseMgmtDiagram() {
   ];
 
   const fields = [
-    { key: "Borrower", val: "M/s Ashoka Traders Ltd." },
-    { key: "Loan A/c", val: "NPA-2026-00841" },
-    { key: "Court", val: "DRT Mumbai — DM Div 3" },
+    { key: "Party", val: "Sample Company Name" },
+    { key: "Account", val: "Sample Account ID" },
+    { key: "Court", val: "Sample Court Name" },
     { key: "Limitation", val: "12 Apr 2027" },
     { key: "Next Hearing", val: "04 Dec 2026" },
-    { key: "Stage", val: "Possession" },
+    { key: "Stage", val: "Active — Possession" },
   ];
 
   const docs = [
-    { icon: "📄", name: "Demand Notice (13.2)", tag: "Generated" },
-    { icon: "📋", name: "Possession Notice (13.4)", tag: "Generated" },
-    { icon: "🗂", name: "Inventory & Panchnama", tag: "Generated" },
-    { icon: "📷", name: "Site Photos — 3 Nov", tag: "Uploaded" },
+    { icon: "📄", name: "Recovery Notice", tag: "Generated" },
+    { icon: "📋", name: "Possession Notice", tag: "Generated" },
+    { icon: "🗂", name: "Field Inspection Report", tag: "Generated" },
+    { icon: "📷", name: "Site Photographs", tag: "Uploaded" },
   ];
 
   const tabs = ["Case Record", "Stage Track", "Documents"];
@@ -48,7 +48,7 @@ function CaseMgmtDiagram() {
       <div className="lp-casefile">
         {/* Case header */}
         <div className="lp-cf-header">
-          <span className="lp-cf-badge">SARFAESI CASE</span>
+          <span className="lp-cf-badge">ACTIVE CASE</span>
           <span className="lp-cf-id">#2026-0841</span>
         </div>
 
@@ -153,9 +153,9 @@ function LiquidTextDiagram() {
   ];
 
   const docs = [
-    { name: "Loan Agreement", short: "Agreement" },
-    { name: "Section 13(2) Notice", short: "Demand Notice" },
-    { name: "DRT Petition Bundle", short: "Petition" },
+    { name: "Primary Agreement", short: "Agreement" },
+    { name: "Issued Notice", short: "Notice" },
+    { name: "Court Filing Bundle", short: "Filing" },
   ];
 
   return (
@@ -181,7 +181,7 @@ function LiquidTextDiagram() {
           className={`lp-lt-doc${activeDoc === 0 ? " is-focused" : ""}`}
           onClick={() => setActiveDoc(activeDoc === 0 ? null : 0)}
         >
-          <div className="lp-lt-doc-title">Loan Agreement</div>
+          <div className="lp-lt-doc-title">Primary Agreement</div>
           <div className="lp-lt-lines">
             {leftLines.map((l, i) => (
               <div
@@ -195,7 +195,7 @@ function LiquidTextDiagram() {
             <div className="lp-lt-excerpt">
               <span className="lp-lt-excerpt-label">Extracted clause</span>
               <span className="lp-lt-excerpt-text">
-                "…outstanding principal of ₹4.2 Cr plus interest at 14.5% p.a…"
+                "…key terms matched and connected across both documents…"
               </span>
             </div>
           )}
@@ -235,7 +235,7 @@ function LiquidTextDiagram() {
           className={`lp-lt-doc${activeDoc === 1 ? " is-focused" : ""}`}
           onClick={() => setActiveDoc(activeDoc === 1 ? null : 1)}
         >
-          <div className="lp-lt-doc-title">Demand Notice (13.2)</div>
+          <div className="lp-lt-doc-title">Issued Notice</div>
           <div className="lp-lt-lines">
             {rightLines.map((l, i) => (
               <div
