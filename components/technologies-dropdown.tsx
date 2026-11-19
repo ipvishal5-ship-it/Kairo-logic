@@ -19,9 +19,9 @@ export const TECH_NAV_ITEMS: TechNavItem[] = [
     href: "/technologies/workflow",
   },
   {
-    domain: "eCourt Filing",
+    domain: "Legal Intelligence",
     platform: "Kairologic Lex",
-    desc: "Offline filing preparation that runs completely on your office PC.",
+    desc: "Case management, multi-document Liquid Text workspace, and automated e-court filing.",
     href: "/technologies/ecourt-filing",
   },
   {

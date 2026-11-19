@@ -10,14 +10,14 @@ const canonicalUrl = `${SITE_CONFIG.url}/technologies`;
 export const metadata: Metadata = {
   title: "Our Technologies | Kairologic Technologies",
   description:
-    "Explore Kairologic's operational platforms: Kairologic Ops for SARFAESI tracking, Kairologic Lex for e-court filing automation, and Manufacturing Suite for shop-floor tracking.",
+    "Explore Kairologic's operational platforms: Kairologic Ops for SARFAESI tracking, Kairologic Lex for case management, Liquid Text, and e-court filing automation, and Manufacturing Suite for shop-floor tracking.",
   alternates: {
     canonical: canonicalUrl,
   },
   openGraph: {
     title: "Our Technologies | Kairologic Technologies",
     description:
-      "Explore Kairologic's operational platforms: Kairologic Ops for SARFAESI tracking, Kairologic Lex for e-court filing automation, and Manufacturing Suite for shop-floor tracking.",
+      "Explore Kairologic's operational platforms: Kairologic Ops for SARFAESI tracking, Kairologic Lex for case management, Liquid Text, and e-court filing automation, and Manufacturing Suite for shop-floor tracking.",
     url: canonicalUrl,
     siteName: "Kairologic Technologies",
     locale: "en_IN",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Our Technologies | Kairologic Technologies",
     description:
-      "Explore Kairologic's operational platforms: Kairologic Ops for SARFAESI tracking, Kairologic Lex for e-court filing automation, and Manufacturing Suite for shop-floor tracking.",
+      "Explore Kairologic's operational platforms: Kairologic Ops for SARFAESI tracking, Kairologic Lex for case management, Liquid Text, and e-court filing automation, and Manufacturing Suite for shop-floor tracking.",
   },
 };
 
