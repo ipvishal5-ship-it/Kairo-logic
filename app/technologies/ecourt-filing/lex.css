@@ -935,6 +935,7 @@
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
   white-space: nowrap;
+  text-align: left;
 }
 .lp-sel-btn.is-active {
   background: var(--ink);
@@ -1017,7 +1018,7 @@
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 20px;
-  min-height: 340px;
+  min-height: clamp(280px, 36vw, 380px);
 }
 
 /* ── Case Management diagram ── */
@@ -1356,6 +1357,10 @@
   .lp-content {
     grid-template-columns: 1fr;
   }
+  .lp-body {
+    max-width: none;
+  }
+  /* Narrow the yarn column on tablet */
   .lp-lt-canvas {
     grid-template-columns: 1fr 36px 1fr;
   }
@@ -1367,13 +1372,138 @@
     font-size: 14px;
   }
 }
-@media (max-width: 540px) {
+
+/* ── Mobile ≤ 640px ── */
+@media (max-width: 640px) {
+  /* Selector: stack vertically, full-width */
+  .lp-selector {
+    width: 100%;
+    border-radius: 14px;
+    flex-direction: column;
+    padding: 6px;
+  }
+  .lp-sel-btn {
+    width: 100%;
+    border-radius: 10px;
+    justify-content: flex-start;
+    padding: 12px 16px;
+    font-size: 15px;
+    white-space: normal;
+  }
+  .lp-sel-btn.is-active {
+    border-radius: 10px;
+  }
+
+  /* Diagram: remove min-height so it shrinks naturally */
+  .lp-diagram {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  /* Case fields: single column */
   .lp-fields {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Liquid Text: stack docs vertically, hide the SVG yarn */
+  .lp-lt-canvas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+  }
+  .lp-lt-yarn {
+    display: none;
+  }
+  .lp-lt-doc {
+    width: 100%;
+  }
+
+  /* Filing steps: tighten columns, label wraps */
+  .lp-fs {
+    grid-template-columns: 24px 1fr auto;
+    gap: 8px;
+  }
+  .lp-fs-n {
+    font-size: 10px;
+  }
+  .lp-fs-label {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lp-fs-tick {
+    grid-column: 3;
+    font-size: 12px;
+  }
+  /* filing output: 3 boxes, smaller text */
+  .lp-fo-part {
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+
+  /* Stage tracker: tighter spacing */
+  .lp-stage {
+    gap: 8px;
+    padding: 5px 0;
+  }
+  .lp-stage-label {
+    font-size: 12px;
+  }
+
+  /* Docs list */
+  .lp-doc-name {
+    font-size: 12px;
+  }
+}
+
+/* ── Also collapse Liquid Text at ≤ 760px when it goes 1-col but docs are still side-by-side ── */
+@media (max-width: 760px) and (min-width: 641px) {
+  .lp-lt-canvas {
+    grid-template-columns: 1fr 28px 1fr;
+  }
+  .lp-lt-doc-title {
+    font-size: 10px;
+  }
+  .lp-lt-excerpt-text {
+    font-size: 10px;
+  }
+}
+
+/* ── Very small phones ≤ 400px ── */
+@media (max-width: 400px) {
+  .lp-sel-btn {
+    font-size: 14px;
+    padding: 11px 14px;
+  }
+  .lp-diagram {
+    padding: 12px;
+  }
+  .lp-lt-pills {
+    gap: 6px;
+  }
+  .lp-lt-pill {
+    font-size: 12px;
+    padding: 5px 11px;
+  }
+  .lp-cf-tab {
+    font-size: 11px;
+    padding: 9px 4px;
+  }
+  .lp-filing-output {
+    gap: 5px;
+  }
+  .lp-fo-part {
+    font-size: 10px;
+    padding: 7px 3px;
   }
   .lp-fs {
-    grid-template-columns: 24px 1fr 16px;
+    gap: 6px;
   }
-  .lp-fs-tick { grid-column: 3; }
+  .lp-fs-label {
+    font-size: 10px;
+  }
 }
 
