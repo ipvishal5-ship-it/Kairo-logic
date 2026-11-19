@@ -903,18 +903,17 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   LEX PILLARS — 3-Module Suite Section
-   Case Management | Liquid Text | Case Filing
+   LEX PILLARS — 3-module switcher
    ───────────────────────────────────────────────────────────────────────────── */
 .lp-section {
   padding-bottom: var(--sec);
 }
 
-/* Pillar Selector Bar */
+/* Selector bar */
 .lp-selector {
   display: flex;
-  gap: 6px;
-  padding: 6px;
+  gap: 4px;
+  padding: 4px;
   background: var(--frost);
   border: 1px solid var(--line);
   border-radius: 99px;
@@ -926,49 +925,39 @@
 .lp-sel-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   border: 0;
   background: none;
   color: var(--ink);
   font: 600 15px 'Hanken Grotesk', system-ui, sans-serif;
-  padding: 12px 24px;
+  padding: 11px 20px;
   border-radius: 99px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: background 0.25s, color 0.25s;
   white-space: nowrap;
-}
-.lp-sel-btn:hover {
-  background: rgba(16, 42, 67, 0.05);
+  text-align: left;
 }
 .lp-sel-btn.is-active {
   background: var(--ink);
   color: #E4F0EC;
-  box-shadow: 0 4px 14px rgba(16, 42, 67, 0.15);
 }
 .lp-sel-num {
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0.6;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
 }
 .lp-sel-btn.is-active .lp-sel-num {
-  opacity: 0.85;
+  opacity: 0.75;
   color: var(--mint);
 }
-.lp-sel-label {
-  letter-spacing: -0.01em;
-}
 
-/* Layout Grid */
+/* Content grid */
 .lp-content {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: clamp(32px, 4.5vw, 72px);
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(32px, 5vw, 80px);
   align-items: start;
-}
-.lp-copy {
-  display: flex;
-  flex-direction: column;
 }
 .lp-module-tag {
   font-size: 13px;
@@ -982,19 +971,19 @@
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
-  font-size: clamp(28px, 3.4vw, 48px);
+  font-size: clamp(28px, 3.6vw, 52px);
   line-height: 1.05;
   text-wrap: balance;
   color: var(--ink);
   margin-bottom: 20px;
 }
 .lp-body {
-  font-size: clamp(15px, 1.2vw, 17px);
+  font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.65;
-  opacity: 0.88;
+  opacity: 0.85;
   max-width: 44ch;
   text-wrap: pretty;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 .lp-chips {
   list-style: none;
@@ -1002,808 +991,394 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .lp-chips li {
-  font-size: 14.5px;
-  line-height: 1.4;
+  font-size: 14px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
-  color: var(--ink);
-  opacity: 0.92;
+  opacity: 0.85;
 }
-.lp-chip-icon {
+.lp-chips li::before {
+  content: '';
   flex: none;
-  color: var(--green);
-  margin-top: 2px;
-}
-
-/* Right-Hand Visual Wrapper */
-.lp-visual {
-  position: relative;
-  width: 100%;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   PILLAR 1: CASE MANAGEMENT WORKSPACE STYLES
-   ───────────────────────────────────────────────────────────────────────────── */
-.lex-cm-card {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: 0 12px 36px rgba(16, 42, 67, 0.07);
-  overflow: hidden;
-}
-.lex-cm-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  background: var(--ink);
-  color: #E4F0EC;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.lex-cm-badge {
-  display: inline-block;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--mint);
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-.lex-cm-title {
-  margin: 0;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-}
-.lex-cm-status-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(242, 184, 75, 0.15);
-  border: 1px solid rgba(242, 184, 75, 0.35);
-  color: #f7cb6b;
-  padding: 5px 12px;
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-.lex-cm-live-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #F2B84B;
-  box-shadow: 0 0 8px #F2B84B;
+  background: var(--green);
 }
 
-/* CM Tab Navigation */
-.lex-cm-tab-bar {
-  display: flex;
+/* Visual pane shared */
+.lp-visual {
+  position: relative;
+}
+.lp-diagram {
   background: var(--frost);
-  border-bottom: 1px solid var(--line);
-  padding: 0 8px;
-  gap: 4px;
-}
-.lex-cm-tab-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: none;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  padding: 12px 14px;
-  font: 600 13px 'Hanken Grotesk', system-ui, sans-serif;
-  color: var(--ink);
-  opacity: 0.6;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.lex-cm-tab-btn:hover {
-  opacity: 0.9;
-}
-.lex-cm-tab-btn.is-active {
-  opacity: 1;
-  color: var(--green);
-  border-bottom-color: var(--green);
-}
-
-/* CM Panels */
-.lex-cm-panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
   padding: 20px;
+  min-height: clamp(280px, 36vw, 380px);
 }
 
-/* Timeline */
-.lex-cm-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 20px;
-}
-.lex-cm-stage-item {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 14px;
-  position: relative;
-  min-height: 52px;
-}
-.lex-cm-stage-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-.lex-node-icon.is-done {
-  color: var(--green);
+/* ── Case Management diagram ── */
+.lp-casefile {
   background: #fff;
-  z-index: 1;
-}
-.lex-node-pulse {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #F2B84B;
-  box-shadow: 0 0 0 4px rgba(242, 184, 75, 0.25);
-  margin-top: 2px;
-  z-index: 1;
-}
-.lex-node-pending {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(16, 42, 67, 0.3);
-  font-size: 10px;
-  display: grid;
-  place-items: center;
-  color: rgba(16, 42, 67, 0.5);
-  background: #fff;
-  z-index: 1;
-}
-.lex-node-connector {
-  position: absolute;
-  top: 18px;
-  bottom: -4px;
-  width: 2px;
-  background: rgba(16, 42, 67, 0.12);
-  z-index: 0;
-}
-.lex-cm-stage-item.is-completed .lex-node-connector {
-  background: var(--green);
-}
-.lex-cm-stage-body {
-  padding-bottom: 14px;
-}
-.lex-cm-stage-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 3px;
-}
-.lex-cm-stage-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.lex-cm-stage-date {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green);
-}
-.lex-cm-stage-desc {
-  margin: 0;
-  font-size: 12.5px;
-  opacity: 0.75;
-  line-height: 1.4;
-}
-
-/* CM Footer KPIs */
-.lex-cm-footer-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 12px 14px;
-  background: var(--frost);
   border: 1px solid var(--line);
   border-radius: 10px;
-  text-align: center;
-}
-.lex-cm-kpi strong {
-  display: block;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.lex-cm-kpi span {
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-/* CM Grid */
-.lex-cm-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 18px;
-}
-.lex-cm-field {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 10px 12px;
-  background: var(--frost);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-}
-.lex-cm-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-.lex-cm-val {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--ink);
-}
-.lex-sample-tag {
-  margin-top: 14px;
-  font-size: 11.5px;
-  opacity: 0.5;
-  font-style: italic;
-  text-align: right;
-}
-
-/* CM Document Vault */
-.lex-cm-doc-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.lex-cm-doc-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  background: var(--frost);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  gap: 12px;
-}
-.lex-cm-doc-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.lex-cm-file-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  background: rgba(22, 135, 109, 0.12);
-  color: var(--green);
-  display: grid;
-  place-items: center;
-  flex: none;
-}
-.lex-cm-doc-name {
-  display: block;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.lex-cm-doc-meta {
-  font-size: 11.5px;
-  opacity: 0.65;
-}
-.lex-cm-doc-status {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--green);
-  background: rgba(22, 135, 109, 0.1);
-  padding: 4px 10px;
-  border-radius: 99px;
-  white-space: nowrap;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   PILLAR 2: LIQUID TEXT WORKSPACE STYLES
-   ───────────────────────────────────────────────────────────────────────────── */
-.lex-lt-card {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: 0 12px 36px rgba(16, 42, 67, 0.07);
   overflow: hidden;
 }
-.lex-lt-toolbar {
+.lp-cf-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 18px;
+  padding: 10px 16px;
   background: var(--ink);
   color: #E4F0EC;
-  gap: 12px;
-  flex-wrap: wrap;
 }
-.lex-lt-doc-pills {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.lex-lt-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 99px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-}
-.lex-lt-pill.is-active {
-  background: var(--green);
-  color: #ffffff;
-}
-.lex-lt-link-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--mint);
-  background: rgba(127, 224, 195, 0.15);
-  border: 1px solid rgba(127, 224, 195, 0.3);
-  padding: 4px 10px;
-  border-radius: 99px;
-  white-space: nowrap;
-}
-
-/* Liquid Text Workspace Canvas */
-.lex-lt-workspace {
-  display: grid;
-  grid-template-columns: 1fr 140px 1fr;
-  align-items: center;
-  gap: 12px;
-  padding: 20px 18px;
-  background: #F4F7F6;
-  position: relative;
-}
-.lex-lt-sheet {
-  background: #ffffff;
-  border: 1.5px solid var(--line);
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 4px 16px rgba(16, 42, 67, 0.05);
-  position: relative;
-}
-.lex-lt-sheet-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 10px;
-  margin-bottom: 12px;
-}
-.lex-lt-sheet-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
-.lex-lt-sheet-badge {
-  font-size: 10.5px;
-  font-weight: 700;
-  background: var(--frost);
-  border: 1px solid var(--line);
-  padding: 2px 7px;
-  border-radius: 4px;
-  opacity: 0.7;
-}
-.lex-lt-sheet-body {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.lex-lt-para {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.55;
-  color: rgba(16, 42, 67, 0.7);
-}
-.lex-lt-para strong {
-  color: var(--ink);
-}
-
-/* Highlighted Connected Clause Box */
-.lex-lt-clause-box {
-  background: rgba(22, 135, 109, 0.07);
-  border: 1.5px solid rgba(22, 135, 109, 0.35);
-  border-radius: 8px;
-  padding: 10px 12px;
-  position: relative;
-  transition: all 0.3s ease;
-}
-.lex-lt-clause-box.is-linked {
-  box-shadow: 0 0 0 3px rgba(22, 135, 109, 0.12);
-}
-.lex-lt-pin-marker {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-.lex-lt-pin-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 6px var(--green);
-}
-.lex-lt-pin-label {
+.lp-cf-badge {
   font-size: 11px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.lex-lt-clause-text {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--ink);
-  font-weight: 500;
-  font-style: italic;
-}
-
-/* Center Bridge & Yarn */
-.lex-lt-bridge {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-}
-.lex-lt-yarn-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.lex-yarn-pulse {
-  animation: lexDash 2.5s linear infinite;
-}
-@keyframes lexDash {
-  to {
-    stroke-dashoffset: -28;
-  }
-}
-.lex-lt-synth-card {
-  position: relative;
-  z-index: 2;
-  background: #ffffff;
-  border: 1.5px solid var(--green);
-  border-radius: 9px;
-  padding: 10px 12px;
-  box-shadow: 0 6px 20px rgba(22, 135, 109, 0.18);
-  text-align: center;
-  width: 100%;
-}
-.lex-lt-synth-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 10.5px;
-  font-weight: 700;
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
-}
-.lex-lt-synth-title {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-.lex-lt-synth-note {
-  margin: 0;
-  font-size: 11px;
-  line-height: 1.35;
-  opacity: 0.75;
-}
-.lex-lt-caption-bar {
-  padding: 10px 18px;
-  background: #ffffff;
-  border-top: 1px solid var(--line);
-  font-size: 12px;
-  opacity: 0.75;
-  text-align: center;
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   PILLAR 3: COURT FILING ENGINE STYLES
-   ───────────────────────────────────────────────────────────────────────────── */
-.lex-fp-card {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: 0 12px 36px rgba(16, 42, 67, 0.07);
-  overflow: hidden;
-}
-.lex-fp-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  background: var(--ink);
-  color: #E4F0EC;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.lex-fp-badge {
-  display: inline-block;
-  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--mint);
-  text-transform: uppercase;
-  margin-bottom: 3px;
 }
-.lex-fp-title {
-  margin: 0;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 16px;
+.lp-cf-id {
+  font-size: 13px;
   font-weight: 700;
-  color: #ffffff;
-}
-.lex-fp-rerun-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: var(--green);
-  color: #ffffff;
-  border: 0;
-  padding: 7px 14px;
-  border-radius: 99px;
-  font: 600 12.5px 'Hanken Grotesk', system-ui, sans-serif;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-}
-.lex-fp-rerun-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  background: #126e58;
-}
-.lex-fp-rerun-btn:disabled {
   opacity: 0.75;
-  cursor: default;
 }
-.is-spinning {
-  animation: lexSpin 1s linear infinite;
+.lp-cf-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  background: var(--frost);
 }
-@keyframes lexSpin {
-  100% {
-    transform: rotate(360deg);
-  }
+.lp-cf-tab {
+  flex: 1;
+  border: 0;
+  background: none;
+  font: 600 13px 'Hanken Grotesk', system-ui, sans-serif;
+  color: var(--ink);
+  padding: 10px 8px;
+  cursor: pointer;
+  opacity: 0.55;
+  border-bottom: 2px solid transparent;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.lp-cf-tab.is-on {
+  opacity: 1;
+  border-bottom-color: var(--green);
+}
+.lp-cf-panel {
+  display: none;
+  padding: 14px 16px 10px;
+}
+.lp-cf-panel.is-on {
+  display: block;
 }
 
-/* 7 Pipeline Stages Grid */
-.lex-fp-stages-grid {
+/* fields */
+.lp-fields {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
-  padding: 18px 20px;
-  background: var(--frost);
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
 }
-.lex-fp-stage-box {
-  background: #ffffff;
-  border: 1.5px solid var(--line);
-  border-radius: 9px;
-  padding: 12px 10px;
+.lp-field {
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
+  gap: 2px;
 }
-.lex-fp-stage-box.is-done {
-  border-color: rgba(22, 135, 109, 0.45);
-  background: #f7faf9;
-}
-.lex-fp-stage-box.is-current {
-  border-color: #F2B84B;
-  box-shadow: 0 0 0 3px rgba(242, 184, 75, 0.25);
-  background: #fffdf8;
-}
-.lex-fp-stage-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-.lex-fp-stage-num {
+.lp-field-k {
   font-size: 11px;
   font-weight: 700;
-  opacity: 0.45;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+  text-transform: uppercase;
 }
-.lex-fp-stage-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  background: rgba(16, 42, 67, 0.06);
-  color: var(--ink);
-  display: grid;
-  place-items: center;
+.lp-field-v {
+  font-size: 13px;
+  font-weight: 600;
 }
-.lex-fp-stage-box.is-done .lex-fp-stage-icon {
-  background: rgba(22, 135, 109, 0.12);
-  color: var(--green);
-}
-.lex-fp-stage-check {
-  color: var(--green);
-}
-.lex-fp-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #F2B84B;
-  box-shadow: 0 0 6px #F2B84B;
-}
-.lex-fp-idle-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(16, 42, 67, 0.2);
-}
-.lex-fp-stage-name {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
-.lex-fp-stage-desc {
-  margin: 0;
+.lp-sample-note {
   font-size: 11px;
-  line-height: 1.35;
-  opacity: 0.65;
+  opacity: 0.4;
+  margin-top: 10px;
+  font-style: italic;
 }
 
-/* Output Dossiers Tray */
-.lex-fp-output-tray {
-  padding: 18px 20px;
-  background: #ffffff;
+/* stage tracker */
+.lp-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
-.lex-fp-tray-label {
+.lp-stage {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: rgba(16, 42, 67, 0.7);
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  padding: 6px 0;
+}
+.lp-stage-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 2px solid currentColor;
+  position: relative;
+  z-index: 1;
+}
+.lp-stage--done .lp-stage-dot {
+  background: var(--green);
+  border-color: var(--green);
+}
+.lp-stage--active .lp-stage-dot {
+  background: #F2B84B;
+  border-color: #F2B84B;
+  box-shadow: 0 0 0 4px rgba(242,184,75,0.25);
+}
+.lp-stage-line {
+  position: absolute;
+  left: 5px;
+  top: 18px;
+  width: 2px;
+  height: 22px;
+  background: var(--line);
+  z-index: 0;
+}
+.lp-stage--done .lp-stage-line { background: var(--green); }
+.lp-stage-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+.lp-stage--pending .lp-stage-label { opacity: 0.4; }
+.lp-stage--active .lp-stage-label { font-weight: 700; }
+
+/* docs */
+.lp-docs {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
-.lex-fp-tray-tag {
+.lp-doc-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--frost);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.lp-doc-icon { font-size: 16px; flex: none; }
+.lp-doc-name {
+  font-size: 13px;
+  font-weight: 600;
+  flex: 1;
+}
+.lp-doc-tag {
+  font-size: 11px;
+  font-weight: 700;
   color: var(--green);
-  background: rgba(22, 135, 109, 0.1);
+  background: rgba(22,135,109,0.1);
   padding: 3px 8px;
   border-radius: 99px;
-  font-weight: 700;
 }
-.lex-fp-bundles-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+
+/* ── Liquid Text diagram ── */
+.lp-lt-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
 }
-.lex-fp-bundle-card {
+.lp-lt-pill {
+  border: 1px solid var(--line);
   background: var(--frost);
-  border: 1.5px solid rgba(22, 135, 109, 0.35);
-  border-radius: 9px;
-  padding: 12px 14px;
+  color: var(--ink);
+  font: 600 13px 'Hanken Grotesk', system-ui, sans-serif;
+  padding: 6px 14px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.lp-lt-pill.is-on {
+  background: var(--ink);
+  color: #E4F0EC;
+  border-color: var(--ink);
+}
+.lp-lt-canvas {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: start;
+  gap: 0;
+  min-height: 200px;
+}
+.lp-lt-doc {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lp-lt-doc.is-focused {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(22,135,109,0.12);
+}
+.lp-lt-doc-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.lp-lt-lines {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: all 0.25s ease;
 }
-.lex-fp-bundle-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(22, 135, 109, 0.12);
-  border-color: var(--green);
+.lp-lt-line {
+  height: 7px;
+  background: rgba(16,42,67,0.14);
+  border-radius: 99px;
+  transition: background 0.5s;
 }
-.lex-fp-bundle-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.lp-lt-line.is-accent {
+  background: rgba(16,42,67,0.28);
 }
-.lex-fp-bundle-icon {
-  color: var(--green);
+.lp-lt-line.is-linked {
+  background: rgba(22,135,109,0.6);
 }
-.lex-fp-bundle-status {
+.lp-lt-excerpt {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: rgba(22,135,109,0.08);
+  border-left: 3px solid var(--green);
+  border-radius: 0 6px 6px 0;
+}
+.lp-lt-excerpt-label {
+  display: block;
   font-size: 10px;
   font-weight: 700;
-  color: var(--green);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.lex-fp-bundle-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.3;
-}
-.lex-fp-bundle-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 11.5px;
-  opacity: 0.75;
-  padding-top: 4px;
-  border-top: 1px solid var(--line);
-}
-.lex-fp-bundle-size {
-  font-weight: 700;
   color: var(--green);
+  margin-bottom: 4px;
+}
+.lp-lt-excerpt-text {
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.lp-lt-yarn {
+  display: block;
+  height: 200px;
+  width: 100%;
+}
+.lp-lt-caption {
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.55;
+  text-align: center;
+  font-style: italic;
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   RESPONSIVE OVERHAUL (100% BULLETPROOF ON ALL SCREENS)
-   ───────────────────────────────────────────────────────────────────────────── */
-@media (max-width: 960px) {
+/* ── Court Filing diagram ── */
+.lp-filing-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.lp-filing-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.lp-fs {
+  display: grid;
+  grid-template-columns: 28px 1fr 20px 48px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.lp-fs-n {
+  font-weight: 700;
+  font-size: 11px;
+  opacity: 0.45;
+  text-align: right;
+}
+.lp-fs-bar {
+  height: 6px;
+  background: rgba(16,42,67,0.1);
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.6s cubic-bezier(0.3, 0.8, 0.2, 1), background 0.4s;
+}
+.lp-fs.is-done .lp-fs-bar {
+  width: 100%;
+  background: var(--green);
+}
+.lp-fs-label {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.65;
+}
+.lp-fs.is-done .lp-fs-label { opacity: 1; }
+.lp-fs-tick {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  grid-column: 4;
+}
+.lp-filing-output {
+  display: flex;
+  gap: 8px;
+}
+.lp-fo-part {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 8px;
+  border: 1.5px solid var(--green);
+  border-radius: 7px;
+  color: var(--green);
+  background: rgba(22,135,109,0.07);
+}
+
+/* Responsive */
+@media (max-width: 860px) {
   .lp-content {
     grid-template-columns: 1fr;
-    gap: 32px;
   }
   .lp-body {
     max-width: none;
   }
-  .lex-lt-workspace {
-    grid-template-columns: 1fr 120px 1fr;
+  /* Narrow the yarn column on tablet */
+  .lp-lt-canvas {
+    grid-template-columns: 1fr 36px 1fr;
+  }
+  .lp-selector {
+    border-radius: 16px;
+  }
+  .lp-sel-btn {
+    padding: 10px 14px;
+    font-size: 14px;
   }
 }
 
-@media (max-width: 768px) {
-  /* Liquid text collapses cleanly */
-  .lex-lt-workspace {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px;
-  }
-  .lex-lt-bridge {
-    min-height: auto;
-    width: 100%;
-  }
-  .lex-lt-yarn-svg {
-    display: none;
-  }
-  .lex-lt-synth-card {
-    max-width: 100%;
-  }
-  .lex-fp-stages-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .lex-fp-bundles-row {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* ── Mobile ≤ 640px ── */
 @media (max-width: 640px) {
+  /* Selector: stack vertically, full-width */
   .lp-selector {
     width: 100%;
-    border-radius: 16px;
+    border-radius: 14px;
     flex-direction: column;
     padding: 6px;
   }
@@ -1811,43 +1386,124 @@
     width: 100%;
     border-radius: 10px;
     justify-content: flex-start;
-    padding: 12px 18px;
+    padding: 12px 16px;
     font-size: 15px;
     white-space: normal;
   }
   .lp-sel-btn.is-active {
     border-radius: 10px;
   }
-  .lex-cm-grid {
-    grid-template-columns: 1fr;
+
+  /* Diagram: remove min-height so it shrinks naturally */
+  .lp-diagram {
+    min-height: 0;
+    padding: 16px;
   }
-  .lex-cm-footer-strip {
+
+  /* Case fields: single column */
+  .lp-fields {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Liquid Text: stack docs vertically, hide the SVG yarn */
+  .lp-lt-canvas {
+    display: flex;
+    flex-direction: column;
     gap: 12px;
-    text-align: left;
-    padding: 14px;
+    min-height: 0;
   }
-  .lex-cm-header,
-  .lex-fp-header,
-  .lex-lt-toolbar {
-    padding: 14px 16px;
+  .lp-lt-yarn {
+    display: none;
   }
-  .lex-cm-title,
-  .lex-fp-title {
-    font-size: 15px;
+  .lp-lt-doc {
+    width: 100%;
+  }
+
+  /* Filing steps: tighten columns, label wraps */
+  .lp-fs {
+    grid-template-columns: 24px 1fr auto;
+    gap: 8px;
+  }
+  .lp-fs-n {
+    font-size: 10px;
+  }
+  .lp-fs-label {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lp-fs-tick {
+    grid-column: 3;
+    font-size: 12px;
+  }
+  /* filing output: 3 boxes, smaller text */
+  .lp-fo-part {
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+
+  /* Stage tracker: tighter spacing */
+  .lp-stage {
+    gap: 8px;
+    padding: 5px 0;
+  }
+  .lp-stage-label {
+    font-size: 12px;
+  }
+
+  /* Docs list */
+  .lp-doc-name {
+    font-size: 12px;
   }
 }
 
-@media (max-width: 440px) {
-  .lex-fp-stages-grid {
-    grid-template-columns: 1fr;
+/* ── Also collapse Liquid Text at ≤ 760px when it goes 1-col but docs are still side-by-side ── */
+@media (max-width: 760px) and (min-width: 641px) {
+  .lp-lt-canvas {
+    grid-template-columns: 1fr 28px 1fr;
   }
-  .lex-cm-tab-btn {
-    padding: 10px 8px;
-    font-size: 12px;
+  .lp-lt-doc-title {
+    font-size: 10px;
   }
-  .lex-lt-sheet {
+  .lp-lt-excerpt-text {
+    font-size: 10px;
+  }
+}
+
+/* ── Very small phones ≤ 400px ── */
+@media (max-width: 400px) {
+  .lp-sel-btn {
+    font-size: 14px;
+    padding: 11px 14px;
+  }
+  .lp-diagram {
     padding: 12px;
+  }
+  .lp-lt-pills {
+    gap: 6px;
+  }
+  .lp-lt-pill {
+    font-size: 12px;
+    padding: 5px 11px;
+  }
+  .lp-cf-tab {
+    font-size: 11px;
+    padding: 9px 4px;
+  }
+  .lp-filing-output {
+    gap: 5px;
+  }
+  .lp-fo-part {
+    font-size: 10px;
+    padding: 7px 3px;
+  }
+  .lp-fs {
+    gap: 6px;
+  }
+  .lp-fs-label {
+    font-size: 10px;
   }
 }
 
