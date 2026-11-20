@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import LexHeroDiagram from "@/components/lex-hero-diagram";
-import LexBeforeAfter from "@/components/lex-before-after";
-import LexSections from "@/components/lex-sections";
-import LexPillars from "@/components/lex-pillars";
+import LexHero from "@/components/lex/Hero";
+import ModuleTabs from "@/components/lex/ModuleTabs";
+import SevenSteps from "@/components/lex/SevenSteps";
+import WatchFiling from "@/components/lex/WatchFiling";
+import ZeroInstallation from "@/components/lex/ZeroInstallation";
+import DocumentIntegrity from "@/components/lex/DocumentIntegrity";
+import ThreeSteps from "@/components/lex/ThreeSteps";
+import LexFaq from "@/components/lex/LexFaq";
+import ClosingBand from "@/components/lex/ClosingBand";
 import { buildProductPageJsonLd, LEX_FAQS } from "@/lib/ops-lex-faqs";
 import { SITE_CONFIG } from "@/lib/site-config";
 import "./lex.css";
@@ -60,53 +65,32 @@ export default function EcourtFilingPage() {
           <b>Kairologic Lex</b>
         </div>
 
-        {/* ── Hero ──────────────────────────────────────────────────────── */}
-        <section className="wrap hero lex-hero">
-          <div>
-            <div className="eb">Kairologic Lex · Legal Intelligence Suite</div>
-            <h1>
-              Case management,
-              <span>document intelligence,</span>
-              <span>automated filing.</span>
-            </h1>
-            <p className="lead">
-              One platform for every stage of legal recovery work — from the
-              first case intake to the final court bundle. Manage cases,
-              read across documents, and file in one click.
-            </p>
-            <div className="btns">
-              <a className="btn" href="#pillars">
-                Explore the three modules
-              </a>
-              <a className="lnk" href="#steps">
-                See filing automation
-              </a>
-            </div>
-            <div className="stats">
-              <div>
-                <b>3 Modules</b>
-                <span>in one unified platform</span>
-              </div>
-              <div>
-                <b>1 Click</b>
-                <span>complete filing automated</span>
-              </div>
-              <div>
-                <b>Zero Install</b>
-                <span>runs in any web browser</span>
-              </div>
-            </div>
-          </div>
+        {/* Hero ("Click RUN") */}
+        <LexHero />
 
-          <LexHeroDiagram />
-        </section>
+        {/* Three Module Tabs */}
+        <ModuleTabs />
 
-        {/* ── Three Pillars ─────────────────────────────────────────────── */}
-        <LexPillars />
+        {/* Seven careful steps */}
+        <SevenSteps />
 
-        {/* ── Filing deep-dive (existing sections) ─────────────────────── */}
-        <LexBeforeAfter />
-        <LexSections />
+        {/* Watch a filing prepare itself */}
+        <WatchFiling />
+
+        {/* Zero installation */}
+        <ZeroInstallation />
+
+        {/* Built for document integrity */}
+        <DocumentIntegrity />
+
+        {/* Three steps */}
+        <ThreeSteps />
+
+        {/* Questions, answered FAQ */}
+        <LexFaq />
+
+        {/* Closing band */}
+        <ClosingBand />
       </main>
       <Footer />
     </>
