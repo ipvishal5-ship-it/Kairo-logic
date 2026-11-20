@@ -28,7 +28,7 @@ export default function LiquidTextDiagram({
 
   const [mode, setMode] = useState<"n" | "f">("n");
   const [links, setLinks] = useState<[boolean, boolean, boolean]>([
-    false,
+    true,
     false,
     false,
   ]);

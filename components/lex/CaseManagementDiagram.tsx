@@ -70,8 +70,11 @@ export default function CaseManagementDiagram({
       const r = slotEl.getBoundingClientRect();
       const L = r.left - c.left;
       const T = r.top - c.top;
-      const sx = z.left - c.left + SX[i] * Math.max(0, z.width - r.width) - L;
-      const sy = z.top - c.top + 34 + i * ((z.height - 44 - r.height) / 6) - T;
+      // Clamp on mobile to prevent clipping outside container
+      const rawTargetX = z.left - c.left + SX[i] * Math.max(0, z.width - r.width);
+      const targetX = Math.max(12, Math.min(c.width - r.width - 12, rawTargetX));
+      const sx = targetX - L;
+      const sy = z.top - c.top + 28 + i * ((z.height - 40 - r.height) / 6) - T;
       return { left: L, top: T, width: r.width, height: r.height, sx, sy };
     });
 
@@ -150,7 +153,16 @@ export default function CaseManagementDiagram({
     <div className="dg">
       <div className="cmg" id="cmg" ref={cmgRef}>
         <div className="zone" id="zn" ref={znRef}>
-          <span className="lb">Loose ends</span>
+          <div className="zn-hd-row">
+            <span className="lb">Loose ends</span>
+            <button
+              type="button"
+              className="m-organize-btn"
+              onClick={handleBringTogether}
+            >
+              {allDocked ? "Scatter ↺" : "Organize ✨"}
+            </button>
+          </div>
         </div>
 
         <div className="rec">

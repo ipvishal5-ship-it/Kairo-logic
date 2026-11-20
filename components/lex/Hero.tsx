@@ -145,6 +145,33 @@ export default function LexHero() {
     timersRef.current.push(finishTimer);
   }, [clearState, finishRun]);
 
+  // Auto-play demo preview on mobile when scrolled into view
+  useEffect(() => {
+    const el = foRef.current;
+    if (!el) return;
+    let autoTimer: NodeJS.Timeout | null = null;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !busyRef.current && !doneRef.current) {
+            autoTimer = setTimeout(() => {
+              if (!busyRef.current && !doneRef.current) {
+                runAnimation();
+              }
+            }, 1800);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      if (autoTimer) clearTimeout(autoTimer);
+    };
+  }, [runAnimation]);
+
   useEffect(() => {
     return () => {
       timersRef.current.forEach(clearTimeout);
