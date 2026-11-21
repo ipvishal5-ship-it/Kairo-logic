@@ -17,6 +17,16 @@ export default function ZeroInstallation() {
   const [forcedDevice, setForcedDevice] = useState<number>(-1);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileStruck, setMobileStruck] = useState(false);
+
+  // Mobile viewport detection
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 900);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   // In-view observer for copy mark animation & early device reveal
   useEffect(() => {
@@ -32,12 +42,20 @@ export default function ZeroInstallation() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
     io.observe(el);
     io.observe(dg);
     return () => io.disconnect();
   }, []);
+
+  // Stagger strike-through on mobile once in view
+  useEffect(() => {
+    if (isMobile && isInView) {
+      const t = setTimeout(() => setMobileStruck(true), 350);
+      return () => clearTimeout(t);
+    }
+  }, [isMobile, isInView]);
 
   // Scroll listener
   useEffect(() => {
@@ -88,12 +106,12 @@ export default function ZeroInstallation() {
   }, []);
 
   const p = isReducedMotion ? 1 : progress;
-  const isDim = p > 0.25;
-  const isZeroOn = p > 0.15 || isInView;
-  const showDev = isReducedMotion || isInView || p > 0.15 || forcedDevice >= 0;
-  const isRcOn = isReducedMotion || isInView || p > 0.2 || forcedDevice >= 0;
+  const isDim = isReducedMotion || (isMobile && mobileStruck) || p > 0.25;
+  const isZeroOn = isReducedMotion || (isMobile && (isInView || mobileStruck)) || p > 0.15 || isInView;
+  const showDev = isReducedMotion || isMobile || isInView || p > 0.15 || forcedDevice >= 0;
+  const isRcOn = isReducedMotion || isMobile || isInView || p > 0.2 || forcedDevice >= 0;
   const autoDev = p < 0.55 ? 0 : p < 0.78 ? 1 : 2;
-  const activeDevice = forcedDevice >= 0 ? forcedDevice : autoDev;
+  const activeDevice = forcedDevice >= 0 ? forcedDevice : (isMobile ? 0 : autoDev);
 
   const renderLaptopUi = () => (
     <div className="ui ui-laptop">
@@ -378,8 +396,10 @@ export default function ZeroInstallation() {
               aria-hidden="true"
             >
               {STEPS.map((s, i) => {
-                const strike = isReducedMotion
+                const strike = isReducedMotion || (isMobile && mobileStruck)
                   ? 1
+                  : isMobile && isInView
+                  ? clamp(i * 0.25 + 0.5)
                   : clamp((p / 0.25) * 4 - i * 0.9);
                 return (
                   <span

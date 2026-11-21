@@ -39,6 +39,7 @@ export default function WatchFiling() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const userInteractedRef = useRef(false);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // In-view mark animation on header
@@ -83,14 +84,15 @@ export default function WatchFiling() {
     const update = () => {
       ticking = false;
       if (window.innerWidth <= 900) {
-        // On mobile, scroll listener also updates activeStep if user scrolls through track
+        // On mobile, scroll listener only updates activeStep if user has NOT manually interacted
+        if (userInteractedRef.current || isPlaying) return;
         const track = trackRef.current;
         if (!track) return;
         const r = track.getBoundingClientRect();
         if (r.top <= window.innerHeight * 0.6 && r.bottom >= window.innerHeight * 0.2) {
           const progress = Math.max(0, Math.min(0.999, (window.innerHeight * 0.6 - r.top) / (r.height * 0.8)));
           const s = Math.floor(progress * 7);
-          setActiveStep((prev) => (isPlaying ? prev : s));
+          setActiveStep(s);
         }
         return;
       }
@@ -147,16 +149,19 @@ export default function WatchFiling() {
   }, [stopAutoPlay]);
 
   const handleStepClick = (index: number) => {
+    userInteractedRef.current = true;
     stopAutoPlay();
     setActiveStep(index);
   };
 
   const handleNext = () => {
+    userInteractedRef.current = true;
     stopAutoPlay();
     setActiveStep((prev) => Math.min(6, prev + 1));
   };
 
   const handlePrev = () => {
+    userInteractedRef.current = true;
     stopAutoPlay();
     setActiveStep((prev) => Math.max(0, prev - 1));
   };

@@ -2508,13 +2508,27 @@
     padding-top: 0;
     padding-bottom: var(--sec);
     gap: 24px;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+  .lex-page .wt-steps-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
   }
   .lex-page .wv {
-    --dh: min(52svh, 340px);
+    --dh: min(44svh, 280px);
     order: -1; /* place live document on top on mobile */
     margin: 0 auto;
     width: 100%;
+    max-width: 100%;
     align-items: center;
+    box-sizing: border-box;
+    overflow: visible;
   }
   .lex-page .wh {
     padding-bottom: 20px;
@@ -2601,14 +2615,21 @@
   border-radius: 14px;
   padding: 10px;
   box-shadow: 0 4px 14px rgba(16, 42, 67, 0.05);
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 .lex-page .m-pills-wrap {
   display: flex;
   gap: 6px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 2px 2px 6px 2px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 .lex-page .m-pills-wrap::-webkit-scrollbar {
   display: none;
@@ -2710,14 +2731,116 @@
     width: 100%;
   }
   .lex-page .zi .area {
-    margin-top: 40px;
+    height: 290px;
+    margin-top: 36px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .lex-page .zi .iq {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .lex-page .zi .cq {
+    font-size: 13px;
+    padding: 8px 10px;
+    justify-content: center;
+    text-align: center;
+  }
+  .lex-page .zi .zr {
+    grid-column: 1 / -1;
+    margin: 8px auto 0;
+    justify-content: center;
+    text-align: center;
+  }
+  .lex-page .zi .lp {
+    height: 78%;
+    --ar: 16 / 10.5;
+    width: 95%;
+    max-width: 330px;
+  }
+  .lex-page .zi .tb {
+    height: 84%;
+    --ar: 4 / 3;
+    width: 86%;
+    max-width: 290px;
+  }
+  .lex-page .zi .mb {
+    height: 94%;
+    --ar: 9 / 16;
+    width: 154px;
+    max-width: 165px;
   }
   .lex-page .zi .sel {
     margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
   }
   .lex-page .zi .sel button {
     padding: 8px 16px;
     font-size: 14px;
+    min-height: 40px;
+  }
+  /* Refined UI micro-scaling for mobile */
+  .lex-page .zi .ui-laptop .br-bar {
+    height: 22px;
+    padding: 0 6px;
+  }
+  .lex-page .zi .ui-laptop .url-txt {
+    font-size: 8px;
+  }
+  .lex-page .zi .ui-laptop .app-side {
+    width: 28%;
+    padding: 6px 4px;
+  }
+  .lex-page .zi .ui-laptop .nav-item {
+    padding: 3px 4px;
+    font-size: 8px;
+    gap: 4px;
+  }
+  .lex-page .zi .ui-laptop .app-main {
+    padding: 6px 8px;
+  }
+  .lex-page .zi .ui-tablet {
+    padding: 8px 10px;
+  }
+  .lex-page .zi .ui-tablet .tb-split {
+    grid-template-columns: 1fr 14px 1fr;
+    gap: 4px;
+  }
+  .lex-page .zi .ui-tablet .tb-pane {
+    padding: 6px 8px;
+  }
+  .lex-page .zi .ui-mobile {
+    padding: 6px 8px;
+  }
+  .lex-page .zi .ui-mobile .mb-status {
+    font-size: 8px;
+    padding: 0 4px;
+  }
+  .lex-page .zi .ui-mobile .mb-notch {
+    width: 22px;
+    height: 5px;
+  }
+  .lex-page .zi .ui-mobile .mb-case-card {
+    padding: 4px 6px;
+  }
+  .lex-page .zi .ui-mobile .mb-steps {
+    gap: 3px;
+  }
+  .lex-page .zi .ui-mobile .mb-row {
+    padding: 2px 4px;
+    font-size: 8px;
+  }
+  .lex-page .zi .ui-mobile .mb-action {
+    padding: 4px 6px;
+    font-size: 8px;
   }
   .site-header .header-cta .pill,
   .site-header .pill {
